@@ -18,6 +18,7 @@ const DefaultLayout : React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    
     const value : string | null = localStorage.getItem("token_user");
     if (JSON.parse(value as string) !== "") {
       getUser()
@@ -51,7 +52,7 @@ const DefaultLayout : React.FC = () => {
         console.error({ e });
       }
     }
-  }, []);
+  }, [dispatch,setToastState]);
   
   function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
     arr.push(value);
@@ -93,15 +94,15 @@ const DefaultLayout : React.FC = () => {
         <div className="page-content container-fluid">
           <Switch>
             {AppRoutes.map((prop, key) => {
-              if (prop.private)
-                return 
-                  // <ProtectedRoute
-                  //   path={prop.path}
-                  //   key={key}
-                  //   component={prop.component}
-                  // />
-                ;
-              else {
+              // if (prop.private)
+              //   return 
+              //     // <ProtectedRoute
+              //     //   path={prop.path}
+              //     //   key={key}
+              //     //   component={prop.component}
+              //     // />
+              //   ;
+              // else {
                 return (
                   <Route
                     exact
@@ -110,7 +111,7 @@ const DefaultLayout : React.FC = () => {
                     component={prop.component as React.FC}
                   />
                 );
-              }
+                //}
             })}
           </Switch>
         </div>

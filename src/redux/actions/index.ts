@@ -3,8 +3,8 @@
 //   LOGOUT : 'logout',
 // }
 
-// interface Login {
-//   type: ActionType.LOGIN;
+// type Login {
+//   type: .LOGIN;
 //   payload: string[];
 // }
 
@@ -17,6 +17,7 @@
 // //   payload: string;
 // // }
 
-// export type Action =
-//   | Login
-//   | Logout;
+export interface Action {
+  type: string;
+  payload: string[];
+}

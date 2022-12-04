@@ -8,7 +8,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { indexRoutes } from "./routes";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Provider } from "react-redux";
-import { store } from "./redux/store.js";
+import { store } from "./redux/store";
 
 const App :React.FC = () => (
   <BrowserRouter>
