@@ -3,7 +3,7 @@ import * as React from 'react';
 const ToastContext = React.createContext<any>([]);
 
 const ToastProvider = ({ children } : any) => {
-  const [toastState, setToastState] = React.useState<any[]>([]);
+  const [toastState, setToastState] = React.useState<object[]>([]);
   
   return <ToastContext.Provider value={{ toastState, setToastState }}>{children}</ToastContext.Provider>;
 };

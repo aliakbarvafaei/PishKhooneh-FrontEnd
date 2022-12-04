@@ -4,29 +4,32 @@ import AppRoutes from "../routes";
 import { useDispatch } from "react-redux";
 import { getUser } from "../services/api";
 import { useToast } from "../contexts/ToastState";
+import Toast from "../components/Toast/Toast";
 
-const DefaultLayout : React.FC = (props : any) => {
+interface eachToast {
+  title : string;
+  description: string;
+  key: number;
+}
+
+const DefaultLayout : React.FC = () => {
   const { toastState, setToastState } = useToast();
-  console.log(toastState,setToastState);
   
   const dispatch = useDispatch();
-  function addItemOnce(arr : any, value : any) {
-    arr.push(value);
-    return arr;
-  }
+
   useEffect(() => {
-    const value : any = localStorage.getItem("token_user");
-    if (JSON.parse(value) !== "") {
+    const value : string | null = localStorage.getItem("token_user");
+    if (JSON.parse(value as string) !== "") {
       getUser()
-        .then((response : any) => {
+        .then((response) => {
           dispatch({
             type: "login",
-            payload: [response.data.email, JSON.parse(value)],
+            payload: [response.data.email, JSON.parse(value as string)],
           });
         })
-        .catch((err : any) => {
+        .catch((err) => {
           dispatch({ type: "logout" });
-          setToastState((old : any) =>
+          setToastState((old : Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",
               description:
@@ -49,11 +52,17 @@ const DefaultLayout : React.FC = (props : any) => {
       }
     }
   }, []);
-
-  function destroyToast(indexKey : any) {
-    // setToastState((old) => removeItemOnce(old.slice(), indexKey));
+  
+  function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
+    arr.push(value);
+    return arr;
   }
-  function removeItemOnce(arr: any, indexKey : any) {
+
+  function destroyToast(indexKey : Number):void {
+    setToastState((old : Array<eachToast>) => removeItemOnce(old.slice(), indexKey));
+  }
+
+  function removeItemOnce(arr: Array<eachToast>, indexKey : Number):Array<eachToast> {
     var index = -1;
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].key === indexKey) {
@@ -98,7 +107,7 @@ const DefaultLayout : React.FC = (props : any) => {
                     exact
                     path={prop.path}
                     key={key}
-                    component={prop.component}
+                    component={prop.component as React.FC}
                   />
                 );
               }
@@ -108,8 +117,8 @@ const DefaultLayout : React.FC = (props : any) => {
       </div>
       {/* <Footer /> */}
       <div className="fixed top-[20px] right-[20px] flex flex-col gap-[15px] z-[1002]">
-        {/* {toastState.length > 0 &&
-          toastState.map((item, index) => {
+        {toastState.length > 0 &&
+          toastState.map((item : eachToast, index : number) => {
             return (
               <Toast
                 type={item.title}
@@ -119,7 +128,7 @@ const DefaultLayout : React.FC = (props : any) => {
                 key={index}
               />
             );
-          })} */}
+          })}
       </div>
     </div>
   );
