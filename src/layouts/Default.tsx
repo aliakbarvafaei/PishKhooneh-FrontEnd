@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getUser } from "../services/api";
 import { useToast } from "../contexts/ToastState";
 import Toast from "../components/Toast/Toast";
+import Header from "../components/Header/Header";
 
 interface eachToast {
   title : string;
@@ -87,8 +88,8 @@ const DefaultLayout : React.FC = () => {
       data-header-position="fixed"
       data-boxed-layout="full"
     >
-      {/* <FixedButtonRight />
       <Header />
+      {/* <FixedButtonRight />
       <MainMenu />
       <MobileMenu /> */}
       <div className="page-wrapper d-block">
