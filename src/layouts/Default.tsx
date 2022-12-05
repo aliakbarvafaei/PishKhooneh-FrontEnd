@@ -8,6 +8,7 @@ import Toast from "../components/Toast/Toast";
 import Header from "../components/Header/Header";
 import MainMenu from "../components/mainMenu/MainMenu";
 import MobileMenu from "../components/MobileMenu/MobileMenu";
+import Footer from "../components/Footer/Footer";
 
 interface eachToast {
   title : string;
@@ -121,7 +122,7 @@ const DefaultLayout : React.FC = () => {
           </Switch>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
       <div className="fixed top-[20px] right-[20px] flex flex-col gap-[15px] z-[1002]">
         {toastState.length > 0 &&
           toastState.map((item : eachToast, index : number) => {

@@ -73,7 +73,7 @@ function MobileMenu() {
                   if (item.title === "خروج")
                     return (
                       <Link
-                        className="text-right text-[14px] py-[12px] hoverItem block font-normal"
+                        className="text-right text-[14px] py-[12px] hoverItem font-normal"
                         onClick={() => {
                           dispatch({ type: "logout" });
                           localStorage.setItem("token_user", JSON.stringify(""));
@@ -94,7 +94,7 @@ function MobileMenu() {
                   else if (item.title === "پروفایل")
                     return (
                       <Link
-                        className="text-right text-[14px] py-[12px] hoverItem block font-normal"
+                        className="text-right text-[14px] py-[12px] hoverItem font-normal"
                         to={item.pathTo}
                         key={index}
                       >
@@ -104,7 +104,7 @@ function MobileMenu() {
                 } else if (item.title !== "خروج" && item.title !== "پروفایل") {
                   return (
                     <Link
-                      className="text-right text-[14px] py-[12px] hoverItem block font-normal"
+                      className="text-right text-[14px] py-[12px] hoverItem font-normal"
                       to={item.pathTo}
                       key={index}
                     >

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 // import { useTheme } from "../../contexts/theme";
-import logo from "../../assets/images/logo.jpg";
+import logo from "../../assets/images/logo.png";
 import logo1 from "../../assets/images/logo1.jpg";
-// import classNames from "classnames";
 import useSticky from "./useSticky";
 import { Button } from "@material-ui/core";
 import Hamburger from "./Hamburger/Hamburger";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const titleMenus = [
   {
@@ -31,16 +30,15 @@ const titleMenus = [
     ],
   }
 ];
-const submenuSetting = [
-  { title: "Language", pathTo: "/" },
-  { title: "Currency", pathTo: "/" },
-];
+// const submenuSetting = [
+//   { title: "Language", pathTo: "/" },
+//   { title: "Currency", pathTo: "/" },
+// ];
 
 function MainMenu() {
   // const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const { sticky, stickyRef } = useSticky();
-  const history = useHistory();
 
   const themeClass = "bg-white";
     // theme.mode === "DARK"
@@ -98,7 +96,7 @@ function MainMenu() {
                     {titleMenu.submenu.map((item, index) => {
                       return (
                         <Link
-                          className={`text-right text-[14px] py-[12px] block hoverItem`}
+                          className={`text-right text-[14px] py-[12px] hoverItem`}
                           to={item.pathTo}
                           key={index}
                         >

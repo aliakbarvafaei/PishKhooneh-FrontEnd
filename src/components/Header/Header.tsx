@@ -134,7 +134,7 @@ function Header() {
                   ) {
                     return (
                       <Link
-                        className="text-right text-[14px] py-[12px] block hoverItem"
+                        className="text-right text-[14px] py-[12px] hoverItem"
                         to={item.pathTo}
                         key={index}
                       >
