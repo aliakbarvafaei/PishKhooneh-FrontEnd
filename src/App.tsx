@@ -1,6 +1,6 @@
 // import "./assets/scss/style.scss";
 import "./index.css";
-import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 // import { AuthProvider } from "./contexts/Auth";
 // import { ThemeProvider } from "./contexts/theme";
 import { ToastProvider } from "./contexts/ToastState";
