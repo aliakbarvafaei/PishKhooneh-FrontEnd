@@ -77,7 +77,7 @@ function Header() {
                   className="fa fa-heart group-hover:text-red pl-[10px]"
                   aria-hidden="true"
                 ></i>
-                علاقه‌ مندی ها
+                علاقه‌‌مندی ها
               </Link>
             </li>
             <li className="group relative text-darkGray">
@@ -89,7 +89,7 @@ function Header() {
                 {myAccountDrop.title}
               </button>
               <div
-                className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[150%] py-[10px] px-[20px] right-0
+                className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[100%] py-[10px] px-[20px] right-0
                 flex-col drop-shadow-lg z-[22]`}
               >
                 {myAccountDrop.submenu.map((item, index) => {

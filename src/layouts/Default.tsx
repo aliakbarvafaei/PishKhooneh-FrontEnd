@@ -6,6 +6,8 @@ import { getUser } from "../services/api";
 import { useToast } from "../contexts/ToastState";
 import Toast from "../components/Toast/Toast";
 import Header from "../components/Header/Header";
+import MainMenu from "../components/mainMenu/MainMenu";
+import MobileMenu from "../components/MobileMenu/MobileMenu";
 
 interface eachToast {
   title : string;
@@ -89,9 +91,10 @@ const DefaultLayout : React.FC = () => {
       data-boxed-layout="full"
     >
       <Header />
-      {/* <FixedButtonRight />
       <MainMenu />
-      <MobileMenu /> */}
+      <MobileMenu />
+      {/* <FixedButtonRight />
+       */}
       <div className="page-wrapper d-block">
         <div className="page-content container-fluid">
           <Switch>
