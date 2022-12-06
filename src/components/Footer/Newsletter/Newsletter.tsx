@@ -1,15 +1,10 @@
 import React from "react";
-// import { useTheme } from "../../../contexts/theme";
 
-function Newsletter() {
-  // const { theme } = useTheme();
+const Newsletter:React.FC = ()=> {
 
-  const themeClass = "bg-white text-darkGray";
-    // theme.mode === "DARK"
-    //   ? "bg-darkModeLightBlack text-lightGray"
-    //   : "bg-white text-darkGray";
-  const themeBorder = "border-darkModeGray";
-    // theme.mode === "DARK" ? "border-lightestBlack" : "border-darkModeGray";
+  const themeClass : string = "bg-white text-darkGray";
+    
+  const themeBorder : string = "border-darkModeGray";
 
   return (
     <div className="flex lgmin:flex-row lg:flex-col justify-between items-center lg:gap-[15px]">

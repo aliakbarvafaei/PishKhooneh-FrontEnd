@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useTheme } from "../../contexts/theme";
 import logo from "../../assets/images/logo.png";
 import logo1 from "../../assets/images/logo1.jpg";
 import useSticky from "./useSticky";
@@ -30,22 +29,14 @@ const titleMenus = [
     ],
   }
 ];
-// const submenuSetting = [
-//   { title: "Language", pathTo: "/" },
-//   { title: "Currency", pathTo: "/" },
-// ];
 
-function MainMenu() {
-  // const { theme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+const MainMenu:React.FC = ()=> {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { sticky, stickyRef } = useSticky();
 
   const themeClass = "bg-white";
-    // theme.mode === "DARK"
-    //   ? "bg-darkModeLightBlack text-darkModeGray"
-    //   : "bg-white";
 
-  function handeHamburger() {
+  function handleHamburger() {
     setIsOpen((old) => !old);
   }
   const stickyClass = sticky ? "fixed top-0 z-[1001] w-[100%]" : "";
@@ -114,11 +105,11 @@ function MainMenu() {
               style={{ fontSize: "25px" }}
               className="fa fa-bars cursor-pointer"
               aria-hidden="true"
-              onClick={handeHamburger}
+              onClick={handleHamburger}
             ></i>
             <Hamburger
               isOpen={isOpen}
-              handeHamburger={handeHamburger}
+              handleHamburger={handleHamburger}
               items={titleMenus}
             />
           </div>
@@ -127,45 +118,6 @@ function MainMenu() {
             <li>
               <Button variant="outlined" style={{fontFamily: 'inherit'}}>ثبت آگهی</Button>
             </li>
-            {/* <li className="group text-inherit pl-[12px]">
-              <i
-                style={{ fontSize: "25px" }}
-                onClick={() => history.push("/search")}
-                className="peer fa fa-search cursor-pointer group-hover:text-red"
-                aria-hidden="true"
-              ></i>
-            </li>
-            <li className="group relative text-inherit pl-[12px]">
-              <i
-                style={{ fontSize: "25px" }}
-                className="peer fa fa-cog px-[1px] py-[1px] cursor-pointer group-hover:text-red"
-                aria-hidden="true"
-              ></i>
-              <div
-                className={`${themeClass} absolute hidden peer-hover:block hover:flex w-[200px] py-[10px] px-[20px] right-0
-              flex-col drop-shadow-lg z-[22]`}
-              >
-                {submenuSetting.map((item, index) => {
-                  return (
-                    <Link
-                      className="text-left text-[14px] py-[12px] hoverItem"
-                      to={item.pathTo}
-                      key={index}
-                    >
-                      {item.title}
-                    </Link>
-                  );
-                })}
-              </div>
-            </li>
-            <li className="group relative text-inherit pl-[12px]">
-              <i
-                style={{ fontSize: "25px" }}
-                onClick={() => history.push("/cart")}
-                className="peer fa fa-shopping-cart px-[1px] py-[1px] cursor-pointer group-hover:text-red"
-                aria-hidden="true"
-              ></i>
-            </li> */}
           </ul>
         </div>
       </div>

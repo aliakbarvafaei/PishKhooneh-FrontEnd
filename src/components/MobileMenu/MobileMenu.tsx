@@ -1,16 +1,8 @@
 import React from "react";
-// import Badge from '@mui/material/Badge';
-import { Link, useHistory } from "react-router-dom";
-// import { useTheme } from "../../contexts/theme";
+import { Link } from "react-router-dom";
 import { useToast } from "../../contexts/ToastState";
 import { useDispatch, useSelector } from "react-redux";
-
-interface eachToast {
-  title : string;
-  description: string;
-  key: number;
-}
-
+import { eachToast, statesRedux } from "../../ts/interfaces";
 
 const myAccountDrop = [
   { title: "ورود", pathTo: "/login" },
@@ -19,17 +11,13 @@ const myAccountDrop = [
   { title: "خروج", pathTo: "/" },
 ];
 
-function MobileMenu() {
-  const { user } = useSelector((state : any) => state.userAuth);
+const MobileMenu:React.FC = ()=> {
+  const { user } = useSelector((state : statesRedux) => state.userAuth);
   const dispatch = useDispatch();
   const { setToastState } = useToast();
 
-  const history = useHistory();
-  // const { theme } = useTheme();
   const themeClass = "bg-darkModeLightBlack";
-    // theme.mode === "DARK"
-    //   ? "bg-darkModeLightBlack text-darkModeGray"
-    //   : "bg-darkModeLightBlack";
+
   function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
       arr.push(value);
       return arr;
@@ -117,24 +105,6 @@ function MobileMenu() {
           </i>
           <p className="text-[12px]">حساب</p>
         </span>
-        {/* <i className="fa fa-cog group relative" aria-hidden="true">
-          <div
-            className={`${themeClass} absolute hidden group-hover:block hover:flex w-[150px] py-[10px] px-[20px] bottom-6 right-[-60px]
-                flex-col drop-shadow-lg z-[26]`}
-          >
-            {submenuSetting.map((item, index) => {
-              return (
-                <Link
-                  className="text-left text-[14px] py-[12px] hoverItem  font-normal"
-                  to={item.pathTo}
-                  key={index}
-                >
-                  {item.title}
-                </Link>
-              );
-            })}
-          </div>
-        </i> */}
       </div>
     </>
   );

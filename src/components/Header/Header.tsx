@@ -1,14 +1,8 @@
 import React from "react";
-// import { useTheme } from "../../contexts/theme";
 import { Link } from "react-router-dom";
 import { useToast } from "../../contexts/ToastState";
 import { useDispatch, useSelector } from "react-redux";
-
-interface eachToast {
-  title : string;
-  description: string;
-  key: number;
-}
+import { eachToast, statesRedux } from "../../ts/interfaces";
 
 const myAccountDrop = {
   title: "حساب کاربری",
@@ -20,18 +14,14 @@ const myAccountDrop = {
   ],
 };
 
-function Header() {
-  // const { theme } = useTheme();
-  const themeClass = "bg-lightGray";
-    // theme.mode === "DARK" ? "bg-black text-lightGray" : "bg-lightGray";
-  const themeAccount = "bg-white text-black";
-    // theme.mode === "DARK"
-    //   ? "bg-darkModeLightBlack text-darkModeGray"
-    //   : "bg-white text-black";
+const Header:React.FC = ()=> {
+  const themeClass:string = "bg-lightGray";
+  const themeAccount:string = "bg-white text-black";
+
   const { setToastState } = useToast();
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state : any) => state.userAuth);
+  const { user } = useSelector((state : statesRedux) => state.userAuth);
   function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
     arr.push(value);
     return arr;
@@ -54,18 +44,6 @@ function Header() {
                 {information.welcome}
               </Link>
             </li>
-            {/* <li>
-              <Link
-                className="text-[14px] text-darkGray no-underline hover:text-darkGray"
-                to="/"
-              >
-                <i
-                  className="pl-[10px] text-red fa fa-phone"
-                  aria-hidden="true"
-                ></i>
-                {information.call}
-              </Link>
-            </li> */}
           </ul>
           <ul className="flex flex-row gap-[1rem] items-center p-0 m-0 ">
             <li>

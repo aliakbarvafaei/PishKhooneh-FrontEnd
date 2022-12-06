@@ -1,17 +1,12 @@
 import React from "react";
 import Newsletter from "./Newsletter/Newsletter";
 import MainFooter from "./MainFooter/MainFooter";
-// import { useTheme } from "../../contexts/theme";
 import CopyRight from "./CopyRight/CopyRight";
 
-function Footer() {
-  // const { theme } = useTheme();
-  const themeClass = "bg-lightGray";
-    // theme.mode === "DARK" ? "bg-black text-darkModeGray" : "bg-lightGray";
-  const themeClassCopy = "bg-white"
-    // theme.mode === "DARK" ? "bg-darkModeLightBlack" : "bg-white";
-  const themeBorder = "border-darkModeGray"
-    // theme.mode === "DARK" ? "border-lightestBlack" : "border-darkModeGray";
+const Footer : React.FC = ()=> {
+  const themeClass : string = "bg-lightGray";
+  const themeClassCopy : string = "bg-white"
+  const themeBorder : string = "border-darkModeGray"
 
   return (
     <section>

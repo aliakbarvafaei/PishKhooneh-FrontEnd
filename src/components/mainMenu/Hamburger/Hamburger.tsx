@@ -1,13 +1,11 @@
 import React from "react";
 import { IconContext } from "react-icons";
-// import { useTheme } from "../../../contexts/theme";
 import { Link } from "react-router-dom";
+import { HamburgerProps } from "../../../ts/interfaces";
 import ItemHamburger from "./ItemHamburger";
 
-function Hamburger({ isOpen, items, handeHamburger }: any) {
-  // const { theme } = useTheme();
+const Hamburger:React.FC<HamburgerProps> = ({ isOpen, items, handleHamburger }) => {
   const themeClass = "bg-white text-black"
-    // theme.mode === "DARK" ? "bg-black text-white" : "bg-white text-black";
 
   return (
     <>
@@ -21,7 +19,7 @@ function Hamburger({ isOpen, items, handeHamburger }: any) {
                 <li
                   className="w-[100%] pr-[8%] h-[80px] flex justify-end items-center border-b-solid border-b-[1px] border-b-darkModeGray"
                   onClick={() => {
-                    handeHamburger();
+                    handleHamburger();
                   }}
                 >
                   <Link to="#" className=" ml-[2rem] text-[2rem] no-underline">

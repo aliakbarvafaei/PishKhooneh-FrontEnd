@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
 import { useToast } from "../../contexts/ToastState";
+import { toastProps } from "../../ts/interfaces";
 
-interface propsToast {
-  type : string;
-  description: string;
-  indexKey: number;
-  destroyToast(indexKey : number):void;
-}
-
-function Toast({ type, description, indexKey, destroyToast }: propsToast) {
+const Toast:React.FC<toastProps> = ({ type, description, indexKey, destroyToast }) => {
   const { setToastState } = useToast();
 
   useEffect(() => {

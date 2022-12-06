@@ -9,12 +9,9 @@ import Header from "../components/Header/Header";
 import MainMenu from "../components/mainMenu/MainMenu";
 import MobileMenu from "../components/MobileMenu/MobileMenu";
 import Footer from "../components/Footer/Footer";
+import { eachToast } from "../ts/interfaces";
+import ProtectedRoute from "../components/ProtectedRoute";
 
-interface eachToast {
-  title : string;
-  description: string;
-  key: number;
-}
 
 const DefaultLayout : React.FC = () => {
   const { toastState, setToastState } = useToast();
@@ -100,15 +97,14 @@ const DefaultLayout : React.FC = () => {
         <div className="page-content container-fluid">
           <Switch>
             {AppRoutes.map((prop, key) => {
-              // if (prop.private)
-              //   return 
-              //     // <ProtectedRoute
-              //     //   path={prop.path}
-              //     //   key={key}
-              //     //   component={prop.component}
-              //     // />
-              //   ;
-              // else {
+              if (prop.private){
+                return <ProtectedRoute
+                    path={prop.path}
+                    key={key}
+                    component={prop.component}
+                  />;
+                }
+              else {
                 return (
                   <Route
                     exact
@@ -117,7 +113,7 @@ const DefaultLayout : React.FC = () => {
                     component={prop.component as React.FC}
                   />
                 );
-                //}
+                }
             })}
           </Switch>
         </div>

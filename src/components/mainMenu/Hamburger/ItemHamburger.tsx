@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { useTheme } from "../../../contexts/theme";
 
-function ItemHamburger({ item } : any) {
+const ItemHamburger:React.FC<any> = ({ item })=> {
   const [isOpen, setIsOpen] = useState(false);
-  // const { theme } = useTheme();
   const themeClass = "bg-white text-black";
-    // theme.mode === "DARK" ? "bg-black text-darkGray" : "bg-white text-black";
 
-  function handeHamburger(e : any) {
+  function handleHamburger() {
     setIsOpen((old) => !old);
   }
 
@@ -16,7 +13,7 @@ function ItemHamburger({ item } : any) {
     <>
       <div
         className="w-[100%] flex flex-row items-center justify-between gap-[50px]"
-        onClick={handeHamburger}
+        onClick={handleHamburger}
         style={
           isOpen && item.submenu.length > 0
             ? { borderBottom: "1px #f9f9f9 solid" }

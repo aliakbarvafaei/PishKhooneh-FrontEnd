@@ -1,5 +1,4 @@
 import React from "react";
-// import { useTheme } from "../../../contexts/theme";
 import logo from "../../../assets/images/logo.png";
 import { FaGooglePlusG } from "@react-icons/all-files/fa/FaGooglePlusG";
 import { FaWifi } from "@react-icons/all-files/fa/FaWifi";
@@ -7,10 +6,8 @@ import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
 import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
 
-function MainFooter() {
-  // const { theme } = useTheme();
-  const themeBorder = "border-darkModeGray";
-    // theme.mode === "DARK" ? "border-lightestBlack" : "border-darkModeGray";
+const MainFooter:React.FC = ()=> {
+  const themeBorder : string = "border-darkModeGray";
 
   return (
     <div className="flex flex-row flex-wrap justify-between">
@@ -20,19 +17,19 @@ function MainFooter() {
           ما در پیش‌خونه به شما کمک می‌کنیم تا بتوانید از قیمت خانه خود باخبر باشید و براحتی در پیش‌خونه خریدوفروش انجام دهید.
         </p>
         <div className="flex flex-row justify-between items-center mt-[8px]">
-          <span>
+          <span className="cursor-pointer">
             <FaFacebookF fontSize={"20px"} />
           </span>
-          <span>
+          <span className="cursor-pointer">
             <FaGooglePlusG fontSize={"20px"} />
           </span>
-          <span>
+          <span className="cursor-pointer">
             <FaTwitter fontSize={"20px"} />
           </span>
-          <span>
+          <span className="cursor-pointer">
             <FaInstagram fontSize={"20px"} />
           </span>
-          <span>
+          <span className="cursor-pointer">
             <FaWifi fontSize={"20px"} />
           </span>
         </div>
@@ -107,13 +104,6 @@ function MainFooter() {
             ></i>{" "}
             ایمیل : pishkhooneh@gmail.com
           </li>
-          {/* <li className="pl-[25px] relative pt-[13px] text-darkGray">
-            <i
-              className="fa fa-fax absolute left-0 top-[16px]"
-              aria-hidden="true"
-            ></i>{" "}
-            Fax: 123456
-          </li> */}
         </ul>
       </div>
     </div>

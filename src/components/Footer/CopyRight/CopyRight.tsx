@@ -1,7 +1,7 @@
 import React from "react";
 import sponser from "../../../assets/images/sponser.png";
 
-function CopyRight() {
+const CopyRight:React.FC = () => {
   return (
     <div className="flex mdmin:flex-row md:flex-col justify-between items-center">
       <div className="text-darkGray">
