@@ -40,7 +40,7 @@ const Toast:React.FC<toastProps> = ({ type, description, indexKey, destroyToast 
         <div className="text-[30px]">
           <i className={toastObject.icon} aria-hidden="true"></i>
         </div>
-        <div>{toastObject.description}</div>
+        <div className="text-right">{toastObject.description}</div>
         <button type="button" onClick={handleClick} className="font-bold">
           X
         </button>

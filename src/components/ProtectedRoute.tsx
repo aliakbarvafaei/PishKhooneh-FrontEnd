@@ -22,7 +22,7 @@ const ProtectedRoute:React.FC<ProtectedRouteProps> = (props) => {
       setToastState((old : Array<eachToast>) =>
         addItemOnce(old.slice(), {
           title: "2",
-          description: "First, log in to your account",
+          description: "ابتدا وارد حساب خود شوید",
           key: Math.random(),
         })
       );

@@ -1,25 +1,25 @@
 import DefaultLayout from "../layouts/Default";
 // import Cart from "../pages/Cart";
-// import Home from "../pages/Home";
-// import LoginPage from "../pages/Login";
+import Home from "../pages/Home";
+import LoginPage from "../pages/Login";
 // import NotFound from "../pages/NotFound";
 // import ProductDetail from "../pages/ProductDetail";
 // import Profile from "../pages/Profile";
-// import RegisterPage from "../pages/Register";
+import RegisterPage from "../pages/Register";
 // import SearchPage from "../pages/SearchPage";
 // import Wishlist from "../pages/Wishlist";
 
 const indexRoutes = [{ path: "/", component: DefaultLayout }];
 
 const AppRoutes:Array<any> = [
-  // {
-  //   path: ["/home", "/"],
-  //   name: "داشبورد",
-  //   icon: "fa fa-tachometer-alt",
-  //   component: Home,
-  //   showInNav: true,
-  //   private: false,
-  // },
+  {
+    path: ["/home", "/"],
+    name: "داشبورد",
+    icon: "fa fa-tachometer-alt",
+    component: Home,
+    showInNav: true,
+    private: false,
+  },
   // {
   //   path: "/product-details/:idProduct",
   //   name: "همه محصولات",
@@ -61,20 +61,20 @@ const AppRoutes:Array<any> = [
   //   private: true,
   // },
 
-  // {
-  //   path: "/login",
-  //   name: "ورود",
-  //   icon: "fa fa-plus",
-  //   component: LoginPage,
-  //   showInNav: false,
-  // },
-  // {
-  //   path: "/register",
-  //   name: "ثبت نام",
-  //   icon: "fa fa-plus",
-  //   component: RegisterPage,
-  //   showInNav: false,
-  // },
+  {
+    path: "/login",
+    name: "ورود",
+    icon: "fa fa-plus",
+    component: LoginPage,
+    showInNav: false,
+  },
+  {
+    path: "/register",
+    name: "ثبت نام",
+    icon: "fa fa-plus",
+    component: RegisterPage,
+    showInNav: false,
+  },
   // {
   //   path: ["*", "/not-found"],
   //   name: "not found",

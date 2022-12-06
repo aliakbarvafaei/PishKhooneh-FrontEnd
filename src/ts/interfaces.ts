@@ -26,3 +26,13 @@ export interface ProtectedRouteProps {
     key: number;
     component: React.FC;
 }
+export interface LoginInputTypes {
+    email: string;
+    password: string;
+}
+export interface RegisterInputTypes {
+    fname: string;
+    lname: string;
+    email: string;
+    password: string;
+}

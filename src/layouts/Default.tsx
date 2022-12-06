@@ -35,7 +35,7 @@ const DefaultLayout : React.FC = () => {
             addItemOnce(old.slice(), {
               title: "2",
               description:
-                "You have not used the site for a long time. Please login again",
+                "از ورود شما زمان زیادی گذشته است لطفا مجدد وارد شوید",
               key: Math.random(),
             })
           );
