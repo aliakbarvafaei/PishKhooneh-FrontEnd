@@ -9,7 +9,7 @@ export const loginAPI = (email : string, password : string) =>
     },
     configToken
   );
-export const registerAPI = (fname : string, lname : string, email : string, password : string) =>
+export const registerAPI = (fname : string, lname : string, email : string, password : string, address: string, bio: string) =>
   axiosInstance.post(
     "/register",
     {
@@ -17,6 +17,8 @@ export const registerAPI = (fname : string, lname : string, email : string, pass
       lname: lname,
       email: email,
       password: password,
+      address: address,
+      bio: bio
     },
     configToken
   );

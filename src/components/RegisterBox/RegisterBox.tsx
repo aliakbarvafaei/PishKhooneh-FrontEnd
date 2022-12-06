@@ -13,6 +13,8 @@ const RegisterBox:React.FC = () => {
   const lnameId = useId();
   const emailId = useId();
   const passwordId = useId();
+  const addressId = useId();
+  const bioId = useId();
 
   const themeClass = "bg-white";
   const themeBorder = "border-darkModeGray";
@@ -36,13 +38,17 @@ const RegisterBox:React.FC = () => {
     const lname = (document.getElementById(lnameId) as HTMLInputElement).value;
     const email = (document.getElementById(emailId) as HTMLInputElement).value;
     const password = (document.getElementById(passwordId) as HTMLInputElement).value;
+    const address = (document.getElementById(addressId) as HTMLInputElement).value;
+    const bio = (document.getElementById(bioId) as HTMLInputElement).value;
 
     (document.getElementById(fnameId) as HTMLInputElement).value = "";
     (document.getElementById(lnameId) as HTMLInputElement).value = "";
     (document.getElementById(emailId) as HTMLInputElement).value = "";
     (document.getElementById(passwordId) as HTMLInputElement).value = "";
+    (document.getElementById(addressId) as HTMLInputElement).value = "";
+    (document.getElementById(bioId) as HTMLInputElement).value = "";
 
-    registerAPI(fname, lname, email, password)
+    registerAPI(fname, lname, email, password, address, bio)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -102,7 +108,7 @@ const RegisterBox:React.FC = () => {
                   htmlFor="fname-input"
                   className="block text-[14px] text-right font-bold mb-[8px]"
                 >
-                  نام
+                  نام کامل
                 </label>
                 <input
                   type="text"
@@ -110,10 +116,10 @@ const RegisterBox:React.FC = () => {
                     errors.fname ? "border-red outline-red" : `${themeBorder}`
                   }`}
                   data-testid="fname-input"
-                  placeholder="نام"
+                  placeholder="نام کامل"
                   id={fnameId}
                   {...register("fname", {
-                    required: "نام اجباری است...",
+                    required: "نام کامل اجباری است...",
                   })}
                 />
                 {errors.fname && (
@@ -128,30 +134,30 @@ const RegisterBox:React.FC = () => {
               </div>
               <div className="mb-[30px] md:w-[100%] mdmin:w-[48%]">
                 <label
-                  htmlFor="lname-input"
+                  htmlFor="callNumber-input"
                   className="block text-[14px] text-right font-bold mb-[8px]"
                 >
-                  نام خانوادگی
+                  شماره تماس
                 </label>
                 <input
                   type="text"
                   className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
-                    errors.lname ? "border-red outline-red" : `${themeBorder}`
+                    errors.callNumber ? "border-red outline-red" : `${themeBorder}`
                   }`}
-                  data-testid="lname-input"
-                  placeholder="نام خانوادگی"
+                  data-testid="callNumber-input"
+                  placeholder="شماره تماس"
                   id={lnameId}
-                  {...register("lname", {
-                    required: "نام خانوادگی اجباری است...",
+                  {...register("callNumber", {
+                    required: "شماره تماس اجباری است...",
                   })}
                 />
-                {errors.lname && (
+                {errors.callNumber && (
                   <div className="text-red text-right pt-[5px]">
                     <i
                       className="fa fa-exclamation-triangle"
                       aria-hidden="true"
                     ></i>
-                    <span className="pr-[5px]">{errors.lname.message}</span>
+                    <span className="pr-[5px]">{errors.callNumber.message}</span>
                   </div>
                 )}
               </div>
@@ -235,6 +241,45 @@ const RegisterBox:React.FC = () => {
                   </>
                 )}
               </div>
+              <div className="mb-[30px] md:w-[100%] mdmin:w-[48%] relative">
+                <label
+                  htmlFor="address-input"
+                  className="block text-[14px] text-right font-bold mb-[8px]"
+                >
+                  آدرس
+                </label>
+                <input
+                  type="text"
+                  className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
+                    errors.address
+                      ? "border-red outline-red"
+                      : `${themeBorder}`
+                  }`}
+                  data-testid="address-input"
+                  placeholder="آدرس"
+                  id={addressId}
+                />
+              </div>
+              <div className="mb-[30px] md:w-[100%] mdmin:w-[48%] relative">
+                <label
+                  htmlFor="bio-input"
+                  className="block text-[14px] text-right font-bold mb-[8px]"
+                >
+                  توضیحات
+                </label>
+                <input
+                  type="text"
+                  className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
+                    errors.bio
+                      ? "border-red outline-red"
+                      : `${themeBorder}`
+                  }`}
+                  data-testid="bio-input"
+                  placeholder="توضیحات"
+                  id={bioId}
+                />
+              </div>
+              
               <button
                 type="submit"
                 className="h-[50px] min-w-[150px] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"

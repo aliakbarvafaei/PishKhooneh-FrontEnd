@@ -32,7 +32,9 @@ export interface LoginInputTypes {
 }
 export interface RegisterInputTypes {
     fname: string;
-    lname: string;
+    callNumber: string;
     email: string;
     password: string;
+    address: string;
+    bio: string;
 }
