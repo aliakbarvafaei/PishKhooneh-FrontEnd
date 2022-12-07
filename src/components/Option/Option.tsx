@@ -1,5 +1,5 @@
 import React from "react";
-import Truck from "../../assets/images/option/truck.png";
+import Free from "../../assets/images/option/free.png";
 import Clock from "../../assets/images/option/clock.png";
 import Speaker from "../../assets/images/option/speaker.png";
 
@@ -8,22 +8,22 @@ const Option : React.FC = () => {
   const themeBorder : string = "border-darkModeGray";
 
   return (
-    <div className={`${themeClass} pb-[40px] px-total`}>
+    <div className={`${themeClass} pb-[40px] px-total mt-[40px]`}>
       <div
         className={`py-[50px] flex lg:flex-col lg:items-center lg:gap-[20px] lgmin:flex-row lgmin:justify-between border-y-[1px] border-y-solid ${themeBorder}`}
       >
         <div className={`group flex lg:flex-col lgmin:flex-row items-center`}>
           <img
-            src={Truck}
+            src={Free}
             className="w-[60px] pl-[10px] hover:scale-125 duration-[500ms]"
-            alt="truck"
+            alt="Free"
           />
           <div>
             <h2 className="text-[16px] font-bold lg:text-center group-hover:text-red">
-              FREE SHIPPING
+              پیش‌بینی رایگان
             </h2>
             <p className="text-[14px] text-darkGray lg:text-center">
-              Free Shipping World Wide
+              تخمین قیمت خانه‌ها به صورت کاملا رایگان
             </p>
           </div>
         </div>
@@ -38,10 +38,10 @@ const Option : React.FC = () => {
           />
           <div>
             <h2 className="text-[16px] font-bold lg:text-center group-hover:text-red">
-              24 X 7 SERVICE
+              پشتیبانی تمام وقت
             </h2>
             <p className="text-[14px] text-darkGray lg:text-center">
-              Online Service For New Customer
+              پشتیبانی برای تمامی اعضای سایت
             </p>
           </div>
         </div>
@@ -56,10 +56,10 @@ const Option : React.FC = () => {
           />
           <div>
             <h2 className="text-[16px] font-bold lg:text-center group-hover:text-red">
-              FESTIVAL OFFER
+              پیشنهاد فوق‌العاده اشتراک
             </h2>
             <p className="text-[14px] text-darkGray lg:text-center">
-              New Online Special Festival Offer
+              اشتراک‌های ماهانه با تخفیف برای اعضای عادی و املاک
             </p>
           </div>
         </div>
