@@ -4,7 +4,7 @@ import Banner from "../components/Banner/Banner";
 import Option from "../components/Option/Option";
 // import SectionCategories from "../components/SectionCategories/SectionCategories";
 // import SectionProductMain from "../components/SectionProductMain/SectionProductMain";
-// import SectionProductSlider from "../components/SectionProductSlider/SectionProductSlider";
+import SectionAdSlider from "../components/SectionAdSlider/SectionAdSlider";
 import { getProducts } from "../services/api";
 
 const Home : React.FC = ()=> {
@@ -24,7 +24,7 @@ const Home : React.FC = ()=> {
     <>
       <Banner />
       {/* <SectionCategories /> */}
-      {/* <SectionProductSlider products={products} /> */}
+      <SectionAdSlider />
       {/* <div className="px-total py-[12%] flex flex-col font-bold items-center mdmin:w-[60%] md:w-[100%]">
         <h2 className="text-red md:text-[75px] lg:text-[60px] xl:text-[85px] xlmin:text-[90px]">
           2022
