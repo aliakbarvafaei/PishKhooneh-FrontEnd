@@ -80,7 +80,6 @@ const DefaultLayout : React.FC = () => {
 
   return (
     <div
-      style={{direction: 'rtl',fontFamily: 'Iranian Sans'}}
       id="main-wrapper"
       data-layout="vertical"
       data-sidebartype="full"

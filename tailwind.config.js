@@ -42,7 +42,7 @@ module.exports = {
       lightestBlack: "#3a3a3a",
 
       skyblue: "#57d7f7",
-      navy: "#021840",
+      navy: "#002466",
       olive: "#bab789",
       pink: "#ffc0cb",
       yellow: "#fdf791",
