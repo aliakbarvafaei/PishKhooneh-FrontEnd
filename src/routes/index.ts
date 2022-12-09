@@ -7,7 +7,7 @@ import LoginPage from "../pages/Login";
 // import Profile from "../pages/Profile";
 import RegisterPage from "../pages/Register";
 // import SearchPage from "../pages/SearchPage";
-// import Wishlist from "../pages/Wishlist";
+// import bookmark from "../pages/bookmark";
 
 const indexRoutes = [{ path: "/", component: DefaultLayout }];
 
@@ -37,10 +37,10 @@ const AppRoutes:Array<any> = [
   //   private: false,
   // },
   // {
-  //   path: "/wishlist",
-  //   name: "wishlist",
+  //   path: "/bookmark",
+  //   name: "bookmark",
   //   icon: "fa fa-list",
-  //   component: Wishlist,
+  //   component: Bookmark,
   //   showInNav: false,
   //   private: true,
   // },

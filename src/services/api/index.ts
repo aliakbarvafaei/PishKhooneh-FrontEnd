@@ -51,19 +51,19 @@ export const getProductsWithPage = (pageNumber : string, pageSize : string, filt
 export const getProduct = (idProduct : string) =>
   axiosInstance.get(`/product/${idProduct}`, configToken);
 
-export const getWishlist = (email : string) =>
-  axiosInstance.get(`/wishlist/${email}`, configToken);
+export const getBookmark = (email : string) =>
+  axiosInstance.get(`/bookmark/${email}`, configToken);
 
-export const postWishlist = (email : string, code : string) =>
+export const postBookmark = (email : string, code : string) =>
   axiosInstance.post(
-    `/wishlist/${email}`,
+    `/bookmark/${email}`,
     {
       code: code,
     },
     configToken
   );
-export const deleteWishlist = (email : string, code : string) =>
-  axiosInstance.delete(`/wishlist/${email}!${code}`, configToken);
+export const deleteBookmark = (email : string, code : string) =>
+  axiosInstance.delete(`/bookmark/${email}!${code}`, configToken);
 
 export const getCart = (email : string) =>
   axiosInstance.get(`/cart/${email}`, configToken);

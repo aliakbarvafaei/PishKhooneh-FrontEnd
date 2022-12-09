@@ -35,7 +35,7 @@ const MobileMenu:React.FC = ()=> {
             <p className="text-[12px]">آگهی جدید</p>
           </span>
         </Link>
-        <Link to="/wishlist">
+        <Link to="/bookmark">
           <span className="flex flex-col justify-center items-center">
             <i className="fa fa-bookmark" aria-hidden="true"></i>
             <p className="text-[12px]">نشان شده</p>

@@ -49,7 +49,7 @@ const Header:React.FC = ()=> {
             <li>
               <Link
                 className="group text-[14px] text-darkGray no-underline hover:text-darkGray"
-                to="/wishlist"
+                to="/bookmark"
               >
                 <i
                   className="fa fa-bookmark group-hover:text-red pl-[10px]"

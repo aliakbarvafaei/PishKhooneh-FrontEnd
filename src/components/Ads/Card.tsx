@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useToast } from "../../contexts/ToastState";
-import { postCart, postWishlist } from "../../services/api";
+import { postCart, postBookmark } from "../../services/api";
 import { eachToast, statesRedux } from "../../ts/interfaces";
 
 var arabicNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
@@ -122,7 +122,7 @@ const Card:React.FC<{item:any}> = ({ item }) => {
       //     title: "3",
       //     description: "", key:Math.random()
       //     }))
-      postWishlist(user, item.identifier)
+      postBookmark(user, item.identifier)
         .then((response) => {
           console.log(response.data);
           setToastState((old:Array<eachToast>) =>
