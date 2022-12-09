@@ -52,10 +52,10 @@ const Header:React.FC = ()=> {
                 to="/wishlist"
               >
                 <i
-                  className="fa fa-heart group-hover:text-red pl-[10px]"
+                  className="fa fa-bookmark group-hover:text-red pl-[10px]"
                   aria-hidden="true"
                 ></i>
-                علاقه‌‌مندی ها
+                نشان‌ شده‌ها
               </Link>
             </li>
             <li className="group relative text-darkGray">

@@ -46,7 +46,7 @@ const MainFooter:React.FC = ()=> {
           </li>
           <div></div>
           <li className="relative inline-block pt-[13px] text-darkGray hoverItem">
-            علاقه‌مندی ها
+            نشان شده‌ها
           </li>
           <div></div>
           <li className="relative inline-block pt-[13px] text-darkGray hoverItem">

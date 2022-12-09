@@ -37,8 +37,8 @@ const MobileMenu:React.FC = ()=> {
         </Link>
         <Link to="/wishlist">
           <span className="flex flex-col justify-center items-center">
-            <i className="fa fa-heart" aria-hidden="true"></i>
-            <p className="text-[12px]">علاقه‌‌مندی</p>
+            <i className="fa fa-bookmark" aria-hidden="true"></i>
+            <p className="text-[12px]">نشان شده</p>
           </span>
         </Link>
         <Link to="/cart">
