@@ -34,15 +34,13 @@ const Header:React.FC = ()=> {
   return (
     <>
       <div className={`py-[15px] px-[5%] sm:hidden ${themeClass}`}>
-        <nav className="flex flex-row lg:justify-end lgmin:justify-between p-0">
-          <ul className="flex flex-row gap-[1rem] items-center p-0 m-0 lg:hidden">
+        <nav className="flex flex-row sm:justify-end smmin:justify-between p-0">
+          <ul className="flex flex-row gap-[1rem] items-center p-0 m-0 sm:hidden">
             <li>
-              <Link
-                className="text-[14px] text-darkGray no-underline hover:text-darkGray"
-                to="/"
-              >
-                {information.welcome}
-              </Link>
+              <div className="relative right-0">
+                <input type="text" className="rounded-3xl w-[500px] lg:w-[300px] sm:w-[120px] h-[30px] text-[10px] pr-[10%]" placeholder="جستجو آگهی یا منطقه"/>
+                <i className="fa fa-search absolute right-[3%] top-[20%]"></i>
+              </div>
             </li>
           </ul>
           <ul className="flex flex-row gap-[1rem] items-center p-0 m-0 ">
