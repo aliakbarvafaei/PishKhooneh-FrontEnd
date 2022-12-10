@@ -22,7 +22,7 @@ const Home : React.FC = ()=> {
 
   return (
     <>
-      <Banner />
+      {/* <Banner /> */}
       {/* <SectionCategories /> */}
       <SectionAdSlider />
       {/* <div className="px-total py-[12%] flex flex-col font-bold items-center mdmin:w-[60%] md:w-[100%]">

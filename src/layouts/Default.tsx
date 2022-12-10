@@ -11,6 +11,7 @@ import MobileMenu from "../components/MobileMenu/MobileMenu";
 import Footer from "../components/Footer/Footer";
 import { eachToast } from "../ts/interfaces";
 import ProtectedRoute from "../components/ProtectedRoute";
+import HeaderNew from "../components/HeaderNew/HeaderNew";
 
 
 const DefaultLayout : React.FC = () => {
@@ -87,8 +88,9 @@ const DefaultLayout : React.FC = () => {
       data-header-position="fixed"
       data-boxed-layout="full"
     >
-      <Header />
-      <MainMenu />
+      {/* <Header />
+      <MainMenu /> */}
+      <HeaderNew />
       <MobileMenu />
       {/* <FixedButtonRight />
        */}
