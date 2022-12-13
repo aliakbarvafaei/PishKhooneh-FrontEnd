@@ -59,7 +59,7 @@ const Profile:React.FC = () => {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "1",
-              description: `Change Password successfull`,
+              description: `رمز عبور با موفقیت تغییر یافت`,
               key: Math.random(),
             })
           );
@@ -70,7 +70,7 @@ const Profile:React.FC = () => {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",
-              description: "Password not correct",
+              description: "رمز عبور نادرست است",
               key: Math.random(),
             })
           );
@@ -78,7 +78,7 @@ const Profile:React.FC = () => {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",
-              description: "User not fount please register first...",
+              description: "کاربر یافت نشد ابتدا ثبت‌ نام کنید ...",
               key: Math.random(),
             })
           );
@@ -87,7 +87,7 @@ const Profile:React.FC = () => {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",
-              description: "The server is unavailable",
+              description: "سرور در دسترس نیست",
               key: Math.random(),
             })
           );

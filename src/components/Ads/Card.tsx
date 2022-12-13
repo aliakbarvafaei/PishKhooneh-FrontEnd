@@ -11,10 +11,8 @@ const Card:React.FC<{item:any}> = ({ item }) => {
   const { user } = useSelector((state:statesRedux) => state.userAuth);
   const [backgroundImage, setBackgroundImage] = useState("");
   const { setToastState } = useToast();
-  const [images, setImages] = useState([]);
   useEffect(() => {
     setBackgroundImage(item.images[0]);
-    setImages(item.images);
   }, [item.images]);
 
   function addItemOnce(arr:Array<eachToast>, value:eachToast) {
@@ -33,7 +31,7 @@ const Card:React.FC<{item:any}> = ({ item }) => {
       setToastState((old:Array<eachToast>) =>
         addItemOnce(old.slice(), {
           title: "2",
-          description: "First, log in to your account",
+          description: "ابتدا وارد حساب خود شوید",
           key: Math.random(),
         })
       );
