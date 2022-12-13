@@ -83,7 +83,7 @@ const Header:React.FC = ()=> {
                             setToastState((old : Array<eachToast>) =>
                               addItemOnce(old.slice(), {
                                 title: "2",
-                                description: "ورود با موفقیت انجام شد",
+                                description: "خروج با موفقیت انجام شد",
                                 key: Math.random(),
                               })
                             );

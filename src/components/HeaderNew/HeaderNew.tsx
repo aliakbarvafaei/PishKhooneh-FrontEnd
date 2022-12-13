@@ -6,6 +6,9 @@ import logo from "../../assets/images/logo.png";
 import logo1_white from "../../assets/images/logo1_white.png";
 import logo1_black from "../../assets/images/logo1_black.png";
 import { Button } from "@material-ui/core";
+import { useDispatch, useSelector } from 'react-redux';
+import { eachToast, statesRedux } from '../../ts/interfaces';
+import { useToast } from '../../contexts/ToastState';
 
 const titleMenus = [
     {
@@ -33,7 +36,17 @@ const titleMenus = [
 
 const HeaderNew:React.FC = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const { user } = useSelector((state : statesRedux) => state.userAuth);
     const themeClass = "bg-white";
+    const themeAccount:string = "bg-white text-black";
+
+    const { setToastState } = useToast();
+
+    const dispatch = useDispatch();
+    function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
+      arr.push(value);
+      return arr;
+    }
 
     function handleHamburger() {
         setIsOpen((old) => !old);
@@ -126,9 +139,46 @@ const HeaderNew:React.FC = () => {
                     </ul>
                     <div className="peer pl-0 text-[12px] text-white font-bold flex flex-row justify-center items-center sm:hidden">
                         <i style={{fontSize: '16px'}} className='fa fa-user-o pl-[10px]'></i>
-                        <button>ورود</button>
-                        <span className='px-[8px]'>|</span>
-                        <button>ثبت نام</button>
+                        {
+                            (user==="" || user==null) ? 
+                                <><Link to="/login">ورود</Link>
+                                <span className='px-[8px]'>|</span>
+                                <Link to="/register">ثبت نام</Link></>
+                                :
+                                <div className='group relative'><button className='peer'>حساب کاربری</button>
+                                    <div
+                                        className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[100px] py-[10px] px-[20px] right-0
+                                        flex-col drop-shadow-lg z-[22]`}>
+                                            <Link
+                                                className="text-right text-[14px] py-[12px] hoverItem"
+                                                to='profile'
+                                                >
+                                                پروفایل
+                                            </Link>
+                                            <Link
+                                                className="text-right text-[14px] py-[12px] hoverItem"
+                                                onClick={() => {
+                                                    dispatch({ type: "logout" });
+                                                    localStorage.setItem(
+                                                    "token_user",
+                                                    JSON.stringify("")
+                                                    );
+                                                    setToastState((old : Array<eachToast>) =>
+                                                    addItemOnce(old.slice(), {
+                                                        title: "2",
+                                                        description: "خروج با موفقیت انجام شد",
+                                                        key: Math.random(),
+                                                    })
+                                                    );
+                                                }}
+                                                to='/'
+                                                >
+                                                خروج
+                                            </Link>
+                                    </div>
+                                </div>
+                        }
+                        
                     </div>
                 </div>
             </div>
