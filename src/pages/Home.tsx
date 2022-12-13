@@ -6,15 +6,15 @@ import Option from "../components/Option/Option";
 // import SectionCategories from "../components/SectionCategories/SectionCategories";
 // import SectionProductMain from "../components/SectionProductMain/SectionProductMain";
 import SectionAdSlider from "../components/SectionAdSlider/SectionAdSlider";
-import { getProducts } from "../services/api";
+import { getAds } from "../services/api";
 
 const Home : React.FC = ()=> {
-  const [products, setProducts] = useState([]);
+  const [ads, setAds] = useState([]);
 
   useEffect(() => {
-    getProducts()
+    getAds()
       .then((response) => {
-        setProducts(response.data);
+        setAds(response.data);
       })
       .catch((err) => {
         console.error(err);

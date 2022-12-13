@@ -9,7 +9,7 @@ import Profile from "../pages/Profile";
 // import Profile from "../pages/Profile";
 import RegisterPage from "../pages/Register";
 // import SearchPage from "../pages/SearchPage";
-// import bookmark from "../pages/bookmark";
+import Bookmark from "../pages/Bookmark";
 
 const indexRoutes = [{ path: "/", component: DefaultLayout }];
 
@@ -38,14 +38,14 @@ const AppRoutes:Array<any> = [
   //   showInNav: false,
   //   private: false,
   // },
-  // {
-  //   path: "/bookmark",
-  //   name: "bookmark",
-  //   icon: "fa fa-list",
-  //   component: Bookmark,
-  //   showInNav: false,
-  //   private: true,
-  // },
+  {
+    path: "/bookmark",
+    name: "bookmark",
+    icon: "fa fa-list",
+    component: Bookmark,
+    showInNav: false,
+    private: true,
+  },
   // {
   //   path: "/cart",
   //   name: "cart",

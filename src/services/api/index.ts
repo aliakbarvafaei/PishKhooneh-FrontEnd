@@ -35,11 +35,11 @@ export const updatePassword = (email : string, LastPassword : string, NewPasswor
     configToken
   );
 
-export const getProducts = () => axiosInstance.get("/products", configToken);
+export const getAds = () => axiosInstance.get("/ads", configToken);
 
-export const getProductsWithPage = (pageNumber : string, pageSize : string, filters : string) =>
+export const getAdsWithPage = (pageNumber : string, pageSize : string, filters : string) =>
   axiosInstance.post(
-    "/productsFilter",
+    "/adsFilter",
     {
       pageNumber: pageNumber,
       pageSize: pageSize,
@@ -48,8 +48,8 @@ export const getProductsWithPage = (pageNumber : string, pageSize : string, filt
     configToken
   );
 
-export const getProduct = (idProduct : string) =>
-  axiosInstance.get(`/product/${idProduct}`, configToken);
+export const getAd = (idAd : string) =>
+  axiosInstance.get(`/ad/${idAd}`, configToken);
 
 export const getBookmark = (email : string) =>
   axiosInstance.get(`/bookmark/${email}`, configToken);
