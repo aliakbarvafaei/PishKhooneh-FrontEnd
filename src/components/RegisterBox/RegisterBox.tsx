@@ -10,7 +10,7 @@ const RegisterBox:React.FC = () => {
   const history = useHistory();
 
   const fnameId = useId();
-  const lnameId = useId();
+  const callNumberId = useId();
   const emailId = useId();
   const passwordId = useId();
   const addressId = useId();
@@ -35,20 +35,20 @@ const RegisterBox:React.FC = () => {
     //     }))
 
     const fname = (document.getElementById(fnameId) as HTMLInputElement).value;
-    const lname = (document.getElementById(lnameId) as HTMLInputElement).value;
+    const callNumber = (document.getElementById(callNumberId) as HTMLInputElement).value;
     const email = (document.getElementById(emailId) as HTMLInputElement).value;
     const password = (document.getElementById(passwordId) as HTMLInputElement).value;
     const address = (document.getElementById(addressId) as HTMLInputElement).value;
     const bio = (document.getElementById(bioId) as HTMLInputElement).value;
 
     (document.getElementById(fnameId) as HTMLInputElement).value = "";
-    (document.getElementById(lnameId) as HTMLInputElement).value = "";
+    (document.getElementById(callNumberId) as HTMLInputElement).value = "";
     (document.getElementById(emailId) as HTMLInputElement).value = "";
     (document.getElementById(passwordId) as HTMLInputElement).value = "";
     (document.getElementById(addressId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
 
-    registerAPI(fname, lname, email, password, address, bio)
+    registerAPI(fname, callNumber, email, password, address, bio)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -146,7 +146,7 @@ const RegisterBox:React.FC = () => {
                   }`}
                   data-testid="callNumber-input"
                   placeholder="شماره تماس"
-                  id={lnameId}
+                  id={callNumberId}
                   {...register("callNumber", {
                     required: "شماره تماس اجباری است...",
                   })}

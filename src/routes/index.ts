@@ -3,6 +3,7 @@ import DefaultLayout from "../layouts/Default";
 import Home from "../pages/Home";
 import LoginPage from "../pages/Login";
 import NotFound from "../pages/NotFound";
+import Profile from "../pages/Profile";
 // import NotFound from "../pages/NotFound";
 // import ProductDetail from "../pages/ProductDetail";
 // import Profile from "../pages/Profile";
@@ -53,14 +54,14 @@ const AppRoutes:Array<any> = [
   //   showInNav: false,
   //   private: true,
   // },
-  // {
-  //   path: "/profile",
-  //   name: "profile",
-  //   icon: "fa fa-list",
-  //   component: Profile,
-  //   showInNav: false,
-  //   private: true,
-  // },
+  {
+    path: "/profile",
+    name: "profile",
+    icon: "fa fa-list",
+    component: Profile,
+    showInNav: false,
+    private: true,
+  },
 
   {
     path: "/login",

@@ -30,11 +30,23 @@ export interface LoginInputTypes {
     email: string;
     password: string;
 }
+export interface ProfileInputTypes {
+    passwordCurrent: string;
+    passwordNew: string;
+    passwordConfirm: string;
+}
 export interface RegisterInputTypes {
     fname: string;
     callNumber: string;
     email: string;
     password: string;
+    address: string;
+    bio: string;
+}
+export interface InformationUserTypes {
+    fname: string;
+    callNumber: string;
+    email: string;
     address: string;
     bio: string;
 }
