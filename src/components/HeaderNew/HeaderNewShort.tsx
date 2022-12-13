@@ -34,7 +34,7 @@ const titleMenus = [
     }
   ];
 
-const HeaderNew:React.FC = () => {
+const HeaderNewShort:React.FC = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { user } = useSelector((state : statesRedux) => state.userAuth);
     const themeClass = "bg-white";
@@ -53,21 +53,21 @@ const HeaderNew:React.FC = () => {
       }
 
     return (
-        <div style={{backgroundImage: `url("${tower}")`}} className='w-[100%] h-[650px] bg-no-repeat bg-cover bg-center bg-opacity-10 flex flex-col items-center'>
-            <div className='flex flex-row justify-between items-center py-[20px] px-total box-border sm:bg-white sm:h-[70px] w-[100%]'>
+        <div style={{backgroundImage: `url("${tower}")`}} className='w-[100%] bg-no-repeat bg-cover sm:bg-[center_bottom_-2rem] md:bg-[center_bottom_-6rem] lg:bg-[center_bottom_-10rem] lgmin:bg-[center_bottom_-16rem] bg-opacity-10 flex flex-col items-center'>
+            <div className='flex flex-row justify-between items-center py-[20px] px-total box-border sm:h-[70px] w-[100%]'>
                 <div className="flex flex-row smmin:justify-between sm:right-0 items-center gap-[20px]">
                     <span>
                         <Link to="/home">
                         <img
-                            className="sm:hidden w-[45px] cursor-pointer sm:w-[25px] sm:right-[3%] sm:absolute mm:mt-[-4%] sm:mt-[-2%]"
+                            className="w-[45px] cursor-pointer sm:w-[25px] sm:right-[3%] sm:absolute mm:mt-[-4%] sm:mt-[-2%]"
                             src={logo1_white}
                             alt="title"
                         />
-                        <img
+                        {/* <img
                             className="smmin:hidden w-[45px] cursor-pointer sm:w-[25px] sm:right-[3%] sm:absolute mm:mt-[-4%] sm:mt-[-2%]"
                             src={logo1_black}
                             alt="title"
-                        />
+                        /> */}
                         </Link>
                     </span>
                     <span>
@@ -116,16 +116,16 @@ const HeaderNew:React.FC = () => {
                     <div className="xl:inline xlmin:hidden curser-pointer">
                         <i
                         style={{ fontSize: "25px",color: 'white' }}
-                        className="sm:hidden fa fa-bars cursor-pointer sm:left-[3%] sm:absolute mm:mt-[-4%] sm:mt-[-2%]"
+                        className="fa fa-bars cursor-pointer sm:left-[3%] sm:absolute mm:mt-[-4%] sm:mt-[-2%]"
                         aria-hidden="true"
                         onClick={handleHamburger}
                         ></i>
-                        <i
+                        {/* <i
                         style={{ fontSize: "25px",color: 'black' }}
                         className="smmin:hidden fa fa-bars cursor-pointer sm:left-[3%] sm:absolute mm:mt-[-4%] sm:mt-[-2%]"
                         aria-hidden="true"
                         onClick={handleHamburger}
-                        ></i>
+                        ></i> */}
                         <Hamburger
                         isOpen={isOpen}
                         handleHamburger={handleHamburger}
@@ -182,19 +182,8 @@ const HeaderNew:React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col justify-center h-full'>
-                <div className='text-center text-white text-[20px] font-bold leading-[40px]'>
-                    به صورت رایگان و در سریع‌ترین زمان ممکن 
-                    <br />
-                    قیمت خانه خود را پیش‌بینی کنید
-                </div>
-                <div className="relative text-center mt-[40px]">
-                    <input type="text" className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] outline outline-[10px] outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
-                    <i className="fa fa-search absolute right-[3%] sm:right-[14%] mm:right-[20%] top-[35%]"></i>
-                </div>
-            </div>
         </div>
     );
 }
 
-export default HeaderNew;
+export default HeaderNewShort;

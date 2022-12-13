@@ -11,7 +11,7 @@ import MobileMenu from "../components/MobileMenu/MobileMenu";
 import Footer from "../components/Footer/Footer";
 import { eachToast } from "../ts/interfaces";
 import ProtectedRoute from "../components/ProtectedRoute";
-import HeaderNew from "../components/HeaderNew/HeaderNew";
+import HeaderNewComplete from "../components/HeaderNew/HeaderNewComplete";
 
 
 const DefaultLayout : React.FC = () => {
@@ -90,7 +90,7 @@ const DefaultLayout : React.FC = () => {
     >
       {/* <Header />
       <MainMenu /> */}
-      <HeaderNew />
+      {/* <HeaderNewComplete /> */}
       <MobileMenu />
       {/* <FixedButtonRight />
        */}

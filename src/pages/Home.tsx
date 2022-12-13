@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Banner from "../components/Banner/Banner";
+import HeaderNewComplete from "../components/HeaderNew/HeaderNewComplete";
 // import Instagram from "../components/Instagram/Instagram";
 import Option from "../components/Option/Option";
 // import SectionCategories from "../components/SectionCategories/SectionCategories";
@@ -24,6 +25,7 @@ const Home : React.FC = ()=> {
     <>
       {/* <Banner /> */}
       {/* <SectionCategories /> */}
+      <HeaderNewComplete />
       <SectionAdSlider />
       {/* <div className="px-total py-[12%] flex flex-col font-bold items-center mdmin:w-[60%] md:w-[100%]">
         <h2 className="text-red md:text-[75px] lg:text-[60px] xl:text-[85px] xlmin:text-[90px]">
