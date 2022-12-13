@@ -2,6 +2,7 @@ import DefaultLayout from "../layouts/Default";
 // import Cart from "../pages/Cart";
 import Home from "../pages/Home";
 import LoginPage from "../pages/Login";
+import NotFound from "../pages/NotFound";
 // import NotFound from "../pages/NotFound";
 // import ProductDetail from "../pages/ProductDetail";
 // import Profile from "../pages/Profile";
@@ -75,14 +76,14 @@ const AppRoutes:Array<any> = [
     component: RegisterPage,
     showInNav: false,
   },
-  // {
-  //   path: ["*", "/not-found"],
-  //   name: "not found",
-  //   icon: "fa fa-tachometer-alt",
-  //   component: NotFound,
-  //   showInNav: true,
-  //   private: false,
-  // },
+  {
+    path: ["*", "/not-found"],
+    name: "not found",
+    icon: "fa fa-tachometer-alt",
+    component: NotFound,
+    showInNav: true,
+    private: false,
+  },
   // { path: '/', pathTo: '/home', name: 'Dashboard', redirect: true },
 ];
 
