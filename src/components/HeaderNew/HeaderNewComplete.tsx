@@ -4,7 +4,7 @@ import Hamburger from "../mainMenu/Hamburger/Hamburger";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import logo1_white from "../../assets/images/logo1_white.png";
-import logo1_black from "../../assets/images/logo1_black.png";
+import predict from "../../assets/images/predict.png";
 import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import { eachToast, statesRedux } from '../../ts/interfaces';
@@ -183,14 +183,18 @@ const HeaderNewComplete:React.FC = () => {
                 </div>
             </div>
             <div className='flex flex-col justify-center h-full'>
-                <div className='text-center text-white text-[20px] font-bold leading-[40px]'>
+                <div className='text-center text-white text-[20px] md:text-[12px] font-bold leading-[40px]'>
                     به صورت رایگان و در سریع‌ترین زمان ممکن 
                     <br />
                     قیمت خانه خود را پیش‌بینی کنید
                 </div>
                 <div className="relative text-center mt-[40px]">
                     <input type="text" className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] outline outline-[10px] outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
-                    <i className="fa fa-search absolute right-[3%] sm:right-[14%] mm:right-[20%] top-[35%]"></i>
+                    <i className="fa fa-search absolute right-[3%] sm:right-[3%] mm:right-[11%] top-[35%]"></i>
+                </div>
+                <div className='flex flex-col items-center gap-[10px] text-center text-white text-[18px] font-bold leading-[40px] pt-[30px]'>
+                    <Link to='/predict'><img src={predict} className="peer w-[100px] cursor-pointer hover:scale-125 duration-[500ms]" alt="" /></Link>
+                    <Link to='/predict'><span className='peer-hover:text-red hover:text-red cursor-pointer'>پیش‌بینی قیمت</span></Link>
                 </div>
             </div>
         </div>
