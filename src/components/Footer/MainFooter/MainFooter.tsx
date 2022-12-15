@@ -5,6 +5,7 @@ import { FaWifi } from "@react-icons/all-files/fa/FaWifi";
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
 import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
 import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
+import { Link } from "react-router-dom";
 
 const MainFooter:React.FC = ()=> {
   const themeBorder : string = "border-darkModeGray";
@@ -41,17 +42,17 @@ const MainFooter:React.FC = ()=> {
           حساب کاربری
         </h4>
         <ul className="list-none p-0 text-[16px]">
-          <li className="relative inline-block pt-[13px] text-darkGray hoverItem">
+          <Link to='/profile'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
             آگهی های من
-          </li>
+          </li></Link>
           <div></div>
-          <li className="relative inline-block pt-[13px] text-darkGray hoverItem">
+          <Link to='/bookmark'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
             نشان شده‌ها
-          </li>
+          </li></Link>
           <div></div>
-          <li className="relative inline-block pt-[13px] text-darkGray hoverItem">
+          <Link to='/profile'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
             پروفایل
-          </li>
+          </li></Link>
           <div></div>
         </ul>
       </div>
@@ -62,17 +63,17 @@ const MainFooter:React.FC = ()=> {
           املاک
         </h4>
         <ul className="list-none p-0 text-[16px]">
-          <li className="relative inline-block pt-[13px] text-darkGray hoverItem">
+          <Link to='/search'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
             آپارتمان
-          </li>
+          </li></Link>
           <div></div>
-          <li className="relative inline-block pt-[13px] text-darkGray hoverItem">
+          <Link to='/search'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
             ویلایی
-          </li>
+          </li></Link>
           <div></div>
-          <li className="relative inline-block pt-[13px] text-darkGray hoverItem">
+          <Link to='/search'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
             زمین
-          </li>
+          </li></Link>
           <div></div>
         </ul>
       </div>

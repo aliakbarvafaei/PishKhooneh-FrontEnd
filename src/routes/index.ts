@@ -8,7 +8,7 @@ import Profile from "../pages/Profile";
 // import ProductDetail from "../pages/ProductDetail";
 // import Profile from "../pages/Profile";
 import RegisterPage from "../pages/Register";
-// import SearchPage from "../pages/SearchPage";
+import SearchPage from "../pages/SearchPage";
 import Bookmark from "../pages/Bookmark";
 import Predict from "../pages/Predict";
 import NewAd from "../pages/NewAd";
@@ -48,14 +48,14 @@ const AppRoutes:Array<any> = [
   //   showInNav: false,
   //   private: false,
   // },
-  // {
-  //   path: "/search",
-  //   name: "search",
-  //   icon: "fa fa-list",
-  //   component: SearchPage,
-  //   showInNav: false,
-  //   private: false,
-  // },
+  {
+    path: "/search",
+    name: "جستجو",
+    icon: "fa fa-list",
+    component: SearchPage,
+    showInNav: false,
+    private: false,
+  },
   {
     path: "/bookmark",
     name: "نشان‌ شده‌ها",

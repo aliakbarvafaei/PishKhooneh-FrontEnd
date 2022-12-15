@@ -6,7 +6,7 @@ import { postBookmark } from "../../services/api";
 import { convertorPrice } from "../../ts/functions";
 import { eachToast, statesRedux } from "../../ts/interfaces";
 
-const Card:React.FC<{item:any}> = ({ item }) => {
+const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
   const history = useHistory();
   const { user } = useSelector((state:statesRedux) => state.userAuth);
   const [backgroundImage, setBackgroundImage] = useState("");
@@ -20,10 +20,10 @@ const Card:React.FC<{item:any}> = ({ item }) => {
     return arr;
   }
 
-  function handleBackground(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-    e.preventDefault();
-    setBackgroundImage(e.currentTarget.src);
-  }
+  // function handleBackground(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
+  //   e.preventDefault();
+  //   setBackgroundImage(e.currentTarget.src);
+  // }
 
   function handleClickHeart(e : React.MouseEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -81,10 +81,10 @@ const Card:React.FC<{item:any}> = ({ item }) => {
           className={`relative overflow-hidden mm:min-h-[150px] sm:min-h-[190px] md:min-h-[210px] lg:min-h-[240px] xl:min-h-[270px] xlmin:min-h-[300px] bg-[length:100%_100%] bg-no-repeat`}
           style={{ backgroundImage: `url("` + backgroundImage + `")` }}
         >
-          <div className="absolute mm:right-[-25%] mmmin:right-[-15%] bottom-[5%] flex flex-col items-center justify-center gap-[20px] text-darkGray text-[20px] bg-white">
+          <div className="absolute sm:right-0 smmin:right-[-50px] bottom-[5%] flex flex-col items-center justify-center gap-[20px] text-darkGray text-[20px]">
             <i
               style={{fontSize: '35px'}}
-              className="sm:group-hover:translate-x-[-35px] lg:group-hover:translate-x-[-45px] lgmin:group-hover:translate-x-[-50px] duration-[700ms] delay-[150ms] fa fa-bookmark rotate-90 cursor-pointer text-white hover:text-red"
+              className="smmin:group-hover:translate-x-[-50px] duration-[700ms] delay-[150ms] fa fa-bookmark rotate-90 cursor-pointer text-white hover:text-red"
               onClick={handleClickHeart}
               aria-hidden="true"
             ></i>
@@ -137,15 +137,22 @@ const Card:React.FC<{item:any}> = ({ item }) => {
         </div>
       </Link>
       <div id="price" className="text-right text-red pt-[10px] opacity-90">
-        <h3 className="sm:text-[8px] md:text-[10px] mdmin:text-[14px] font-bold flex flex-row justify-end gap-[5px]">
-          <span>{convertorPrice(item.totalPrice)[0]}</span>
+        <h3 className="sm:text-[8px] md:text-[10px] mdmin:text-[14px] font-bold ">
+          <span>قیمت : </span>
           <span>{convertorPrice(item.totalPrice)[1]}</span>
-          <span> : قیمت</span>
+          <span className="pr-[5px]">{convertorPrice(item.totalPrice)[0]}</span>
         </h3>
       </div>
-      <div id="location" className="flex flex-row justify-end gap-[10px] pt-[10px] sm:text-[8px] smmin:text-[12px] text-darkGray">
-        <span>{item.bread_crumbs[item.bread_crumbs.length-1]}</span>
-        <i className="fa fa-map-marker" aria-hidden="true"></i>
+      <div id="location" className="py-[10px] text-right sm:text-[8px] smmin:text-[12px] text-darkGray">
+        <h3>
+          {dir==='r'? 
+          <><span><i className="fa fa-map-marker pl-[5px]" aria-hidden="true"></i></span>
+          <span>{item.bread_crumbs[item.bread_crumbs.length-1]}</span></>
+          :
+          <><span>{item.bread_crumbs[item.bread_crumbs.length-1]}</span>
+          <span><i className="fa fa-map-marker pl-[5px]" aria-hidden="true"></i></span></>
+          }
+        </h3>
       </div>
     </div>
   );

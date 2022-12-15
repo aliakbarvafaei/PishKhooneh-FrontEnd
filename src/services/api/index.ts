@@ -1,4 +1,5 @@
 import { axiosInstance, configToken } from "../../config";
+import { filtersInterface } from "../../ts/interfaces";
 
 export const loginAPI = (email : string, password : string) =>
   axiosInstance.post(
@@ -37,7 +38,7 @@ export const updatePassword = (email : string, LastPassword : string, NewPasswor
 
 export const getAds = () => axiosInstance.get("/ads", configToken);
 
-export const getAdsWithPage = (pageNumber : string, pageSize : string, filters : string) =>
+export const getAdsWithPage = (pageNumber : number, pageSize : number, filters : filtersInterface) =>
   axiosInstance.post(
     "/adsFilter",
     {

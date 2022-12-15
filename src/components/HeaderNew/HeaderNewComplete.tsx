@@ -14,15 +14,15 @@ const titleMenus = [
     {
       title: "خرید",
       submenu: [
-        { title: "آپارتمان", pathTo: "/" },
-        { title: "ویلایی", pathTo: "/" },
+        { title: "آپارتمان", pathTo: "/search" },
+        { title: "ویلایی", pathTo: "/search" },
       ],
     },
     {
       title: "رهن و اجاره",
       submenu: [
-        { title: "آپارتمان", pathTo: "/" },
-        { title: "ویلایی", pathTo: "/" },
+        { title: "آپارتمان", pathTo: "/search" },
+        { title: "ویلایی", pathTo: "/search" },
       ],
     },
     {

@@ -50,3 +50,14 @@ export interface InformationUserTypes {
     address: string;
     bio: string;
 }
+export interface filtersInterface {
+    searchInput: string;
+    color: string[];
+    size: string[];
+    gender: string[];
+    category: string[];
+    priceRange: {
+        from: number;
+        to: number;
+    };
+}

@@ -827,7 +827,7 @@ const SectionAdSlider:React.FC = () => {
               return (
                 <>
                   {item ? (
-                    <Card key={index} item={item} />
+                    <Card key={index} item={item} dir='l' />
                   ) : (
                     <div key={index} className="ml-[5px]">
                       <Skeleton
