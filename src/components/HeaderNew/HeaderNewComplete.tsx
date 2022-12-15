@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import tower from "../../assets/images/pent2.jpg"
+import bg_header from "../../assets/images/bg-header.jpg"
 import Hamburger from "../mainMenu/Hamburger/Hamburger";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
@@ -53,7 +53,7 @@ const HeaderNewComplete:React.FC = () => {
       }
 
     return (
-        <div style={{backgroundImage: `url("${tower}")`}} className='w-[100%] h-[650px] bg-no-repeat bg-cover bg-center bg-opacity-10 flex flex-col items-center'>
+        <div style={{backgroundImage: `url("${bg_header}")`}} className='w-[100%] h-[650px] bg-no-repeat bg-cover bg-center bg-opacity-10 flex flex-col items-center'>
             <div className='flex flex-row justify-between items-center py-[20px] px-total box-border w-[100%]'>
                 <div className="flex flex-row smmin:justify-between sm:right-0 items-center gap-[20px]">
                     <span>

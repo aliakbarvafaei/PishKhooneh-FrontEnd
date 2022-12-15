@@ -1,5 +1,5 @@
 import React from 'react';
-import tower from "../../assets/images/pent.jpg"
+import bg_header_lighter from "../../assets/images/bg-header-lighter.jpg"
 const Banner:React.FC = () => {
     return (
     <div className="mdmin:h-[400px] md:h-[550px] sm:h-[400px] w-full flex justify-center items-center bg-lightGray">
@@ -15,7 +15,7 @@ const Banner:React.FC = () => {
           </button>
         </div>
         <div className="mdmin:w-[50%] md:mt-[20px] md:w-[80%] mdmin:h-full md:h-[50%] flex items-center mdmin:justify-end md:justify-center">
-          <img src={tower} className="h-full mdmin:rounded-l-[50px] md:rounded-[30px]"/>
+          <img src={bg_header_lighter} className="h-full mdmin:rounded-l-[50px] md:rounded-[30px]" alt='bg_header_lighter'/>
         </div>
       </div>
     </div>
