@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import Banner from "../components/Banner/Banner";
+import React, { useEffect } from "react";
+// import Banner from "../components/Banner/Banner";
 import HeaderNewComplete from "../components/HeaderNew/HeaderNewComplete";
 // import Instagram from "../components/Instagram/Instagram";
 import Option from "../components/Option/Option";
 // import SectionCategories from "../components/SectionCategories/SectionCategories";
 // import SectionProductMain from "../components/SectionProductMain/SectionProductMain";
 import SectionAdSlider from "../components/SectionAdSlider/SectionAdSlider";
-import { getAds } from "../services/api";
+// import { getAds } from "../services/api";
 
 const Home : React.FC = ()=> {
-  const [ads, setAds] = useState([]);
+  // const [ads, setAds] = useState([]);
 
   useEffect(() => {
-    getAds()
-      .then((response) => {
-        setAds(response.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // getAds()
+    //   .then((response) => {
+    //     setAds(response.data);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   }, []);
 
   return (

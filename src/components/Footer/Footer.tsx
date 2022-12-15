@@ -1,12 +1,12 @@
 import React from "react";
-import Newsletter from "./Newsletter/Newsletter";
+// import Newsletter from "./Newsletter/Newsletter";
 import MainFooter from "./MainFooter/MainFooter";
-import CopyRight from "./CopyRight/CopyRight";
+// import CopyRight from "./CopyRight/CopyRight";
 
 const Footer : React.FC = ()=> {
   const themeClass : string = "bg-lightGray";
-  const themeClassCopy : string = "bg-white"
-  const themeBorder : string = "border-darkModeGray"
+  // const themeClassCopy : string = "bg-white"
+  // const themeBorder : string = "border-darkModeGray"
 
   return (
     <section>

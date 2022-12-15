@@ -4,7 +4,7 @@ import Hamburger from "../mainMenu/Hamburger/Hamburger";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import logo1_white from "../../assets/images/logo1_white.png";
-import logo1_black from "../../assets/images/logo1_black.png";
+// import logo1_black from "../../assets/images/logo1_black.png";
 import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import { eachToast, statesRedux } from '../../ts/interfaces';
