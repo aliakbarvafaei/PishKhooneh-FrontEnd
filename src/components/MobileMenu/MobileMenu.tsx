@@ -26,7 +26,7 @@ const MobileMenu:React.FC = ()=> {
   return (
     <>
       <div className="sm:fixed smmin:hidden sm:bottom-0 z-[25] flex flex-row justify-between items-center bg-darkModeLightBlack w-full h-16 text-darkGray text-[26px] px-[40px]">
-        <Link to="/search">
+        <Link to="/new-ad">
           <span className="flex flex-col justify-center items-center">
             <i
               className="fa fa-plus"
@@ -41,7 +41,7 @@ const MobileMenu:React.FC = ()=> {
             <p className="text-[12px]">نشان شده</p>
           </span>
         </Link>
-        <Link to="/cart">
+        <Link to="/home">
           <span className="flex flex-col justify-center items-center">
             <i
               className="fa fa-home"

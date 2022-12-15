@@ -134,7 +134,7 @@ const HeaderNewShort:React.FC = () => {
                     </div>
                     <ul className="sm:hidden smmin:flex flex-row m-0 items-center list-none">
                         <li>
-                        <Button variant="contained" style={{fontFamily: 'inherit',color: 'black'}}>ثبت آگهی</Button>
+                        <Link to="/new-ad"><Button variant="contained" style={{fontFamily: 'inherit',color: 'black'}}>ثبت آگهی</Button></Link>
                         </li>
                     </ul>
                     <div className="peer pl-0 text-[12px] text-white font-bold flex flex-row justify-center items-center sm:hidden">

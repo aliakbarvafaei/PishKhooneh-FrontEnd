@@ -11,6 +11,7 @@ import RegisterPage from "../pages/Register";
 // import SearchPage from "../pages/SearchPage";
 import Bookmark from "../pages/Bookmark";
 import Predict from "../pages/Predict";
+import NewAd from "../pages/NewAd";
 
 const indexRoutes = [{ path: "/", component: DefaultLayout }];
 
@@ -31,6 +32,14 @@ const AppRoutes:Array<any> = [
     showInNav: false,
     private: false,
   },
+  {
+    path: "/new-ad",
+    name: "آگهی جدید",
+    icon: "fa fa-list",
+    component: NewAd,
+    showInNav: false,
+    private: true,
+  },
   // {
   //   path: "/product-details/:idProduct",
   //   name: "همه محصولات",
@@ -49,7 +58,7 @@ const AppRoutes:Array<any> = [
   // },
   {
     path: "/bookmark",
-    name: "bookmark",
+    name: "نشان‌ شده‌ها",
     icon: "fa fa-list",
     component: Bookmark,
     showInNav: false,
@@ -65,7 +74,7 @@ const AppRoutes:Array<any> = [
   // },
   {
     path: "/profile",
-    name: "profile",
+    name: "پروفایل",
     icon: "fa fa-list",
     component: Profile,
     showInNav: false,
@@ -88,7 +97,7 @@ const AppRoutes:Array<any> = [
   },
   {
     path: ["*", "/not-found"],
-    name: "not found",
+    name: "صفحه یافت نشد",
     icon: "fa fa-tachometer-alt",
     component: NotFound,
     showInNav: true,

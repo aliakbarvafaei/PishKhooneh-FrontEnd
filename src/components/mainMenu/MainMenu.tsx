@@ -116,7 +116,7 @@ const MainMenu:React.FC = ()=> {
 
           <ul className="sm:hidden smmin:flex flex-row m-0 items-center list-none">
             <li>
-              <Button variant="outlined" style={{fontFamily: 'inherit'}}>ثبت آگهی</Button>
+            <Link to="/new-ad"><Button variant="outlined" style={{fontFamily: 'inherit'}}>ثبت آگهی</Button></Link>
             </li>
           </ul>
         </div>
