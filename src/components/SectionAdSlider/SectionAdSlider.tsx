@@ -809,7 +809,7 @@ const SectionAdSlider:React.FC = () => {
       <h2 className="sm:text-[24px] smmin:text-[32px] font-bold">
         آگهی‌های جدید
       </h2>
-      <h6 className="w-[70px] border-b-red border-b-solid border-b-[3px] mb-[15px]"></h6>
+      <h6 className="w-[70px] border-b-red border-b-solid border-b-[3px] mb-[15px]">{}</h6>
       {/* <p className="w-[50%] text-darkGray text-center text-[14px] mb-[20px]">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever

@@ -16,7 +16,7 @@ const Footer : React.FC = ()=> {
         <Newsletter />
       </div> */}
       <div
-        className={`${themeClass} mb-[60px] md:py-[20px] lg:py-[30px] lgmin:py-[45px] px-total bg-lightGray`}
+        className={`${themeClass} lg:pb-[100px] md:pt-[20px] lg:pt-[30px] lgmin:py-[45px] px-total bg-lightGray`}
       >
         <MainFooter />
       </div>
