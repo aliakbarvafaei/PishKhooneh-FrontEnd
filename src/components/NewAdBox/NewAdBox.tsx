@@ -1,14 +1,19 @@
-import React, { useId, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NewAdAPI } from "../../services/api/index";
 import { useHistory } from "react-router-dom";
 import { useToast } from "../../contexts/ToastState";
 import { eachToast, NewAdInputTypes } from "../../ts/interfaces.js";
+import { convertorPrice } from "../../ts/functions";
 
 const NewAdBox:React.FC = () => {
   const { setToastState } = useToast();
-  const history = useHistory();
+  const [ price, setPrice ] = useState<null | number>(null);
+  const [ imagesFile, setImagesFile ] = useState([]);
+  const [preview, setPreview] = useState([])
 
+  const history = useHistory();
+  
   const categoryId = useId();
   const typeId = useId();
   const cityId = useId();
@@ -20,10 +25,9 @@ const NewAdBox:React.FC = () => {
   const parkingId = useId();
   const meterageId = useId();
   const priceId = useId();
+  const photoId = useId();
   const titleId = useId();
   const callNumberId = useId();
-  const emailId = useId();
-  const passwordId = useId();
   const addressId = useId();
   const bioId = useId();
 
@@ -35,31 +39,63 @@ const NewAdBox:React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<NewAdInputTypes>();
+
+  const priceInput = register("price", {
+    required: "قیمت اجباری است...",
+  })
+
   function addItemOnce(arr : Array<eachToast>, value: eachToast) {
     arr.push(value);
     return arr;
   }
+  function handlePrice(){
+    setPrice(parseInt((document.getElementById(priceId) as HTMLInputElement).value));
+  }
+  function handleFile(e : React.MouseEvent) {
+    setImagesFile((e.target as HTMLInputElement).files as any);
+  }
+
   function formSubmit() {
     // setToastState(old=>addItemOnce(old.slice(),{
     //     title: "3",
     //     description: "", key:Math.random()
     //     }))
 
-    const fname = (document.getElementById(titleId) as HTMLInputElement).value;
+    const category = (document.getElementById(categoryId) as HTMLInputElement).value;
+    const type = (document.getElementById(typeId) as HTMLInputElement).value;
+    const city = (document.getElementById(cityId) as HTMLInputElement).value;
+    const region = (document.getElementById(regionId) as HTMLInputElement).value;
+    const room = (document.getElementById(roomId) as HTMLInputElement).value;
+    const year = (document.getElementById(yearId) as HTMLInputElement).value;
+    const floor = (document.getElementById(floorId) as HTMLInputElement).value;
+    const elevator = (document.getElementById(elevatorId) as HTMLInputElement).value;
+    const parking = (document.getElementById(parkingId) as HTMLInputElement).value;
+    const meterage = (document.getElementById(meterageId) as HTMLInputElement).value;
+    const price = (document.getElementById(priceId) as HTMLInputElement).value;
+    const photo = (document.getElementById(photoId) as HTMLInputElement).value;
+    const title = (document.getElementById(titleId) as HTMLInputElement).value;
     const callNumber = (document.getElementById(callNumberId) as HTMLInputElement).value;
-    const email = (document.getElementById(emailId) as HTMLInputElement).value;
-    const password = (document.getElementById(passwordId) as HTMLInputElement).value;
     const address = (document.getElementById(addressId) as HTMLInputElement).value;
     const bio = (document.getElementById(bioId) as HTMLInputElement).value;
 
+    (document.getElementById(categoryId) as HTMLInputElement).value = "";
+    (document.getElementById(typeId) as HTMLInputElement).value = "";
+    (document.getElementById(cityId) as HTMLInputElement).value = "";
+    (document.getElementById(regionId) as HTMLInputElement).value = "";
+    (document.getElementById(roomId) as HTMLInputElement).value = "";
+    (document.getElementById(yearId) as HTMLInputElement).value = "";
+    (document.getElementById(floorId) as HTMLInputElement).value = "";
+    (document.getElementById(elevatorId) as HTMLInputElement).value = "";
+    (document.getElementById(parkingId) as HTMLInputElement).value = "";
+    (document.getElementById(meterageId) as HTMLInputElement).value = "";
+    (document.getElementById(priceId) as HTMLInputElement).value = "";
+    (document.getElementById(photoId) as HTMLInputElement).value = "";
     (document.getElementById(titleId) as HTMLInputElement).value = "";
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
-    (document.getElementById(emailId) as HTMLInputElement).value = "";
-    (document.getElementById(passwordId) as HTMLInputElement).value = "";
     (document.getElementById(addressId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
 
-    NewAdAPI(fname, callNumber, email, password, address, bio)
+    NewAdAPI(category, type, city, region, room, year, floor, elevator, parking, meterage, price, photo, title, callNumber, address, bio)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -93,14 +129,21 @@ const NewAdBox:React.FC = () => {
         }
       });
   }
-  const [iconPassword, setIconPassword] = useState("fa-eye-slash");
-  const [passType, setPassType] = useState("password");
-  function handlePassword() {
-    setIconPassword((old) =>
-      old === "fa-eye-slash" ? "fa-eye" : "fa-eye-slash"
-    );
-    setPassType((old) => (old === "password" ? "text" : "password"));
-  }
+
+  useEffect(() => {
+    if (!imagesFile || imagesFile.length===0) {
+        setPreview([])
+        return
+    }
+
+    var arr = [];
+    for(var i=0;i<imagesFile.length;i++){
+      const objectUrl = URL.createObjectURL(imagesFile[i])
+      arr.push(objectUrl);
+    }
+
+    setPreview(arr as any);
+  }, [imagesFile])
 
   return (
     <>
@@ -411,15 +454,23 @@ const NewAdBox:React.FC = () => {
               <div className="sm:w-[100%] smmin:w-[45%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center">
                     <label htmlFor="price-select" className="inline text-[14px] text-right font-bold" >قیمت : </label>
-                    <input type='price' placeholder="تومان" data-testid="meterage-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                    <input type='number' {...priceInput} onChange={(e) => {
+                          priceInput.onChange(e);
+                          handlePrice();
+                      }}  
+                      value={price as number} placeholder="تومان" data-testid="meterage-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
                         errors.price ? "border-red outline-red" : `${themeBorder}`
                     }`}
                     id={priceId}
-                    {...register("price", {
-                        required: "قیمت اجباری است...",
-                    })}
+                    
                     />
                 </span>
+                {!errors.price && price && (
+                  <div className="text-darkGray sm:text-sm text-right pt-[5px]">
+                    <span>{convertorPrice(price)[1]}</span>
+                    <span>{convertorPrice(price)[0]}</span>
+                  </div>
+                )}
                 {errors.price && (
                   <div className="text-red text-right pt-[5px]">
                     <i
@@ -488,115 +539,39 @@ const NewAdBox:React.FC = () => {
                   </div>
                 )}
               </div>
-              <div className="mb-[30px] md:w-[100%] mdmin:w-[48%]">
+              <div className="mb-[30px] w-[100%] text-right">
                 <label
-                  htmlFor="email-input"
+                  htmlFor="photo-input"
                   className="block text-[14px] text-right font-bold mb-[8px]"
                 >
-                  ایمیل
+                  عکس
                 </label>
-                <input
-                  type="email"
-                  className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
-                    errors.email ? "border-red outline-red" : `${themeBorder}`
-                  }`}
-                  data-testid="email-input"
-                  placeholder="ایمیل"
-                  id={emailId}
-                  {...register("email", {
-                    required: "ایمیل اجباری است...",
-                  })}
-                />
-                {errors.email && (
-                  <div className="text-red text-right pt-[5px]">
-                    <i
-                      className="fa fa-exclamation-triangle"
-                      aria-hidden="true"
-                    ></i>
-                    <span className="pr-[5px]">{errors.email.message}</span>
+                <div className={` border-solid border-[1px] ${themeBorder}`}>
+                  <input
+                    type="file"
+                    className={`${themeClass} mdmin:w-[20%] md:w-[100%] rounded-none py-[17px] px-[15px] text-[12px]`}
+                    data-testid="photo-input"
+                    multiple
+                    onChange={handleFile as any}
+                    id={photoId}/>
+                  <div className={`flex flex-row flex-wrap gap-[5px] mt-[10px] px-[3%] pb-[3%] `}>
+                    {
+                      preview.map((item)=>{
+                        return <img src={item} alt="" className="w-[200px]" />
+                      })
+                    }
                   </div>
-                )}
+                </div>
               </div>
-              <div className="mb-[30px] md:w-[100%] mdmin:w-[48%] relative">
-                <label
-                  htmlFor="password-input"
-                  className="block text-[14px] text-right font-bold mb-[8px]"
-                >
-                  رمز عبور
-                </label>
-                <input
-                  type={passType}
-                  className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
-                    errors.password
-                      ? "border-red outline-red"
-                      : `${themeBorder}`
-                  }`}
-                  data-testid="password-input"
-                  placeholder="رمز عبور"
-                  id={passwordId}
-                  {...register("password", {
-                    required: "رمز عبور اجباری است...",
-                    minLength: {
-                      value: 8,
-                      message: "رمز عبور حداقل 8 کاراکتر است...",
-                    },
-                  })}
-                />
-                {!errors.password && (
-                  <i
-                    className={`fa ${iconPassword} absolute left-[2%] bottom-[20px] cursor-pointer`}
-                    onClick={handlePassword}
-                    aria-hidden="true"
-                  ></i>
-                )}
-                {errors.password && (
-                  <>
-                    <i
-                      className={`fa ${iconPassword} absolute left-[2%] bottom-[48px] cursor-pointer`}
-                      onClick={handlePassword}
-                      aria-hidden="true"
-                    ></i>
-                    <div className="text-red text-right pt-[5px]">
-                      <i
-                        className="fa fa-exclamation-triangle"
-                        aria-hidden="true"
-                      ></i>
-                      <span className="pr-[5px]">
-                        {errors.password.message}
-                      </span>
-                    </div>
-                  </>
-                )}
-              </div>
-              <div className="mb-[30px] md:w-[100%] mdmin:w-[48%] relative">
-                <label
-                  htmlFor="address-input"
-                  className="block text-[14px] text-right font-bold mb-[8px]"
-                >
-                  آدرس
-                </label>
-                <input
-                  type="text"
-                  className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
-                    errors.address
-                      ? "border-red outline-red"
-                      : `${themeBorder}`
-                  }`}
-                  data-testid="address-input"
-                  placeholder="آدرس"
-                  id={addressId}
-                />
-              </div>
-              <div className="mb-[30px] md:w-[100%] mdmin:w-[48%] relative">
+              <div className="mb-[30px] w-[100%] text-right">
                 <label
                   htmlFor="bio-input"
                   className="block text-[14px] text-right font-bold mb-[8px]"
                 >
                   توضیحات
                 </label>
-                <input
-                  type="text"
-                  className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
+                <textarea
+                  className={`${themeClass} mdmin:w-[50%] md:w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
                     errors.bio
                       ? "border-red outline-red"
                       : `${themeBorder}`
@@ -604,14 +579,14 @@ const NewAdBox:React.FC = () => {
                   data-testid="bio-input"
                   placeholder="توضیحات"
                   id={bioId}
-                />
+                  cols={30} rows={10} ></textarea>
               </div>
               
               <button
                 type="submit"
-                className="h-[50px] min-w-[150px] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                className="min-w-fill px-[4%] py-[1%] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
               >
-                ثبت نام
+                ایجاد
               </button>
             </form>
           </div>

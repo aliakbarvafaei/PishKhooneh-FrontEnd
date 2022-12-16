@@ -5,7 +5,7 @@ import LoginPage from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Profile from "../pages/Profile";
 // import NotFound from "../pages/NotFound";
-// import ProductDetail from "../pages/ProductDetail";
+// import adDetail from "../pages/adDetail";
 // import Profile from "../pages/Profile";
 import RegisterPage from "../pages/Register";
 import SearchPage from "../pages/SearchPage";
@@ -38,13 +38,13 @@ const AppRoutes:Array<any> = [
     icon: "fa fa-list",
     component: NewAd,
     showInNav: false,
-    private: false,
+    private: true,
   },
   // {
-  //   path: "/product-details/:idProduct",
+  //   path: "/ad-details/:idad",
   //   name: "همه محصولات",
   //   icon: "fa fa-list",
-  //   component: ProductDetail,
+  //   component: adDetail,
   //   showInNav: false,
   //   private: false,
   // },

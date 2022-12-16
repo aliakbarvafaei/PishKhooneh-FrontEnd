@@ -57,8 +57,6 @@ export interface NewAdInputTypes {
     price: string;
     title: string;
     callNumber: string;
-    email: string;
-    password: string;
     address: string;
     bio: string;
 }

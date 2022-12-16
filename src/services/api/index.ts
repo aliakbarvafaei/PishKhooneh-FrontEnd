@@ -23,14 +23,24 @@ export const registerAPI = (fname : string, lname : string, email : string, pass
     },
     configToken
   );
-export const NewAdAPI = (fname : string, lname : string, email : string, password : string, address: string, bio: string) =>
+export const NewAdAPI = (category : string, type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, price : string, photo : string, title : string, callNumber : string, address : string, bio : string) =>
   axiosInstance.post(
     "/new-ad",
     {
-      fname: fname,
-      lname: lname,
-      email: email,
-      password: password,
+      category: category,
+      type: type,
+      city: city,
+      region: region,
+      room: room,
+      year: year,
+      floor: floor,
+      elevator: elevator,
+      parking: parking,
+      meterage: meterage,
+      price: price,
+      photo: photo,
+      title: title,
+      callNumber: callNumber,
       address: address,
       bio: bio
     },

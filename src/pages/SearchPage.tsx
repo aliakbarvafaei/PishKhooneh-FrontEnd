@@ -17,8 +17,8 @@ const n=6 ;
 
 const SearchPage:React.FC = () => {
   const [counterPage, setcounterPage] = useState(1);
-  const [products, setProducts] = useState(Ads);
-  const [filterProducts, setFilterProducts] = useState(Ads);
+  const [ads, setAds] = useState(Ads);
+  const [filterAds, setfilterAds] = useState(Ads);
   const [priceRange, setPriceRange] = useState({ from: 0, to: 20000 });
   const searchRef = useRef(null);
   const [searchInput, setSearchInput] = useState("");
@@ -44,8 +44,8 @@ const SearchPage:React.FC = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     getAdsWithPage(counterPage, n, filters)
       .then((response) => {
-        setProducts(response.data);
-        setFilterProducts(response.data);
+        setAds(response.data);
+        setfilterAds(response.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -257,7 +257,7 @@ const SearchPage:React.FC = () => {
             <div
               className={`flex flex-row flex-wrap w-[100%] py-[40px] px-[2%] gap-[1%] rounded-md border-solid border-[1px] ${themeBorder}`}
             >
-              {filterProducts.length === 0 ? (
+              {filterAds.length === 0 ? (
                 <>
                   <i
                     className="fa fa-exclamation-triangle text-red mt-[2px]"
@@ -266,7 +266,7 @@ const SearchPage:React.FC = () => {
                   <div className="text-red">آگهی یافت نشد</div>
                 </>
               ) : (
-                filterProducts.map((item, index) => {
+                filterAds.map((item, index) => {
                   return (
                     <div
                       key={index}
@@ -305,7 +305,7 @@ const SearchPage:React.FC = () => {
                     {counterPage}
                   </div>
                   <button
-                    disabled={n <= filterProducts.length ? false : true}
+                    disabled={n <= filterAds.length ? false : true}
                     onClick={() => setcounterPage((old) => old + 1)}
                     type="button"
                     className="bg-darkGray text-lightGray rounded-l-md py-2  hover:bg-red disabled:opacity-60 px-3"
