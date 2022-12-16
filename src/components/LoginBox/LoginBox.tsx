@@ -29,7 +29,7 @@ const LoginBox:React.FC = () => {
     } catch (e) {
       console.error({ e });
     }
-  }, []);
+  }, [dispatch]);
 
   const {
     register,

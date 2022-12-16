@@ -26,10 +26,10 @@ const Header:React.FC = ()=> {
     arr.push(value);
     return arr;
   }
-  const information = {
-    welcome: "به پیش‌خونه خوش آمدید",
-    call: "ارتباط باما: 09120781225",
-  };
+  // const information = {
+  //   welcome: "به پیش‌خونه خوش آمدید",
+  //   call: "ارتباط باما: 09120781225",
+  // };
 
   return (
     <>

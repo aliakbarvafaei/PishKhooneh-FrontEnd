@@ -39,7 +39,6 @@ module.exports = {
       darkModeLightBlack: "#2b2b2b",
       lightestBlack: "#3a3a3a",
       darkModeGray: "#cfd4da",
-      lightestBlack: "#3a3a3a",
 
       skyblue: "#57d7f7",
       navy: "#002466",
