@@ -23,7 +23,7 @@ export const registerAPI = (fname : string, lname : string, email : string, pass
     },
     configToken
   );
-export const NewAdAPI = (category : string, type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, price : string, photo : string, title : string, callNumber : string, address : string, bio : string) =>
+export const NewAdAPI = (category : string, type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, price : string, photo : any, title : string, callNumber : string, bio : string) =>
   axiosInstance.post(
     "/new-ad",
     {
@@ -41,7 +41,6 @@ export const NewAdAPI = (category : string, type : string, city : string, region
       photo: photo,
       title: title,
       callNumber: callNumber,
-      address: address,
       bio: bio
     },
     configToken

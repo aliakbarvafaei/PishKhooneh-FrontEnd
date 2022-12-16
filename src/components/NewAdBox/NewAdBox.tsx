@@ -28,7 +28,6 @@ const NewAdBox:React.FC = () => {
   const photoId = useId();
   const titleId = useId();
   const callNumberId = useId();
-  const addressId = useId();
   const bioId = useId();
 
   const themeClass = "bg-white";
@@ -72,15 +71,16 @@ const NewAdBox:React.FC = () => {
     const parking = (document.getElementById(parkingId) as HTMLInputElement).value;
     const meterage = (document.getElementById(meterageId) as HTMLInputElement).value;
     const price = (document.getElementById(priceId) as HTMLInputElement).value;
-    const photo = (document.getElementById(photoId) as HTMLInputElement).value;
+    const photo = imagesFile;
+    // setImagesFile([]);
+    // setPreview([]);
     const title = (document.getElementById(titleId) as HTMLInputElement).value;
     const callNumber = (document.getElementById(callNumberId) as HTMLInputElement).value;
-    const address = (document.getElementById(addressId) as HTMLInputElement).value;
     const bio = (document.getElementById(bioId) as HTMLInputElement).value;
 
     (document.getElementById(categoryId) as HTMLInputElement).value = "";
     (document.getElementById(typeId) as HTMLInputElement).value = "";
-    (document.getElementById(cityId) as HTMLInputElement).value = "";
+    (document.getElementById(cityId) as HTMLInputElement).value = "تهران";
     (document.getElementById(regionId) as HTMLInputElement).value = "";
     (document.getElementById(roomId) as HTMLInputElement).value = "";
     (document.getElementById(yearId) as HTMLInputElement).value = "";
@@ -89,13 +89,13 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(parkingId) as HTMLInputElement).value = "";
     (document.getElementById(meterageId) as HTMLInputElement).value = "";
     (document.getElementById(priceId) as HTMLInputElement).value = "";
+    setPrice(null);
     (document.getElementById(photoId) as HTMLInputElement).value = "";
     (document.getElementById(titleId) as HTMLInputElement).value = "";
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
-    (document.getElementById(addressId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
 
-    NewAdAPI(category, type, city, region, room, year, floor, elevator, parking, meterage, price, photo, title, callNumber, address, bio)
+    NewAdAPI(category, type, city, region, room, year, floor, elevator, parking, meterage, price, photo, title, callNumber, bio)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -128,9 +128,11 @@ const NewAdBox:React.FC = () => {
           console.error(err);
         }
       });
+      history.go(0);
   }
 
   useEffect(() => {
+    console.log(imagesFile)
     if (!imagesFile || imagesFile.length===0) {
         setPreview([])
         return
