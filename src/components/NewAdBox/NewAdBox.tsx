@@ -9,7 +9,7 @@ import { convertorPrice } from "../../ts/functions";
 const NewAdBox:React.FC = () => {
   const { setToastState } = useToast();
   const [ price, setPrice ] = useState<null | number>(null);
-  const [ imagesFile, setImagesFile ] = useState([]);
+  const [ imagesFile, setImagesFile ] = useState<FileList | null>(null);
   const [preview, setPreview] = useState([])
 
   const history = useHistory();
@@ -51,7 +51,7 @@ const NewAdBox:React.FC = () => {
     setPrice(parseInt((document.getElementById(priceId) as HTMLInputElement).value));
   }
   function handleFile(e : React.MouseEvent) {
-    setImagesFile((e.target as HTMLInputElement).files as any);
+    setImagesFile((document.getElementById(photoId) as HTMLInputElement).files);
   }
 
   function formSubmit() {
@@ -59,7 +59,26 @@ const NewAdBox:React.FC = () => {
     //     title: "3",
     //     description: "", key:Math.random()
     //     }))
-
+    const creatorInput = (document.getElementsByName('creator') as any);
+    var creator;
+    for(var i = 0; i < creatorInput.length; i++) {
+      if(creatorInput[i].checked)
+      {
+        creator = (creatorInput[i].value)
+        creatorInput[i].checked = false;
+        break ;
+      }
+    }
+    const warehouseInput = (document.getElementsByName('warehouse') as any);
+    var warehouse;
+    for(var i = 0; i < warehouseInput.length; i++) {
+      if(warehouseInput[i].checked)
+      {
+        warehouse = (warehouseInput[i].value);
+        warehouseInput[i].checked = false;
+        break ;
+      }
+    }
     const category = (document.getElementById(categoryId) as HTMLInputElement).value;
     const type = (document.getElementById(typeId) as HTMLInputElement).value;
     const city = (document.getElementById(cityId) as HTMLInputElement).value;
@@ -72,8 +91,8 @@ const NewAdBox:React.FC = () => {
     const meterage = (document.getElementById(meterageId) as HTMLInputElement).value;
     const price = (document.getElementById(priceId) as HTMLInputElement).value;
     const photo = imagesFile;
-    // setImagesFile([]);
-    // setPreview([]);
+    setImagesFile(null);
+    setPreview([]);
     const title = (document.getElementById(titleId) as HTMLInputElement).value;
     const callNumber = (document.getElementById(callNumberId) as HTMLInputElement).value;
     const bio = (document.getElementById(bioId) as HTMLInputElement).value;
@@ -90,12 +109,11 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(meterageId) as HTMLInputElement).value = "";
     (document.getElementById(priceId) as HTMLInputElement).value = "";
     setPrice(null);
-    (document.getElementById(photoId) as HTMLInputElement).value = "";
+    // (document.getElementById(photoId) as HTMLInputElement).value = "";
     (document.getElementById(titleId) as HTMLInputElement).value = "";
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
-
-    NewAdAPI(category, type, city, region, room, year, floor, elevator, parking, meterage, price, photo, title, callNumber, bio)
+    NewAdAPI(category, type, city, region, room, year, floor, elevator, parking, meterage, price, photo, title, callNumber, bio, creator, warehouse)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -128,11 +146,10 @@ const NewAdBox:React.FC = () => {
           console.error(err);
         }
       });
-      history.go(0);
+      // history.go(0);
   }
 
   useEffect(() => {
-    console.log(imagesFile)
     if (!imagesFile || imagesFile.length===0) {
         setPreview([])
         return
@@ -404,32 +421,58 @@ const NewAdBox:React.FC = () => {
                     <legend className="inline text-[14px] text-right font-bold">آگهی دهنده : </legend>
 
                     <div className="flex justify-center items-center gap-[5px]">
-                    <input type="radio" id="person" name="creator" value="شخصی"
-                            checked />
+                    <input type="radio" {...register("creator",{
+                        required: "ارائه دهنده اجباری است...",
+                    })} id="person" name="creator" value="شخصی"
+                             />
                     <label htmlFor="person" className="text-[12px]">شخصی</label>
                     </div>
 
                     <div className="flex justify-center items-center gap-[5px]">
-                    <input type="radio" id="shop" name="creator" value="مشاور املاک" />
+                    <input type="radio" {...register("creator",{
+                        required: "ارائه دهنده اجباری است...",
+                    })} id="shop" name="creator" value="مشاور املاک" />
                     <label htmlFor="shop" className="text-[12px]">مشاور املاک</label>
                     </div>
                 </span>
+                {errors.creator && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.creator.message}</span>
+                  </div>
+                )}
               </div>
               <div className="w-[100%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center">
                     <legend className="inline text-[14px] text-right font-bold">انباری : </legend>
 
                     <div className="flex justify-center items-center gap-[5px]">
-                    <input type="radio" id="دارد" name="warehouse" value="دارد"
-                            checked />
+                    <input type="radio" {...register("warehouse",{
+                        required: " انباری اجباری است...",
+                    })} id="دارد" name="warehouse" value="دارد"
+                             />
                     <label htmlFor="دارد" className="text-[12px]">دارد</label>
                     </div>
 
                     <div className="flex justify-center items-center gap-[5px]">
-                    <input type="radio" id="دارد" name="warehouse" value="ندارد" />
+                    <input type="radio" {...register("warehouse",{
+                        required: " انباری اجباری است...",
+                    })} id="دارد" name="warehouse" value="ندارد" />
                     <label htmlFor="ندارد" className="text-[12px]">ندارد</label>
                     </div>
                 </span>
+                {errors.warehouse && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.warehouse.message}</span>
+                  </div>
+                )}
               </div>
               <div className="sm:w-[100%] smmin:w-[45%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center">

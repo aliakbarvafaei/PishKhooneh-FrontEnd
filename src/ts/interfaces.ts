@@ -59,6 +59,8 @@ export interface NewAdInputTypes {
     callNumber: string;
     address: string;
     bio: string;
+    creator: string;
+    warehouse: string;
 }
 export interface InformationUserTypes {
     fname: string;
