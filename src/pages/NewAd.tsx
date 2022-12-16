@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderNewShort from '../components/HeaderNew/HeaderNewShort';
+import NewAdBox from '../components/NewAdBox/NewAdBox';
 import TitlePages from '../components/TitlePages/TitlePages';
 
 const NewAd:React.FC = () => {
@@ -7,7 +8,7 @@ const NewAd:React.FC = () => {
         <div>
             <HeaderNewShort />
             <TitlePages title='آگهی جدید' />
-            l
+            <NewAdBox />
         </div>
     );
 }

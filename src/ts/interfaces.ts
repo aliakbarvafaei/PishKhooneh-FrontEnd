@@ -43,6 +43,25 @@ export interface RegisterInputTypes {
     address: string;
     bio: string;
 }
+export interface NewAdInputTypes {
+    category: string;
+    type: string;
+    city: string;
+    region: string;
+    room: string;
+    year: string;
+    floor: string;
+    elevator: string;
+    parking: string;
+    meterage: string;
+    price: string;
+    title: string;
+    callNumber: string;
+    email: string;
+    password: string;
+    address: string;
+    bio: string;
+}
 export interface InformationUserTypes {
     fname: string;
     callNumber: string;

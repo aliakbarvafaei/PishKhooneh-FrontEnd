@@ -38,7 +38,7 @@ const AppRoutes:Array<any> = [
     icon: "fa fa-list",
     component: NewAd,
     showInNav: false,
-    private: true,
+    private: false,
   },
   // {
   //   path: "/product-details/:idProduct",

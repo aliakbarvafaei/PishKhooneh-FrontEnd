@@ -23,6 +23,19 @@ export const registerAPI = (fname : string, lname : string, email : string, pass
     },
     configToken
   );
+export const NewAdAPI = (fname : string, lname : string, email : string, password : string, address: string, bio: string) =>
+  axiosInstance.post(
+    "/new-ad",
+    {
+      fname: fname,
+      lname: lname,
+      email: email,
+      password: password,
+      address: address,
+      bio: bio
+    },
+    configToken
+  );
 
 export const getUser = () => axiosInstance.get(`/user`, configToken);
 
