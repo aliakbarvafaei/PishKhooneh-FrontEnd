@@ -1,9 +1,12 @@
+import { Button } from "@material-ui/core";
 import React, { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
 import { useToast } from "../contexts/ToastState";
+import { Ads } from "../data";
 import { getUser, updatePassword } from "../services/api";
 import { eachToast, InformationUserTypes, ProfileInputTypes, statesRedux } from "../ts/interfaces";
 
@@ -13,6 +16,7 @@ const Profile:React.FC = () => {
   const themeBorder2 = "border-darkModeGray"; 
 
   const { setToastState } = useToast();
+  const [ myAds, setMyAds ] = useState([]);
 
   const [showMenu, setShowMenu] = useState("information");
   const styleSelectedMenu = "text-red border-red border-b-solid border-b-[2px]";
@@ -130,6 +134,14 @@ const Profile:React.FC = () => {
             onClick={() => setShowMenu("change password")}
           >
             تغییر رمز عبور
+          </h4>
+          <h4
+            className={`${
+              showMenu === "my ads" ? styleSelectedMenu : themeBorder2
+            } mb-[20px] pb-[10px] md:text-[12px] mdmin:text-[14px] font-semibold mm:w-[100%] mm:text-center mm:pb-[10px] cursor-pointer mm:border-b-[1px] mm:border-b-solid`}
+            onClick={() => setShowMenu("my ads")}
+          >
+            آگهی‌های من
           </h4>
         </div>
         <div
@@ -367,6 +379,49 @@ const Profile:React.FC = () => {
                     تغییر
                   </button>
                 </form>
+              )}
+            </div>
+          )}
+          {showMenu === "my ads" && (
+            <div
+              className={`w-[100%] py-[40px] px-[2%] text-center rounded-md border-solid border-[1px] ${themeBorder}`}
+            >
+              {loading && (
+                <div className="text-center pt-[15px]">
+                  <i
+                    className="fa fa-spinner fa-spin text-[50px]"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+              )}
+              {!loading && (
+                <div
+                className={`flex flex-row flex-wrap justify-center w-full gap-[1%]`}>
+                  {Ads.map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="md:w-[48%] xl:w-[48%] xlmin:w-[32%]"
+                      >
+                        <Card item={item} dir='r' />
+                        <div className="flex flex-row gap-[3%] justify-center items-center mb-[20px] md:ml-[5px] lg:ml-[10px] lgmin:ml-[20px]">
+                          <button
+                            type="button"
+                            className="min-w-fit w-[100%] py-[5%] rounded-md font-extrabold text-[14px] md:text-[12px] sm:text-[10px] bg-green text-white hover:bg-white hover:outline-green hover:outline hover:outline-[2px] hover:outline-solid hover:text-green"
+                          >
+                            ویرایش
+                          </button>
+                          <button
+                            type="button"
+                            className="min-w-fit w-[100%] py-[5%] rounded-md font-extrabold text-[14px] md:text-[12px] sm:text-[10px] bg-red text-white hover:bg-white hover:outline-red hover:outline hover:outline-[2px] hover:outline-solid hover:text-red"
+                          >
+                            حذف
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               )}
             </div>
           )}
