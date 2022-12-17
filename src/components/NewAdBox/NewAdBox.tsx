@@ -90,7 +90,7 @@ const NewAdBox:React.FC = () => {
     const parking = (document.getElementById(parkingId) as HTMLInputElement).value;
     const meterage = (document.getElementById(meterageId) as HTMLInputElement).value;
     const price = (document.getElementById(priceId) as HTMLInputElement).value;
-    const photo = imagesFile;
+    const photo = {...imagesFile as FileList};
     setImagesFile(null);
     setPreview([]);
     const title = (document.getElementById(titleId) as HTMLInputElement).value;
@@ -109,7 +109,7 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(meterageId) as HTMLInputElement).value = "";
     (document.getElementById(priceId) as HTMLInputElement).value = "";
     setPrice(null);
-    // (document.getElementById(photoId) as HTMLInputElement).value = "";
+    (document.getElementById(photoId) as HTMLInputElement).value = "";
     (document.getElementById(titleId) as HTMLInputElement).value = "";
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
