@@ -48,6 +48,24 @@ export const NewAdAPI = (category : string, type : string, city : string, region
     configToken
   );
 
+  export const PredictAPI = (type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, warehouse: string) =>
+  axiosInstance.post(
+    "/predict",
+    {
+      type: type,
+      city: city,
+      region: region,
+      room: room,
+      year: year,
+      floor: floor,
+      elevator: elevator,
+      parking: parking,
+      meterage: meterage,
+      warehouse: warehouse
+    },
+    configToken
+  );
+
 export const getUser = () => axiosInstance.get(`/user`, configToken);
 
 export const updatePassword = (email : string, LastPassword : string, NewPassword : string) =>

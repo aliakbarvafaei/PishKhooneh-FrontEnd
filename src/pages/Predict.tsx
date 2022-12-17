@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderNewShort from '../components/HeaderNew/HeaderNewShort';
+import PredictBox from '../components/PredictBox/PredictBox';
 import TitlePages from '../components/TitlePages/TitlePages';
 
 const Predict:React.FC = () => {
@@ -7,7 +8,7 @@ const Predict:React.FC = () => {
         <div>
             <HeaderNewShort />
             <TitlePages title='پیش‌بینی' />
-            l
+            <PredictBox />
         </div>
     );
 }

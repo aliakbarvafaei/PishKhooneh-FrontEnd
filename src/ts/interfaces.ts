@@ -62,6 +62,18 @@ export interface NewAdInputTypes {
     creator: string;
     warehouse: string;
 }
+export interface PredictInputTypes {
+    type: string;
+    city: string;
+    region: string;
+    room: string;
+    year: string;
+    floor: string;
+    elevator: string;
+    parking: string;
+    meterage: string;
+    warehouse: string;
+}
 export interface InformationUserTypes {
     fname: string;
     callNumber: string;
