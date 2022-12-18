@@ -12,6 +12,7 @@ import SearchPage from "../pages/SearchPage";
 import Bookmark from "../pages/Bookmark";
 import Predict from "../pages/Predict";
 import NewAd from "../pages/NewAd";
+import AdDetails from "../pages/AdDetails";
 
 const indexRoutes = [{ path: "/", component: DefaultLayout }];
 
@@ -40,14 +41,14 @@ const AppRoutes:Array<any> = [
     showInNav: false,
     private: false,
   },
-  // {
-  //   path: "/ad-details/:idad",
-  //   name: "همه محصولات",
-  //   icon: "fa fa-list",
-  //   component: adDetail,
-  //   showInNav: false,
-  //   private: false,
-  // },
+  {
+    path: "/ad-details/:idad",
+    name: "همه محصولات",
+    icon: "fa fa-list",
+    component: AdDetails,
+    showInNav: false,
+    private: false,
+  },
   {
     path: "/search",
     name: "جستجو",

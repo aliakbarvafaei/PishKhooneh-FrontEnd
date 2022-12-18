@@ -25,7 +25,7 @@ const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
   //   setBackgroundImage(e.currentTarget.src);
   // }
 
-  function handleClickHeart(e : React.MouseEvent<HTMLFormElement>) {
+  function handleClickBookmark(e : React.MouseEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!user) {
       setToastState((old:Array<eachToast>) =>
@@ -72,9 +72,7 @@ const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
       <Link
         to={
           "/ad-details/" +
-          String(item.identifier) +
-          `-` +
-          String(item.title.replace(/\s/g, "").toLowerCase())
+          String(item.identifier)
         }
       >
         <div
@@ -85,7 +83,7 @@ const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
             <i
               style={{fontSize: '35px'}}
               className="smmin:group-hover:translate-x-[-50px] duration-[700ms] delay-[150ms] fa fa-bookmark rotate-90 cursor-pointer text-white hover:text-red"
-              onClick={handleClickHeart}
+              onClick={handleClickBookmark}
               aria-hidden="true"
             ></i>
           </div>
@@ -126,9 +124,7 @@ const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
       <Link
         to={
           "/ad-details/" +
-          String(item.identifier) +
-          `-` +
-          String(item.title.replace(/\s/g, "").toLowerCase())
+          String(item.identifier)
         }
       >
         <div id="title" className="sm:text-[12px] md:text-[14px] mdmin:text-[16px] font-medium text-black text-right pt-[10px]">

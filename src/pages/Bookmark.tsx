@@ -87,11 +87,12 @@ const Bookmark:React.FC = () => {
                           <Link
                             to={
                               "/ad-details/" +
-                              String(Ad.identifier) +
-                              `-` +
-                              String(
-                                Ad.title.replace(/\s/g, "").toLowerCase()
-                              )
+                              String(Ad.identifier) 
+                              // +
+                              // `-` +
+                              // String(
+                              //   Ad.title.replace(/\s/g, "").toLowerCase()
+                              // )
                             }
                           >
                             <img
@@ -105,11 +106,7 @@ const Bookmark:React.FC = () => {
                           <Link
                             to={
                               "/ad-details/" +
-                              String(Ad.identifier) +
-                              `-` +
-                              String(
-                                Ad.title.replace(/\s/g, "").toLowerCase()
-                              )
+                              String(Ad.identifier)
                             }
                           >
                             {Ad.title}

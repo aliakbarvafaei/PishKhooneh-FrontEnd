@@ -92,3 +92,43 @@ export interface filtersInterface {
         to: number;
     };
 }
+export interface ads{
+    id: number;
+    owner: string;
+    title: string;
+    total_price: number;
+    unit_price: number;
+    province: string;
+    address: string;
+    location_x: number;
+    location_y: number;
+    main_image: string;
+    image_1: string | null;
+    image_2: string | null;
+    image_3: string | null;
+    type: string;
+    category: string;
+    status: string;
+    age: number;
+    floor_area: number;
+    num_of_beds: number;
+    parking: boolean;
+    lobby: boolean;
+    warehouse: boolean;
+    sports_hall: boolean;
+    guard: boolean;
+    elevator: boolean;
+    swimming_pool: boolean;
+    balcony: boolean;
+    roof_garden: boolean;
+    remote_door: boolean;
+    description: string | null;
+    region: number;
+    neighbor: string | null;
+    graph: {
+    "12000": "Price"
+    },
+    updated_at: string;
+    created_at: string;
+    is_active: boolean;
+}

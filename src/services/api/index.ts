@@ -97,7 +97,7 @@ export const getAd = (idAd : string) =>
 export const getBookmark = (email : string) =>
   axiosInstance.get(`/bookmark/${email}`, configToken);
 
-export const postBookmark = (email : string, code : string) =>
+export const postBookmark = (email : string, code : number) =>
   axiosInstance.post(
     `/bookmark/${email}`,
     {
