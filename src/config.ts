@@ -9,7 +9,7 @@ const isLocalhost = Boolean(
 );
 
 const API_URL = isLocalhost
-  ? "http://localhost:5000"
+  ? "http://localhost:8000/api/v1"
   : "https://api.clothing-shopping.ir";
 
 export const axiosInstance = axios.create({
@@ -19,6 +19,6 @@ export const axiosInstance = axios.create({
 
 export const configToken = {
   headers: {
-    token: JSON.parse(localStorage.getItem("token_user") as string),
+    Authorization: `Token ${JSON.parse(localStorage.getItem("token_user") as string)}`,
   },
 };

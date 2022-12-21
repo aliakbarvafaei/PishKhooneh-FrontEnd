@@ -67,7 +67,7 @@ const LoginBox:React.FC = () => {
           // toggleAuth(response.data.data.email,response.data.token);
           dispatch({
             type: "login",
-            payload: [response.data.data.email, response.data.token],
+            payload: [email, response.data.token],
           });
           try {
             localStorage.setItem(
@@ -81,7 +81,7 @@ const LoginBox:React.FC = () => {
         }
       })
       .catch((err) => {
-        if (err.response && err.response.status === 401) {
+        if (err.response && err.response.status === 400) {
           setToastState((old : Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",

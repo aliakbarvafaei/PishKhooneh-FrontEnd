@@ -109,6 +109,7 @@ export interface ads{
     type: string;
     category: string;
     status: string;
+    seller: string;
     age: number;
     floor_area: number;
     num_of_beds: number;
@@ -128,6 +129,7 @@ export interface ads{
     graph: {
     "12000": "Price"
     },
+    phone_number: string;
     updated_at: string;
     created_at: string;
     is_active: boolean;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FaGooglePlusG } from "@react-icons/all-files/fa/FaGooglePlusG";
-import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
-import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
-import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
+// import { FaGooglePlusG } from "@react-icons/all-files/fa/FaGooglePlusG";
+// import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
+// import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
+// import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
 import { useToast } from "../../contexts/ToastState";
 import { useHistory } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ import {
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { ads, eachToast, statesRedux } from "../../ts/interfaces";
+import { convertorPrice, DateDiff } from "../../ts/functions";
 
 const Ad:React.FC<{ad:ads}> = ({ ad })=> {
   const history = useHistory();
@@ -20,6 +21,10 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
   const themeBorder2 = "border-darkModeGray";
 
   const { setToastState } = useToast();
+  const [ menuAd ] = useState({
+    "description": ad.description,
+    "informationCall": ad.phone_number
+  })
 
   const { user } = useSelector((state:statesRedux) => state.userAuth);
 
@@ -75,7 +80,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "1",
-              description: "Product Added Successfully",
+              description: "آگهی با موفقیت اضافه شد",
               key: Math.random(),
             })
           );
@@ -85,7 +90,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
             setToastState((old:Array<eachToast>) =>
               addItemOnce(old.slice(), {
                 title: "2",
-                description: "This Product Already Added",
+                description: "این آگهی اخیرا اضافه شده است",
                 key: Math.random(),
               })
             );
@@ -136,15 +141,32 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
               <>
                 <h2 className="text-[25px] font-bold pb-[10px]">
                   {ad.title}
-                  <span className="text-[16px] text-darkGray font-normal">
-                    {ad.id}
-                  </span>
                 </h2>
-                <i
-                  className="fa fa-bookmark text-red pb-[5px] cursor-pointer"
-                  onClick={handleClickBookmark}
-                  aria-hidden="true"
-                ></i>
+                <div className="flex flex-row justify-between items-center pb-[10px]">
+                  <div className="text-right text-sm text-darkGray">
+                    <span>{DateDiff.inMonths(new Date(ad.created_at),new Date())===0?
+                      (DateDiff.inWeeks(new Date(ad.created_at),new Date())===0?
+                        (DateDiff.inDays(new Date(ad.created_at),new Date())===0?
+                          (DateDiff.inHour(new Date(ad.created_at),new Date())===0?
+                            <>دقایقی پیش</>
+                            :
+                            <>{DateDiff.inHour(new Date(ad.created_at),new Date())} ساعت پیش</>)
+                          :
+                          <>{DateDiff.inDays(new Date(ad.created_at),new Date())} روز پیش</>)
+                      :
+                      <>{DateDiff.inWeeks(new Date(ad.created_at),new Date())} هفته پیش</>)
+                    :
+                    <>{DateDiff.inMonths(new Date(ad.created_at),new Date())} ماه پیش</>}</span>
+                    ، <span>{ad.neighbor}</span>
+                    
+                  </div>
+                  <i
+                    className="fa fa-bookmark text-red pb-[5px] rotate-90 cursor-pointer"
+                    onClick={handleClickBookmark}
+                    style={{fontSize: '26px'}}
+                    aria-hidden="true"
+                  ></i>
+                </div>
               </>
             ) : (
               <div className="w-[100%] mt-0 pt-0">
@@ -156,110 +178,145 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
               </div>
             )}
             {ad ? (
-              <>
-                <h3>
-                  <span className="text-[14px] text-darkGray">
-                    ${ad.total_price}
-                  </span>
-                  {/* <span className="text-red"> {ad.off}% Off</span> */}
-                </h3>
-                {/* <h3 className="text-[26px]">
-                  ${(Number(ad.price) * (100 - Number(ad.off))) / 100}
-                </h3> */}
+              <>                
+                <div className="sm:rounded-lg">
+                    <div className="bg-white text-sm font-bold flex flex-row justify-between items-center text-center w-[100%]">
+                        <div className="w-[33%]">
+                            <div className="my-3 mmmin:px-6 border-l border-l-gray">
+                              <div className="mb-[6px]">متراژ</div>
+                              <div>{ad.floor_area}</div>
+                            </div>
+                        </div>
+                        <div className="w-[33%]">
+                            <div className="my-3 mmmin:px-6 border-l border-l-gray">
+                              <div className="mb-[6px]">اتاق</div>
+                              <div>{ad.num_of_beds}</div>
+                            </div>
+                        </div>
+                        <div className="w-[33%]">
+                            <div className="my-3 mmmin:px-6">
+                              <div className="mb-[6px]">سن ساخت</div>
+                              <div>{ad.age}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <table className="w-full text-sm text-gray-500 dark:text-gray-400">
+                        <tbody>
+                            <tr className="bg-lightGray">
+                                <th className="py-4 mmmin:px-6 mm:pr-3 text-right">
+                                    قیمت 
+                                </th>
+                                <td className="py-4 mmmin:px-6 mm:pl-3 text-left">
+                                    <span className="pl-[6px]">{convertorPrice(ad.total_price)[1]}</span>{convertorPrice(ad.total_price)[0]}
+                                </td>
+                            </tr>
+                            <tr className="bg-white">
+                                <th className="py-4 mmmin:px-6 mm:pr-3 text-right">
+                                    نوع 
+                                </th>
+                                <td className="py-4 mmmin:px-6 mm:pl-3 text-left">
+                                    {ad.type}
+                                </td>
+                            </tr>
+                            <tr className="bg-lightGray">
+                                <th className="py-4 mmmin:px-6 mm:pr-3 text-right">
+                                    دسته‌بندی 
+                                </th>
+                                <td className="py-4 mmmin:px-6 mm:pl-3 text-left">
+                                    {ad.category}
+                                </td>
+                            </tr>
+                            <tr className="bg-white">
+                                <th className="py-4 mmmin:px-6 mm:pr-3 text-right">
+                                    مکان 
+                                </th>
+                                <td className="py-4 mmmin:px-6 mm:pl-3 text-left">
+                                    {ad.province} ,منطقه {ad.region}
+                                </td>
+                            </tr>
+                            <tr className="bg-lightGray">
+                                <th className="py-4 mmmin:px-6 mm:pr-3 text-right">
+                                    ایجادکننده 
+                                </th>
+                                <td className="py-4 mmmin:px-6 mm:pl-3 text-left">
+                                    {ad.seller}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
               </>
             ) : (
               <div className="w-[100%] mt-[10px] ml-[10%]">
                 <Skeleton variant="rectangular" width={"80%"} height={"40px"} />
               </div>
             )}
-            {/* {textButton !== "" ? (
-              <div
-                id="colors"
-                className="flex flex-row gap-[5px] pt-[15px] pb-[10px] lg:justify-center"
-              >
-                {ad.colors.split(",").map((item:any, index:number) => {
-                  return (
-                    <div
-                      key={index}
-                      className={`${themeBorder2} border-solid border-[1px] w-[30px] h-[30px] rounded-[50%]`}
-                      style={{ backgroundColor: `${item}` }}
-                    ></div>
-                  );
-                })}
-              </div>
-            ) : ( */}
-              {/* <div className="w-[100%] mt-[10px]">
-                <Skeleton
-                  variant="rectangular"
-                  width={"100%%"}
-                  height={"40px"}
-                />
-              </div>
-            )} */}
           </div>
           <div
             className={`${themeBorder2} w-[100%] border-dashed border-b-[1px]`}
           ></div>
           {ad ? (
             <div>
-              <h2 className="text-[14px] font-bold ">Select Size</h2>
-              {/* <div
-                id="colors"
-                className="flex flex-row gap-[5px] pt-[15px] pb-[10px] lg:justify-center"
-              >
-                {ad.size.split(",").map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className={`${themeBorder2} border-solid border-[1px] w-[35px] h-[35px] rounded-[50%] flex items-center justify-center`}
-                    >
-                      {item}
-                    </div>
-                  );
-                })}
-              </div> */}
-              {/* <h3 className="text-[14px] font-bold text-red">
-                {Number(product.stock) === 0
-                  ? "Not available in stock"
-                  : Number(product.stock) < 10
-                  ? `Only ${product.stock} in stock`
-                  : "InStock"}
-              </h3> */}
-              <h3 className="text-[14px] font-bold ">Quantity</h3>
-              {/* <div className="flex lg:justify-center">
-                <div
-                  className={`mt-[10px] flex flex-row items-center justify-between border-[1px] border-solid w-[100px] ${themeBorder2}`}
-                >
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => handleQuantity("-")}
-                  >
-                    <i
-                      className={`fa fa-caret-left p-[8px] h-[100%] border-r-[1px] ${themeBorder2}`}
-                      aria-hidden="true"
-                    ></i>
+              <div className="bg-white text-sm font-bold flex flex-row justify-between items-center text-center w-[100%]">
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6 border-l border-l-gray">
+                        <div className="mb-[6px]">پارکینگ</div>
+                        <div>{ad.parking ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
                   </div>
-                  <div className="py-[4px] px-[10px]">{counter}</div>
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => handleQuantity("+")}
-                  >
-                    <i
-                      className={`fa fa-caret-right p-[8px] border-l-[1px] ${themeBorder2}`}
-                      aria-hidden="true"
-                    ></i>
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6 border-l border-l-gray">
+                        <div className="mb-[6px]">بالکن</div>
+                        <div>{ad.balcony ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
                   </div>
-                </div>
-              </div> */}
-              {/* <div className="py-[10px]">
-                <button
-                  type="button"
-                  onClick={handleClickCart}
-                  className="h-[50px] min-w-fit py-[10px] px-[20px] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
-                >
-                  {textButton}
-                </button>
-              </div> */}
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6">
+                        <div className="mb-[6px]">آسانسور</div>
+                        <div>{ad.elevator ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
+                  </div>
+              </div>
+              <div className="bg-white text-sm font-bold flex flex-row justify-between items-center text-center w-[100%] border-t border-t-gray">
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6 border-l border-l-gray">
+                        <div className="mb-[6px]">نگهبان</div>
+                        <div>{ad.guard ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
+                  </div>
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6 border-l border-l-gray">
+                        <div className="mb-[6px]">لابی</div>
+                        <div>{ad.lobby ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
+                  </div>
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6">
+                        <div className="mb-[6px]">انباری</div>
+                        <div>{ad.warehouse ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
+                  </div>
+              </div>
+              <div className="bg-white text-sm font-bold flex flex-row justify-between items-center text-center w-[100%] border-t border-t-gray">
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6 border-l border-l-gray">
+                        <div className="mb-[6px]">استخر</div>
+                        <div>{ad.swimming_pool ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
+                  </div>
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6 border-l border-l-gray">
+                        <div className="mb-[6px]">سالن ورزشی</div>
+                        <div>{ad.sports_hall ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
+                  </div>
+                  <div className="w-[33%]">
+                      <div className="my-3 mmmin:px-6">
+                        <div className="mb-[6px]">در برقی</div>
+                        <div>{ad.remote_door ? <i className="fa fa-check text-green" aria-hidden="true"></i>:<i className="fa fa-close text-red" aria-hidden="true"></i>}</div>
+                      </div>
+                  </div>
+              </div>
             </div>
           ) : (
             <div className="w-[100%] my-[30px]">
@@ -271,17 +328,8 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
           ></div>
           {ad ? (
             <>
-              <div>
-                <h2 className="text-[14px] font-bold ">Product Details</h2>
-                <p className="text-[14px] text-darkGray">
-                  {ad.description}
-                </p>
-              </div>
-              <div
-                className={`${themeBorder2} w-[100%] border-dashed border-b-[1px]`}
-              ></div>
-              <div>
-                <h2 className="text-[14px] font-bold ">Share It</h2>
+              {/* <div>
+                <h2 className="text-[14px] font-bold ">اشتراک گذاری</h2>
                 <div className="flex flex-row items-center gap-[10px] lg:justify-center mt-[8px]">
                   <span>
                     <FaFacebookF fontSize={"20px"} />
@@ -296,7 +344,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
                     <FaInstagram fontSize={"20px"} />
                   </span>
                 </div>
-              </div>
+              </div> */}
             </>
           ) : (
             <div className="w-[100%] my-[30px]">
@@ -307,11 +355,11 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
               />
             </div>
           )}
-          <div
+          {/* <div
             className={`${themeBorder2} w-[100%] border-dashed border-b-[1px]`}
-          ></div>
+          ></div> */}
         </div>
-        <div className="mt-[30px] lgmin:px-[30px] sm:w-[90%] lg:w-[70%] lgmin:w-[100%]">
+        <div className="mt-[10px] lgmin:px-[30px] sm:w-[90%] lg:w-[70%] lgmin:w-[100%]">
           {ad ? (
             <>
               <div
@@ -325,35 +373,19 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
                   } pb-[20px] text-[14px] mm:w-[100%] mm:text-center mm:pb-[10px] cursor-pointer mm:border-b-[1px] mm:border-b-solid`}
                   onClick={() => setShowMenu("description")}
                 >
-                  DESCRIPTION
-                </h4>
-                {/* <h4
-                  className={`${
-                    showMenu === "details" ? styleSelectedMenu : themeBorder2
-                  } pb-[20px] text-[14px] mm:w-[100%] mm:text-center mm:pb-[10px] cursor-pointer mm:border-b-[1px] mm:border-b-solid`}
-                  onClick={() => setShowMenu("details")}
-                >
-                  DETAILS
-                </h4> */}
-                {/* <h4
-                  className={`${
-                    showMenu === "video" ? styleSelectedMenu : themeBorder2
-                  } pb-[20px] text-[14px] mm:w-[100%] mm:text-center mm:pb-[10px] cursor-pointer mm:border-b-[1px] mm:border-b-solid`}
-                  onClick={() => setShowMenu("video")}
-                >
-                  VIDEO
+                  توضیحات
                 </h4>
                 <h4
                   className={`${
-                    showMenu === "review" ? styleSelectedMenu : themeBorder2
+                    showMenu === "informationCall" ? styleSelectedMenu : themeBorder2
                   } pb-[20px] text-[14px] mm:w-[100%] mm:text-center mm:pb-[10px] cursor-pointer mm:border-b-[1px] mm:border-b-solid`}
-                  onClick={() => setShowMenu("review")}
+                  onClick={() => setShowMenu("informationCall")}
                 >
-                  WRITE REVIEW
-                </h4> */}
+                  اطلاعات تماس
+                </h4>
               </div>
               <p className="text-[14px] text-darkGray leading-[25px] pt-[20px] px-[20px]">
-                {ad.description}
+                {showMenu==="description"? menuAd.description:menuAd.informationCall}
               </p>
             </>
           ) : (
