@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
@@ -13,6 +13,7 @@ const Profile:React.FC = () => {
   const themeClass = "bg-white"; 
   const themeBorder = "border-darkModeGray"; 
   const themeBorder2 = "border-darkModeGray"; 
+  const dispatch = useDispatch();
 
   const { setToastState } = useToast();
   const [ myAds, setMyAds ] = useState([]);
@@ -98,20 +99,28 @@ const Profile:React.FC = () => {
       });
   }
   useEffect(() => {
-    getUser()
+    const value : string | null = localStorage.getItem("token_user");
+    getUser(JSON.parse(value as string))
       .then((response) => {
-        setLoading(false);
-        setUserInformation(response.data);
+        if (response.status === 200) {
+          console.log(response.data)
+          setLoading(false);
+          setUserInformation(response.data);
+          setMyAds(response.data.homes);
+        }
       })
       .catch((err) => {
-        if (err.response && err.response.status === 403) {
-          setToastState((old:Array<eachToast>) =>
+        if (err.response && err.response.status === 404) {
+          dispatch({ type: "logout" });
+          setToastState((old : Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",
-              description: "احراز هویت با مشکل مواجه شد",
+              description:
+                "احراز هویت ما مشکل مواجه شد لطفا مجدد وارد شوید",
               key: Math.random(),
             })
           );
+          localStorage.setItem("token_user", JSON.stringify(""));
         }else{
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
@@ -187,7 +196,7 @@ const Profile:React.FC = () => {
                     <input
                       disabled={true}
                       className={`${themeClass} ${themeBorder} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[14px] }`}
-                      placeholder={userInformation? userInformation.fname:""}
+                      placeholder={userInformation? userInformation.full_name:""}
                     />
                   </div>
                   <div className="mb-[30px]">
@@ -200,7 +209,7 @@ const Profile:React.FC = () => {
                     <input
                       disabled={true}
                       className={`${themeClass} ${themeBorder} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[14px] `}
-                      placeholder={userInformation? userInformation.callNumber:""}
+                      placeholder={userInformation? userInformation.phone_number:""}
                     />
                   </div>
                   <div className="mb-[30px]">
@@ -213,7 +222,7 @@ const Profile:React.FC = () => {
                     <input
                       disabled={true}
                       className={`${themeClass} ${themeBorder} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[14px] }`}
-                      placeholder={userInformation? userInformation.email:""}
+                      placeholder={userInformation? userInformation.username:""}
                     />
                   </div>
                   <div className="mb-[30px]">
@@ -413,7 +422,7 @@ const Profile:React.FC = () => {
               {!loading && (
                 <div
                 className={`flex flex-row flex-wrap justify-center w-full gap-[1%]`}>
-                  {Ads.map((item, index) => {
+                  {myAds.map((item, index) => {
                     return (
                       <div
                         key={index}
@@ -437,6 +446,7 @@ const Profile:React.FC = () => {
                       </div>
                     );
                   })}
+                  {myAds.length===0? <div className="text-gray">آگهی وجود ندارد</div>:<></>}
                 </div>
               )}
             </div>

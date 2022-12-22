@@ -75,9 +75,9 @@ export interface PredictInputTypes {
     warehouse: string;
 }
 export interface InformationUserTypes {
-    fname: string;
-    callNumber: string;
-    email: string;
+    full_name: string;
+    phone_number: string;
+    username: string;
     address: string;
     bio: string;
 }

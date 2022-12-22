@@ -23,12 +23,14 @@ const DefaultLayout : React.FC = () => {
     
     const value : string | null = localStorage.getItem("token_user");
     if (JSON.parse(value as string) !== "") {
-      getUser()
+      getUser(JSON.parse(value as string))
         .then((response) => {
-          dispatch({
-            type: "login",
-            payload: [response.data.email, JSON.parse(value as string)],
-          });
+          if (response.status === 200) {
+            dispatch({
+              type: "login",
+              payload: [response.data.username, JSON.parse(value as string)],
+            });
+          }
         })
         .catch((err) => {
           dispatch({ type: "logout" });
@@ -36,7 +38,7 @@ const DefaultLayout : React.FC = () => {
             addItemOnce(old.slice(), {
               title: "2",
               description:
-                "از ورود شما زمان زیادی گذشته است لطفا مجدد وارد شوید",
+                "احراز هویت ما مشکل مواجه شد لطفا مجدد وارد شوید",
               key: Math.random(),
             })
           );
@@ -48,11 +50,6 @@ const DefaultLayout : React.FC = () => {
         });
     } else {
       dispatch({ type: "logout" });
-      try {
-        localStorage.setItem("token_user", JSON.stringify(""));
-      } catch (e) {
-        console.error({ e });
-      }
     }
   }, [dispatch,setToastState]);
   

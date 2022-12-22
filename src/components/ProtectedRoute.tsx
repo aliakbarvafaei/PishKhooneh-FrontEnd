@@ -26,8 +26,8 @@ const ProtectedRoute:React.FC<ProtectedRouteProps> = (props) => {
           key: Math.random(),
         })
       );
+      history.push("/login");
     }
-    history.push("/login");
   }
   return <></>;
 };

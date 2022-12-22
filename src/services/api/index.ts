@@ -66,7 +66,13 @@ export const NewAdAPI = (category : string, type : string, city : string, region
     configToken
   );
 
-export const getUser = () => axiosInstance.get(`/user`, configToken);
+export const getUser = (token : string ) => axiosInstance.post(
+    `/getuser/`,
+    {
+      token: token
+    },
+    configToken
+  );
 
 export const updatePassword = (email : string, LastPassword : string, NewPassword : string) =>
   axiosInstance.patch(
