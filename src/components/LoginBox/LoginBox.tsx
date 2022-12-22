@@ -60,7 +60,7 @@ const LoginBox:React.FC = () => {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "1",
-              description: `خوش آمدی ${response.data.data.fname}`,
+              description: `خوش آمدید`,
               key: Math.random(),
             })
           );
@@ -81,7 +81,7 @@ const LoginBox:React.FC = () => {
         }
       })
       .catch((err) => {
-        if (err.response && err.response.status === 400) {
+        if (err.response && err.response.status === 403) {
           setToastState((old : Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",

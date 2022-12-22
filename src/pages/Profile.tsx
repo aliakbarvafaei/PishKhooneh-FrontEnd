@@ -104,7 +104,24 @@ const Profile:React.FC = () => {
         setUserInformation(response.data);
       })
       .catch((err) => {
-        console.error(err);
+        if (err.response && err.response.status === 403) {
+          setToastState((old:Array<eachToast>) =>
+            addItemOnce(old.slice(), {
+              title: "2",
+              description: "احراز هویت با مشکل مواجه شد",
+              key: Math.random(),
+            })
+          );
+        }else{
+          setToastState((old:Array<eachToast>) =>
+            addItemOnce(old.slice(), {
+              title: "2",
+              description: "سرور دردسترس نیست",
+              key: Math.random(),
+            })
+          );
+          console.error(err);
+        }
       });
   }, []);
 

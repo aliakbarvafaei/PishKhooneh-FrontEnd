@@ -60,7 +60,9 @@ const RegisterBox:React.FC = () => {
           );
           history.push("/login");
         }
-        else if(response.status === 204){
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 403) {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",
@@ -69,8 +71,7 @@ const RegisterBox:React.FC = () => {
             })
           );
         }
-      })
-      .catch((err) => {
+        else{
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",
@@ -79,6 +80,7 @@ const RegisterBox:React.FC = () => {
             })
           );
           console.error(err);
+        }
       });
   }
   const [iconPassword, setIconPassword] = useState("fa-eye-slash");

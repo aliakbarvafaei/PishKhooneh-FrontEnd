@@ -1,6 +1,8 @@
 import { axiosInstance, configToken } from "../../config";
 import { filtersInterface } from "../../ts/interfaces";
 
+export const logoutAPI = () => axiosInstance.get(`/logout/`, configToken);
+
 export const loginAPI = (email : string, password : string) =>
   axiosInstance.post(
     "/login/",
@@ -18,9 +20,7 @@ export const registerAPI = (fname : string, callNumber : string, email : string,
       username: email,
       password: password,
       address: address,
-      bio: bio,
-      homes: [],last_login: null, is_superuser: false, is_staff: false, is_active: false,
-      groups: [], user_permissions: []
+      bio: bio
     }
   );
 export const NewAdAPI = (category : string, type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, price : string, photo : any, title : string, callNumber : string, bio : string, creator: string, warehouse: string) =>
