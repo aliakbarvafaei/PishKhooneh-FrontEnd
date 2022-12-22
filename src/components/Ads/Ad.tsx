@@ -12,6 +12,8 @@ import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { ads, eachToast, statesRedux } from "../../ts/interfaces";
 import { convertorPrice, DateDiff } from "../../ts/functions";
+import Map from "../Map/Map";
+import Chart1 from "../Chart/Chart";
 
 const Ad:React.FC<{ad:ads}> = ({ ad })=> {
   const history = useHistory();
@@ -384,7 +386,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
                   اطلاعات تماس
                 </h4>
               </div>
-              <p className="text-[14px] text-darkGray leading-[25px] pt-[20px] px-[20px]">
+              <p className="text-[14px] text-darkGray leading-[25px] py-[20px] px-[20px] border-b border-b-darkModeGray">
                 {showMenu==="description"? menuAd.description:menuAd.informationCall}
               </p>
             </>
@@ -397,6 +399,10 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
               />
             </div>
           )}
+        </div>
+        <div className="flex lg:flex-col lgmin:flex-row items-center justify-center w-full my-[30px] gap-[30px]">
+          <Map />
+          <Chart1 />
         </div>
       </div>
     </div>
