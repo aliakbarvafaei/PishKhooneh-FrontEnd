@@ -400,7 +400,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
             </div>
           )}
         </div>
-        <div className="flex lg:flex-col lgmin:flex-row items-center justify-center w-full my-[30px] gap-[30px]">
+        <div className="flex lg:flex-col lgmin:flex-row lgmin:justify-between items-center lg:justify-center w-full my-[30px] gap-[30px]">
           <Map />
           <Chart1 />
         </div>

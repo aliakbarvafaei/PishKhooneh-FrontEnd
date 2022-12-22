@@ -8,20 +8,21 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 
 const data = [
-  { argument: 1, value: 10 },
-  { argument: 2, value: 20 },
-  { argument: 3, value: 30 },
-  { argument: 4, value: 0 },
-  { argument: 5, value: 42 },
+  { argument: "1", value: 1000000000 },
+  { argument: "2", value: 500000000 },
+  { argument: "3", value: 10000000000 },
+  { argument: "4", value: 8500000000 },
+  { argument: "5", value: 4250000000 },
 ];
 
 const Chart1:React.FC = () => (
-  <Paper className='lg:w-[90%] lgmin:w-[45%] lg:h-[70%]'>
+  <Paper className='lg:w-[100%] lgmin:w-[60%]'>
     <Chart
       data={data}
+      height={300}
     >
       <ArgumentAxis />
-      <ValueAxis />
+      <ValueAxis position='right'/>
 
       <LineSeries valueField="value" argumentField="argument" />
     </Chart>
