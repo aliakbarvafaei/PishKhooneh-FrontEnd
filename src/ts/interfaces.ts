@@ -83,10 +83,10 @@ export interface InformationUserTypes {
 }
 export interface filtersInterface {
     searchInput: string;
-    color: string[];
-    size: string[];
-    gender: string[];
     category: string[];
+    type: string[];
+    region: string[];
+    room: string[];
     priceRange: {
         from: number;
         to: number;

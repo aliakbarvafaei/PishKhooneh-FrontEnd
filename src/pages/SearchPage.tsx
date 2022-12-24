@@ -7,9 +7,9 @@ import { getAdsWithPage } from "../services/api";
 import { filtersInterface } from "../ts/interfaces";
 
 const filtersOption = [
-  { title: "دسته‌بندی", content: ["خرید", "رهن و اجاره"] },
-  { title: "نوع", content: ["آپارتمان", "ویلایی", "زمین"] },
-  { title: "منطقه", content: ["منطقه 1", "منطقه 2", "منطقه 3", "منطقه 4", "منطقه 5", "منطقه 6", "منطقه 7", "منطقه 8"] },
+  { title: "دسته‌بندی", content: ["ویلا", "آپارتمان", "باغ"] },
+  { title: "نوع", content: ["مسکونی", "تجاری"] },
+  { title: "منطقه", content: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"] },
   { title: "تعداد اتاق", content: ["بدون اتاق", "1", "2", "بیشتر از 2",]}
 ];
 
@@ -17,17 +17,16 @@ const n=6 ;
 
 const SearchPage:React.FC = () => {
   const [counterPage, setcounterPage] = useState(1);
-  const [ads, setAds] = useState(Ads);
   const [filterAds, setfilterAds] = useState(Ads);
   const [priceRange, setPriceRange] = useState({ from: 0, to: 20000 });
   const searchRef = useRef(null);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [color, setColor] = useState([]);
-  const [size, setSize] = useState([]);
-  const [gender, setGender] = useState([]);
   const [category, setCategory] = useState([]);
+  const [type, setType] = useState([]);
+  const [roomsNumber, setRoomsNumber] = useState([]);
+  const [regionNumber, setRegionNumber] = useState([]);
 
   const themeClass ="bg-white";
   const themeBorder ="border-darkModeGray";
@@ -35,16 +34,15 @@ const SearchPage:React.FC = () => {
   useEffect(() => {
     const filters:filtersInterface = {
       searchInput: searchInput === "" ? "" : searchInput,
-      color: color.length === 0 ? filtersOption[2].content : color,
-      size: size.length === 0 ? filtersOption[3].content : size,
-      gender: gender.length === 0 ? filtersOption[1].content : gender,
       category: category.length === 0 ? filtersOption[0].content : category,
+      type: type.length === 0 ? filtersOption[1].content : type,
+      region: regionNumber.length === 0 ? filtersOption[2].content : regionNumber,
+      room: roomsNumber.length === 0 ? filtersOption[3].content : roomsNumber,
       priceRange: priceRange,
     };
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     getAdsWithPage(counterPage, n, filters)
       .then((response) => {
-        setAds(response.data);
         setfilterAds(response.data);
         setLoading(false);
       })
@@ -54,9 +52,9 @@ const SearchPage:React.FC = () => {
   }, [
     counterPage,
     searchInput,
-    color,
-    size,
-    gender,
+    regionNumber,
+    roomsNumber,
+    type,
     category,
     priceRange,
   ]);
@@ -76,28 +74,29 @@ const SearchPage:React.FC = () => {
   function handleClick(e : React.MouseEvent, filterName : string) {
     const target : HTMLInputElement = e.target as HTMLInputElement;
     switch (filterName) {
-      case "رنگ":
-        (target.checked && setColor((old) => [...old, target.value] as any)) ||
-          (!target.checked &&
-            setColor((old) => removeItemOnce(old.slice(), target.value)));
-        setcounterPage(1);
-        break;
-      case "سایز":
-        (target.checked && setSize((old) => [...old, target.value] as any)) ||
-          (!target.checked &&
-            setSize((old) => removeItemOnce(old.slice(), target.value)));
-        setcounterPage(1);
-        break;
-      case "جنسیت":
-        (target.checked && setGender((old) => [...old, target.value] as any)) ||
-          (!target.checked &&
-            setGender((old) => removeItemOnce(old.slice(), target.value)));
-        setcounterPage(1);
-        break;
       case "دسته‌بندی":
         (target.checked && setCategory((old) => [...old, target.value] as any)) ||
           (!target.checked &&
             setCategory((old) => removeItemOnce(old.slice(), target.value)));
+        setcounterPage(1);
+        break;
+      case "نوع":
+        (target.checked && setType((old) => [...old, target.value] as any)) ||
+          (!target.checked &&
+            setType((old) => removeItemOnce(old.slice(), target.value)));
+        setcounterPage(1);
+        break;
+      case "منطقه":
+        console.log(target.value);
+        (target.checked && setRegionNumber((old) => [...old, target.value] as any)) ||
+          (!target.checked &&
+            setRegionNumber((old) => removeItemOnce(old.slice(), target.value)));
+        setcounterPage(1);
+        break;
+      case "اتاق":
+        (target.checked && setRoomsNumber((old) => [...old, target.value] as any)) ||
+          (!target.checked &&
+            setRoomsNumber((old) => removeItemOnce(old.slice(), target.value)));
         setcounterPage(1);
         break;
       default:
@@ -151,7 +150,7 @@ const SearchPage:React.FC = () => {
                           className={`w-[100%] py-[8px] cursor-pointer border-b-solid border-b-[1px] ${themeBorder}`}
                           htmlFor={item.title + index}
                         >
-                          {subItem}
+                          {item.title==="منطقه"? "منطقه ":""}{subItem}
                         </label>
                       </li>
                     );
