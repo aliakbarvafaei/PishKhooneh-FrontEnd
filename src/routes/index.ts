@@ -50,7 +50,7 @@ const AppRoutes:Array<any> = [
     private: false,
   },
   {
-    path: "/search/:searchText?",
+    path: "/search",
     name: "جستجو",
     icon: "fa fa-list",
     component: SearchPage,

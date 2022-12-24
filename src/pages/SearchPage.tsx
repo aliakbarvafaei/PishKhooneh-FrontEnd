@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
@@ -17,7 +17,6 @@ const filtersOption = [
 const n=6 ;
 
 const SearchPage:React.FC = () => {
-  const { searchText } = useParams<any>();
 
   const [counterPage, setcounterPage] = useState(1);
   const [filterAds, setfilterAds] = useState(Ads);
@@ -30,15 +29,15 @@ const SearchPage:React.FC = () => {
   const [type, setType] = useState([]);
   const [roomsNumber, setRoomsNumber] = useState([]);
   const [regionNumber, setRegionNumber] = useState([]);
-
+  const history = useHistory();
   const themeClass ="bg-white";
   const themeBorder ="border-darkModeGray";
 
   useEffect(()=>{
-    if(searchText){
-      setSearchInput(searchText.split('=')[1]);
+    if(history.location.search.split('=')[1]){
+      setSearchInput(history.location.search.split('=')[1])
     }
-  },[])
+  },[history.location.search])
   useEffect(() => {
     const filters:filtersInterface = {
       searchInput: searchInput === "" ? "" : searchInput,

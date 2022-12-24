@@ -44,7 +44,7 @@ const HeaderNewComplete:React.FC = () => {
     const [searchInput, setSearchInput] = useState("");
 
     const { setToastState } = useToast();
-
+    // const navigate = useNavig
     const dispatch = useDispatch();
     function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
       arr.push(value);
@@ -196,7 +196,8 @@ const HeaderNewComplete:React.FC = () => {
                 <div className="relative text-center mt-[40px]">
                     <input type="text" value={searchInput} onChange={handleChange as any} className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] outline outline-[10px] outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
                     <i onClick={()=>{
-                        history.push(`/search/searchText=${searchInput}`)
+                        if(searchInput!=="")
+                            history.push(`/search?searchText=${searchInput}`)
                     }} className="fa fa-search absolute right-[3%] sm:right-[3%] mm:right-[11%] top-[35%]"></i>
                 </div>
                 <div className='flex flex-col items-center gap-[10px] text-center text-white text-[18px] font-bold leading-[40px] pt-[30px]'>
