@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
@@ -16,6 +17,8 @@ const filtersOption = [
 const n=6 ;
 
 const SearchPage:React.FC = () => {
+  const { searchText } = useParams<any>();
+
   const [counterPage, setcounterPage] = useState(1);
   const [filterAds, setfilterAds] = useState(Ads);
   const [priceRange, setPriceRange] = useState({ from: 0, to: 20000 });
@@ -31,6 +34,11 @@ const SearchPage:React.FC = () => {
   const themeClass ="bg-white";
   const themeBorder ="border-darkModeGray";
 
+  useEffect(()=>{
+    if(searchText){
+      setSearchInput(searchText.split('=')[1]);
+    }
+  },[])
   useEffect(() => {
     const filters:filtersInterface = {
       searchInput: searchInput === "" ? "" : searchInput,
