@@ -4,26 +4,21 @@ import { Link, useHistory } from "react-router-dom";
 import { useToast } from "../../contexts/ToastState";
 import { postBookmark } from "../../services/api";
 import { convertorPrice } from "../../ts/functions";
-import { eachToast, statesRedux } from "../../ts/interfaces";
+import { ads, eachToast, statesRedux } from "../../ts/interfaces";
 
-const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
+const Card:React.FC<{item:ads, dir:string}> = ({ item, dir}) => {
   const history = useHistory();
   const { user } = useSelector((state:statesRedux) => state.userAuth);
   const [backgroundImage, setBackgroundImage] = useState("");
   const { setToastState } = useToast();
   useEffect(() => {
-    setBackgroundImage(item.images[0]);
-  }, [item.images]);
+    setBackgroundImage(item.main_image);
+  }, [item.main_image]);
 
   function addItemOnce(arr:Array<eachToast>, value:eachToast) {
     arr.push(value);
     return arr;
   }
-
-  // function handleBackground(e: React.MouseEvent<HTMLImageElement, MouseEvent>) {
-  //   e.preventDefault();
-  //   setBackgroundImage(e.currentTarget.src);
-  // }
 
   function handleClickBookmark(e : React.MouseEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,7 +36,7 @@ const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
       //     title: "3",
       //     description: "", key:Math.random()
       //     }))
-      postBookmark(user, item.identifier)
+      postBookmark(user, item.id)
         .then((response) => {
           console.log(response.data);
           setToastState((old:Array<eachToast>) =>
@@ -72,7 +67,7 @@ const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
       <Link
         to={
           "/ad-details/" +
-          String(item.identifier)
+          String(item.id)
         }
       >
         <div
@@ -124,7 +119,7 @@ const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
       <Link
         to={
           "/ad-details/" +
-          String(item.identifier)
+          String(item.id)
         }
       >
         <div id="title" className="sm:text-[12px] md:text-[14px] mdmin:text-[16px] font-medium text-black text-right pt-[10px]">
@@ -135,17 +130,17 @@ const Card:React.FC<{item:any, dir:string}> = ({ item, dir}) => {
       <div id="price" className="text-right text-red pt-[10px] opacity-90">
         <h3 className="sm:text-[8px] md:text-[10px] mdmin:text-[14px] font-bold ">
           <span>قیمت : </span>
-          <span>{convertorPrice(item.totalPrice)[1]}</span>
-          <span className="pr-[5px]">{convertorPrice(item.totalPrice)[0]}</span>
+          <span>{convertorPrice(item.total_price)[1]}</span>
+          <span className="pr-[5px]">{convertorPrice(item.total_price)[0]}</span>
         </h3>
       </div>
       <div id="location" className="py-[10px] text-right sm:text-[8px] smmin:text-[12px] text-darkGray">
         <h3>
           {dir==='r'? 
           <><span><i className="fa fa-map-marker pl-[5px]" aria-hidden="true"></i></span>
-          <span>{item.bread_crumbs[item.bread_crumbs.length-1]}</span></>
+          <span>{item.neighbor}</span></>
           :
-          <><span>{item.bread_crumbs[item.bread_crumbs.length-1]}</span>
+          <><span>{item.neighbor}</span>
           <span><i className="fa fa-map-marker pl-[5px]" aria-hidden="true"></i></span></>
           }
         </h3>

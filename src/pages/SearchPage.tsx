@@ -3,9 +3,8 @@ import { useHistory } from "react-router-dom";
 import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
-import { Ads } from "../data";
 import { getAdsWithPage } from "../services/api";
-import { filtersInterface } from "../ts/interfaces";
+import { ads, filtersInterface } from "../ts/interfaces";
 
 const filtersOption = [
   { title: "دسته‌بندی", content: ["ویلا", "آپارتمان", "باغ"] },
@@ -19,7 +18,7 @@ const n=6 ;
 const SearchPage:React.FC = () => {
 
   const [counterPage, setcounterPage] = useState(1);
-  const [filterAds, setfilterAds] = useState(Ads);
+  const [filterAds, setfilterAds] = useState<Array<ads>>([]);
   const [priceRange, setPriceRange] = useState({ from: 0, to: 20000 });
   const searchRef = useRef(null);
   const [searchInput, setSearchInput] = useState("");
@@ -45,7 +44,7 @@ const SearchPage:React.FC = () => {
       type: type.length === 0 ? filtersOption[1].content : type,
       region: regionNumber.length === 0 ? filtersOption[2].content : regionNumber,
       room: roomsNumber.length === 0 ? filtersOption[3].content : roomsNumber,
-      priceRange: priceRange,
+      priceRange: { from: priceRange.from*1000000, to: priceRange.to*1000000 },
     };
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     getAdsWithPage(counterPage, n, filters)
@@ -272,7 +271,7 @@ const SearchPage:React.FC = () => {
                   <div className="text-red">آگهی یافت نشد</div>
                 </>
               ) : (
-                filterAds.map((item, index) => {
+                filterAds.map((item:ads, index:number) => {
                   return (
                     <div
                       key={index}

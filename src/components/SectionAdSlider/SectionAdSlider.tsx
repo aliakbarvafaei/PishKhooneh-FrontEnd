@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel"; 
 import "react-multi-carousel/lib/styles.css";
 import Card from "../Ads/Card";
 import Skeleton from "@mui/material/Skeleton";
-import { Ads } from "../../data";
+import { getAdsNew } from "../../services/api";
+import { ads } from "../../ts/interfaces";
 
 const responsive = {
   superLargeDesktop: {
@@ -22,7 +23,18 @@ const responsive = {
 };
 
 const SectionAdSlider:React.FC = () => {
-  const themeClass = "bg-white"
+  const themeClass = "bg-white";
+  const [AdsNew, setAdsNew] = useState<Array<ads>>([]);
+  useEffect(()=>{
+    getAdsNew()
+      .then((response) => {
+        setAdsNew(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },[])
+
   return (
     <div
       className={`${themeClass} flex flex-col items-center py-[50px] px-total`}
@@ -32,11 +44,6 @@ const SectionAdSlider:React.FC = () => {
         آگهی‌های جدید
       </h2>
       <h6 className="w-[70px] border-b-red border-b-solid border-b-[3px] mb-[15px]">{}</h6>
-      {/* <p className="w-[50%] text-darkGray text-center text-[14px] mb-[20px]">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s,
-      </p> */}
       <div className="overflow-hidden w-[100%]">
         <Carousel
           responsive={responsive}
@@ -44,7 +51,7 @@ const SectionAdSlider:React.FC = () => {
           infinite={true}
           arrows={false}
         >
-          {(Ads.length === 0 ? Array.from(new Array(8)) : Ads).map(
+          {(AdsNew.length === 0 ? Array.from(new Array(8)) : AdsNew).map(
             (item : any, index : number) => {
               return (
                 <>

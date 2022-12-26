@@ -5,7 +5,6 @@ import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
 import { useToast } from "../contexts/ToastState";
-import { Ads } from "../data";
 import { getUser, updatePassword } from "../services/api";
 import { eachToast, InformationUserTypes, ProfileInputTypes, statesRedux } from "../ts/interfaces";
 

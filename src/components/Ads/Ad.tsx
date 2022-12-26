@@ -54,7 +54,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
     else{
       setImages([])
     }
-  }, []);
+  }, [ad.image_3,ad.image_2,ad.image_1]);
 
   function handleBackground(e:React.MouseEvent) {
     setBackgroundImage((e.target as HTMLImageElement).src);
