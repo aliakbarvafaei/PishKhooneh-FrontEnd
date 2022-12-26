@@ -7,36 +7,36 @@ import { getAdsWithPage } from "../services/api";
 import { ads, filtersInterface } from "../ts/interfaces";
 
 const filtersOption = [
-  { title: "دسته‌بندی", content: ["ویلا", "آپارتمان", "باغ"] },
+  { title: "دسته‌بندی", content: ["ویلا", "آپارتمان", "باغ","آپارتمان/برج"] },
   { title: "نوع", content: ["مسکونی", "تجاری"] },
   { title: "منطقه", content: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"] },
-  { title: "تعداد اتاق", content: ["بدون اتاق", "1", "2", "بیشتر از 2",]}
+  { title: "اتاق", content: ["0", "1", "2", "3","4","5","6","7"]}
 ];
 
 const n=6 ;
 
 const SearchPage:React.FC = () => {
 
+  const history = useHistory();
+
   const [counterPage, setcounterPage] = useState(1);
   const [filterAds, setfilterAds] = useState<Array<ads>>([]);
-  const [priceRange, setPriceRange] = useState({ from: 0, to: 20000 });
+  const [priceRange, setPriceRange] = useState({ from: 0, to: 50000 });
   const searchRef = useRef(null);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState(()=>{
+  if(history.location.search.split('=')[1]){
+    return history.location.search.split('=')[1]}
+  else return ""
+  });
   const [loading, setLoading] = useState(false);
 
   const [category, setCategory] = useState([]);
   const [type, setType] = useState([]);
   const [roomsNumber, setRoomsNumber] = useState([]);
   const [regionNumber, setRegionNumber] = useState([]);
-  const history = useHistory();
   const themeClass ="bg-white";
   const themeBorder ="border-darkModeGray";
 
-  useEffect(()=>{
-    if(history.location.search.split('=')[1]){
-      setSearchInput(history.location.search.split('=')[1])
-    }
-  },[history.location.search])
   useEffect(() => {
     const filters:filtersInterface = {
       searchInput: searchInput === "" ? "" : searchInput,
@@ -47,6 +47,7 @@ const SearchPage:React.FC = () => {
       priceRange: { from: priceRange.from*1000000, to: priceRange.to*1000000 },
     };
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    setLoading(true);
     getAdsWithPage(counterPage, n, filters)
       .then((response) => {
         setfilterAds(response.data);
@@ -93,7 +94,6 @@ const SearchPage:React.FC = () => {
         setcounterPage(1);
         break;
       case "منطقه":
-        console.log(target.value);
         (target.checked && setRegionNumber((old) => [...old, target.value] as any)) ||
           (!target.checked &&
             setRegionNumber((old) => removeItemOnce(old.slice(), target.value)));
@@ -181,7 +181,7 @@ const SearchPage:React.FC = () => {
                 <input
                   type="range"
                   min={0}
-                  max={20000}
+                  max={50000}
                   step={100}
                   value={priceRange.from}
                   onChange={(e) => {
@@ -199,7 +199,7 @@ const SearchPage:React.FC = () => {
                 <input
                   type="range"
                   min={0}
-                  max={20000}
+                  max={50000}
                   step={100}
                   value={priceRange.to}
                   onChange={(e) => {

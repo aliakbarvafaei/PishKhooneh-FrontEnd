@@ -90,13 +90,12 @@ export const getAdsNew = () => axiosInstance.get("/homes/new/");
 
 export const getAdsWithPage = (pageNumber : number, pageSize : number, filters : filtersInterface) =>
   axiosInstance.post(
-    "/adsFilter",
+    "/homesfilter/",
     {
       pageNumber: pageNumber,
       pageSize: pageSize,
       filters: filters,
-    },
-    configToken
+    }
   );
 
 export const getAd = (idAd : string) =>
