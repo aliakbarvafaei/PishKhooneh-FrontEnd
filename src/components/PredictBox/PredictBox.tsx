@@ -1,9 +1,12 @@
 import React, { useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import { PredictAPI } from "../../services/api/index";
 import { useToast } from "../../contexts/ToastState";
 import { eachToast, PredictInputTypes } from "../../ts/interfaces.js";
 import Modal from "../Modal/Modal";
+
+var typeSelect = "";
+
+const regions = {'1728': 'شهرک مدرس', '1729': 'زمانی', '1730': 'جوادیه', '1731': 'حق گویان', '1732': 'مهدیه', '1733': '18 متری شکریه', '1734': 'شکریه', '1735': 'هنرستان', '1736': 'کمال آباد', '1737': 'کمال آباد شرقی', '1738': 'سعیدیه پایین', '1739': 'رکنی', '1740': 'جهان نما', '1741': 'بلوار بعثت', '1742': 'سعیدیه بالا', '1743': 'ادیب', '1744': 'میلاد استادان', '1745': 'قهرمان استادان', '1746': 'تربیت استادان', '1747': 'بلوار شهرداری', '1748': 'استادان', '1749': 'پردیس', '1750': 'بلوار عمار', '1751': 'پرستار', '1752': 'کوچه مشکی', '1753': 'خ طالقانی', '1754': 'فرهنگ', '1755': 'نواب', '1756': 'گلزار', '1757': 'شهناز', '1758': 'میلادکوچه مشکی', '1759': 'متخصصین', '1760': 'مدیریت', '1761': 'آزاد غربی', '1762': 'اعتمادیه غربی', '1763': 'اعتمادیه شرقی', '1764': 'بلوار مدنی', '1765': 'بلوار دانشگاه', '1766': 'بلوار ارم', '1767': 'بلوار خرم رودی', '1768': 'بلوار رنجبران', '1769': 'بلوار صورتی', '1770': 'بلوار فاطمیه', '1771': 'بلوار کاج', '1772': 'بوعلی بالا', '1773': 'پاستور', '1774': 'ذوالفقار', '1775': 'عارف', '1776': 'خواجه رشید', '1777': 'میرزاده عشقی', '1778': 'مصیب مجیدی', '1779': 'بین النهرین', '1780': 'کولانج', '1781': 'تختی', '1782': 'فرهنگیان', '1783': 'ذوالریاستین', '1784': 'حیدره', '1785': 'جانبازان', '1786': 'شریعتی', '1787': 'دره مرادبیگ', '1788': 'آرام شرقی', '1789': 'بوعلی پایین', '1790': 'خیابان پاسداران -کرمانشاه'}
 
 const PredictBox:React.FC = () => {
   const { setToastState } = useToast();
@@ -14,9 +17,7 @@ const PredictBox:React.FC = () => {
   const typeId = useId();
   const cityId = useId();
   const regionId = useId();
-  const roomId = useId();
   const yearId = useId();
-  const floorId = useId();
   const elevatorId = useId();
   const parkingId = useId();
   const meterageId = useId();
@@ -37,28 +38,15 @@ const PredictBox:React.FC = () => {
   function modalClose(){
     setModalOpen(false);
   }
-
+  
   function formSubmit() {
     // setToastState(old=>addItemOnce(old.slice(),{
     //     title: "3",
     //     description: "", key:Math.random()
     //     }))
-    const warehouseInput = (document.getElementsByName('warehouse') as any);
-    var warehouse;
-    for(var i = 0; i < warehouseInput.length; i++) {
-      if(warehouseInput[i].checked)
-      {
-        warehouse = (warehouseInput[i].value);
-        warehouseInput[i].checked = false;
-        break ;
-      }
-    }
-    const type = (document.getElementById(typeId) as HTMLInputElement).value;
-    const city = (document.getElementById(cityId) as HTMLInputElement).value;
+    typeSelect = ((document.getElementById(typeId) as HTMLInputElement).value );
     const region = (document.getElementById(regionId) as HTMLInputElement).value;
-    const room = (document.getElementById(roomId) as HTMLInputElement).value;
     const year = (document.getElementById(yearId) as HTMLInputElement).value;
-    const floor = (document.getElementById(floorId) as HTMLInputElement).value;
     const elevator = (document.getElementById(elevatorId) as HTMLInputElement).value;
     const parking = (document.getElementById(parkingId) as HTMLInputElement).value;
     const meterage = (document.getElementById(meterageId) as HTMLInputElement).value;
@@ -66,38 +54,45 @@ const PredictBox:React.FC = () => {
     (document.getElementById(typeId) as HTMLInputElement).value = "";
     (document.getElementById(cityId) as HTMLInputElement).value = "تهران";
     (document.getElementById(regionId) as HTMLInputElement).value = "";
-    (document.getElementById(roomId) as HTMLInputElement).value = "";
     (document.getElementById(yearId) as HTMLInputElement).value = "";
-    (document.getElementById(floorId) as HTMLInputElement).value = "";
     (document.getElementById(elevatorId) as HTMLInputElement).value = "";
     (document.getElementById(parkingId) as HTMLInputElement).value = "";
     (document.getElementById(meterageId) as HTMLInputElement).value = "";
-    PredictAPI(type, city, region, room, year, floor, elevator, parking, meterage, warehouse)
-      .then((response) => {
-        if (response.status === 201) {
-          setPriceMin(10);
-          setPriceMax(1000);
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "1",
-              description: "پیش‌بینی با موفقیت انجام شد",
-              key: Math.random(),
-            })
-          );
-        }
-      })
-      .catch((err) => {
-          setModalOpen(true);
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description: "سرور دردسترس نیست",
-              key: Math.random(),
-            })
-          );
-          console.error(err);
-      });
-      // history.go(0);
+    fetch(`http://predict.erfan-nourbakhsh.ir/predict?area=${meterage}&age=${year}&region=${region}&parking=${parking}&elevator=${elevator}`)
+        .then(async response => {
+            const data = await response.json();
+            if(response.ok){
+              if(typeSelect==="خرید یا فروش"){
+                setPriceMin(data.buy.minimum);
+                setPriceMax(data.buy.maximum);
+              }else if(typeSelect==="رهن یا اجاره"){
+                setPriceMin(data.rent.minimum);
+                setPriceMax(data.rent.maximum);
+              }
+              setModalOpen(true);
+              setToastState((old:Array<eachToast>) =>
+                addItemOnce(old.slice(), {
+                  title: "1",
+                  description: "پیش‌بینی با موفقیت انجام شد",
+                  key: Math.random(),
+                })
+              );
+            }
+            else{
+              setToastState((old:Array<eachToast>) =>
+                addItemOnce(old.slice(), {
+                  title: "2",
+                  description: data.error,
+                  key: Math.random(),
+                })
+              );
+            }
+
+        })
+        .catch(error => {
+            
+        });
+
   }
 
   return (
@@ -124,8 +119,8 @@ const PredictBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="آپارتمان">آپارتمان</option>
-                        <option value="ویلایی">ویلایی</option>
+                        <option value="خرید یا فروش">خرید یا فروش</option>
+                        <option value="رهن یا اجاره">رهن یا اجاره</option>
                     </select>
                 </span>
                 {errors.type && (
@@ -174,8 +169,11 @@ const PredictBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="منطقه1">منطقه1</option>
-                        <option value="منطقه2">منطقه2</option>
+                        {
+                          Object.entries(regions).map(([key,value],i)=>{
+                            return <option value={key} key={i}>{value}</option>
+                          })
+                        }
                     </select>
                 </span>
                 {errors.region && (
@@ -188,7 +186,7 @@ const PredictBox:React.FC = () => {
                   </div>
                 )}
               </div>
-              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+              {/* <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center  justify-between">
                     <label htmlFor="room-select" className="inline text-[14px] text-right font-bold" >تعداد اتاق : </label>
                     <select data-testid="room-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
@@ -216,37 +214,8 @@ const PredictBox:React.FC = () => {
                     <span className="pr-[5px]">{errors.room.message}</span>
                   </div>
                 )}
-              </div>
-              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
-                <span className="flex flex-row gap-[1%] items-center  justify-between">
-                    <label htmlFor="year-select" className="inline text-[14px] text-right font-bold" >سال ساخت : </label>
-                    <select data-testid="year-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
-                        errors.year ? "border-red outline-red" : `${themeBorder}`
-                    }`}
-                    id={yearId}
-                    {...register("year", {
-                        required: "سال ساخت اجباری است...",
-                    })}
-                    >
-                        <option value="">انتخاب کنید</option>
-                        <option value="1401">1401</option>
-                        <option value="1400">1400</option>
-                        <option value="1399">1399</option>
-                        <option value="1398">1398</option>
-                        <option value="قبا از 1398">قبل از 1398</option>
-                    </select>
-                </span>
-                {errors.year && (
-                  <div className="text-red text-right pt-[5px]">
-                    <i
-                      className="fa fa-exclamation-triangle"
-                      aria-hidden="true"
-                    ></i>
-                    <span className="pr-[5px]">{errors.year.message}</span>
-                  </div>
-                )}
-              </div>
-              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+              </div> */}
+              {/* <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center  justify-between">
                     <label htmlFor="floor-select" className="inline text-[14px] text-right font-bold" >طبقه : </label>
                     <select data-testid="floor-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
@@ -273,7 +242,7 @@ const PredictBox:React.FC = () => {
                     <span className="pr-[5px]">{errors.floor.message}</span>
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center  justify-between">
                     <label htmlFor="elevator-select" className="inline text-[14px] text-right font-bold" >آسانسور : </label>
@@ -286,8 +255,8 @@ const PredictBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="ندارد">ندارد</option>
-                        <option value="دارد">دارد</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
                     </select>
                 </span>
                 {errors.elevator && (
@@ -312,8 +281,8 @@ const PredictBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="ندارد">ندارد</option>
-                        <option value="دارد">دارد</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
                     </select>
                 </span>
                 {errors.parking && (
@@ -348,7 +317,68 @@ const PredictBox:React.FC = () => {
                   </div>
                 )}
               </div>
-              <div className="w-[100%] text-right flex flex-col gap-[1%] mb-[30px]">
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center justify-between">
+                    <label htmlFor="year-select" className="inline text-[14px] text-right font-bold" >سن بنا : </label>
+                    <input type='number' placeholder="سن" data-testid="year-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.year ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={yearId}
+                    {...register("year", {
+                        required: "سن بنا ساخت اجباری است...",
+                    })}
+                    />
+                </span>
+                {errors.year && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.year.message}</span>
+                  </div>
+                )}
+              </div>
+              {/* <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="year-select" className="inline text-[14px] text-right font-bold" >سال ساخت : </label>
+                    <select data-testid="year-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.year ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={yearId}
+                    {...register("year", {
+                        required: "سال ساخت اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                    </select>
+                </span>
+                {errors.year && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.year.message}</span>
+                  </div>
+                )}
+              </div> */}
+              {/* <div className="w-[100%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center">
                     <legend className="inline text-[14px] text-right font-bold">انباری : </legend>
 
@@ -376,15 +406,16 @@ const PredictBox:React.FC = () => {
                     <span className="pr-[5px]">{errors.warehouse.message}</span>
                   </div>
                 )}
-              </div>
+              </div> */}
 
-              
-              <button
-                type="submit"
-                className="min-w-fill px-[4%] py-[1%] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
-              >
-                تخمین
-              </button>
+              <div className="w-[100%] text-center">
+                <button
+                  type="submit"
+                  className="min-w-fill px-[4%] py-[1%] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                >
+                  تخمین
+                </button>
+              </div>
               {modalOpen && <Modal modalClose={modalClose} priceMin={priceMin as number} priceMax={priceMax as number} />}
             </form>
           </div>
