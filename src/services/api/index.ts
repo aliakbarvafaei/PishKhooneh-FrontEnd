@@ -23,30 +23,42 @@ export const registerAPI = (fname : string, callNumber : string, email : string,
       bio: bio
     }
   );
-export const NewAdAPI = (category : string, type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, price : string, photo : any, title : string, callNumber : string, bio : string, creator: string, warehouse: string) =>
-  axiosInstance.post(
-    "/new-ad",
+export const NewAdAPI = (category : string, type : string, city : string, region : number, room : number, year : number, elevator : boolean, parking : boolean, lobby : boolean, sports_hall : boolean, guard : boolean,swimming_pool : boolean, balcony : boolean, roof_garden : boolean, remote_door : boolean, meterage : number, price : number, main_image : string, image_1 : string, image_2 : string, title : string, callNumber : string, bio : string, creator: string, warehouse: boolean) =>{
+  console.log(category,type,room,year,main_image,image_1)
+  return axiosInstance.post(
+    "/homes/",
     {
       category: category,
       type: type,
-      city: city,
+      province: city,
       region: region,
-      room: room,
-      year: year,
-      floor: floor,
+      num_of_beds: room,
+      age: year,
       elevator: elevator,
       parking: parking,
-      meterage: meterage,
-      price: price,
-      photo: photo,
+      lobby: lobby,
+      sports_hall: sports_hall,
+      guard: guard,
+      swimming_pool: swimming_pool,
+      balcony: balcony,
+      roof_garden: roof_garden,
+      remote_door: remote_door,
+      floor_area: meterage,
+      total_price: price,
+      main_image: main_image,
+      image_1: image_1,
+      image_2: image_2,
       title: title,
-      callNumber: callNumber,
-      bio: bio,
-      creator: creator,
-      warehouse: warehouse
+      phone_number: callNumber,
+      description: bio,
+      seller: creator,
+      warehouse: warehouse,
+      location_x: 0,
+      location_y: 0
     },
     configToken
   );
+}
 
   export const PredictAPI = (type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, warehouse: string) =>
   axiosInstance.post(

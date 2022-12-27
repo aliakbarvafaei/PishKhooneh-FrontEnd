@@ -53,6 +53,13 @@ export interface NewAdInputTypes {
     floor: string;
     elevator: string;
     parking: string;
+    lobby: string;
+    sports_hall: string;
+    guard: string;
+    swimming_pool: string;
+    balcony: string;
+    roof_garden: string;
+    remote_door: string;
     meterage: string;
     price: string;
     title: string;

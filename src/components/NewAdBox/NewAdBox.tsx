@@ -23,6 +23,13 @@ const NewAdBox:React.FC = () => {
   const floorId = useId();
   const elevatorId = useId();
   const parkingId = useId();
+  const lobbyId = useId();
+  const sports_hallId = useId();
+  const guardId = useId();
+  const swimming_poolId = useId();
+  const balconyId = useId();
+  const roof_gardenId = useId();
+  const remote_doorId = useId();
   const meterageId = useId();
   const priceId = useId();
   const photoId = useId();
@@ -70,11 +77,11 @@ const NewAdBox:React.FC = () => {
       }
     }
     const warehouseInput = (document.getElementsByName('warehouse') as any);
-    var warehouse;
-    for(var i = 0; i < warehouseInput.length; i++) {
+    var warehouse = false;
+    for(i = 0; i < warehouseInput.length; i++) {
       if(warehouseInput[i].checked)
       {
-        warehouse = (warehouseInput[i].value);
+        warehouse = (warehouseInput[i].value==="1" ? true:false);
         warehouseInput[i].checked = false;
         break ;
       }
@@ -82,15 +89,33 @@ const NewAdBox:React.FC = () => {
     const category = (document.getElementById(categoryId) as HTMLInputElement).value;
     const type = (document.getElementById(typeId) as HTMLInputElement).value;
     const city = (document.getElementById(cityId) as HTMLInputElement).value;
-    const region = (document.getElementById(regionId) as HTMLInputElement).value;
-    const room = (document.getElementById(roomId) as HTMLInputElement).value;
-    const year = (document.getElementById(yearId) as HTMLInputElement).value;
-    const floor = (document.getElementById(floorId) as HTMLInputElement).value;
-    const elevator = (document.getElementById(elevatorId) as HTMLInputElement).value;
-    const parking = (document.getElementById(parkingId) as HTMLInputElement).value;
-    const meterage = (document.getElementById(meterageId) as HTMLInputElement).value;
-    const price = (document.getElementById(priceId) as HTMLInputElement).value;
-    const photo = {...imagesFile as FileList};
+    const region = parseInt((document.getElementById(regionId) as HTMLInputElement).value);
+    const room = parseInt((document.getElementById(roomId) as HTMLInputElement).value);
+    const year = parseInt((document.getElementById(yearId) as HTMLInputElement).value);
+    const elevator = (document.getElementById(elevatorId) as HTMLInputElement).value==="1" ? true:false;
+    const parking = (document.getElementById(parkingId) as HTMLInputElement).value==="1" ? true:false;
+    const lobby = (document.getElementById(lobbyId) as HTMLInputElement).value==="1" ? true:false;
+    const sports_hall = (document.getElementById(sports_hallId) as HTMLInputElement).value==="1" ? true:false;
+    const guard = (document.getElementById(guardId) as HTMLInputElement).value==="1" ? true:false;
+    const swimming_pool = (document.getElementById(swimming_poolId) as HTMLInputElement).value==="1" ? true:false;
+    const balcony = (document.getElementById(balconyId) as HTMLInputElement).value==="1" ? true:false;
+    const roof_garden = (document.getElementById(roof_gardenId) as HTMLInputElement).value==="1" ? true:false;
+    const remote_door = (document.getElementById(remote_doorId) as HTMLInputElement).value==="1" ? true:false;
+    const meterage = parseInt((document.getElementById(meterageId) as HTMLInputElement).value);
+    const price = parseInt((document.getElementById(priceId) as HTMLInputElement).value);
+    // const photo = {...imagesFile as FileList};
+    var main_image = "";
+    var image_1 = "";
+    var image_2 = "";
+    if(preview.length>0){
+      main_image = (preview[0] as string).split("blob:")[1];
+      if(preview.length>1){
+        image_1 = (preview[1] as string).split("blob:")[1];
+        if(preview.length>2){
+          image_2 = (preview[2] as string).split("blob:")[1];
+        }
+      }
+    }
     setImagesFile(null);
     setPreview([]);
     const title = (document.getElementById(titleId) as HTMLInputElement).value;
@@ -103,9 +128,15 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(regionId) as HTMLInputElement).value = "";
     (document.getElementById(roomId) as HTMLInputElement).value = "";
     (document.getElementById(yearId) as HTMLInputElement).value = "";
-    (document.getElementById(floorId) as HTMLInputElement).value = "";
     (document.getElementById(elevatorId) as HTMLInputElement).value = "";
     (document.getElementById(parkingId) as HTMLInputElement).value = "";
+    (document.getElementById(lobbyId) as HTMLInputElement).value = "";
+    (document.getElementById(sports_hallId) as HTMLInputElement).value = "";
+    (document.getElementById(guardId) as HTMLInputElement).value = "";
+    (document.getElementById(swimming_poolId) as HTMLInputElement).value = "";
+    (document.getElementById(balconyId) as HTMLInputElement).value = "";
+    (document.getElementById(roof_gardenId) as HTMLInputElement).value = "";
+    (document.getElementById(remote_doorId) as HTMLInputElement).value = "";
     (document.getElementById(meterageId) as HTMLInputElement).value = "";
     (document.getElementById(priceId) as HTMLInputElement).value = "";
     setPrice(null);
@@ -113,7 +144,7 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(titleId) as HTMLInputElement).value = "";
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
-    NewAdAPI(category, type, city, region, room, year, floor, elevator, parking, meterage, price, photo, title, callNumber, bio, creator, warehouse)
+    NewAdAPI(category, type, city, region, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, title, callNumber, bio, creator, warehouse)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -150,7 +181,6 @@ const NewAdBox:React.FC = () => {
       const objectUrl = URL.createObjectURL(imagesFile[i])
       arr.push(objectUrl);
     }
-
     setPreview(arr as any);
   }, [imagesFile])
 
@@ -178,8 +208,10 @@ const NewAdBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="فروش">فروش</option>
-                        <option value="رهن و اجاره">رهن و اجاره</option>
+                        <option value="آپارتمان">آپارتمان</option>
+                        <option value="ویلا">ویلا</option>
+                        <option value="باغ">باغ</option>
+                        <option value="آپارتمان/برج">آپارتمان/برج</option>
                     </select>
                 </span>
                 {errors.category && (
@@ -204,8 +236,8 @@ const NewAdBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="آپارتمان">آپارتمان</option>
-                        <option value="ویلایی">ویلایی</option>
+                        <option value="مسکونی">مسکونی</option>
+                        <option value="تجاری">تجاری</option>
                     </select>
                 </span>
                 {errors.type && (
@@ -254,8 +286,14 @@ const NewAdBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="منطقه1">منطقه1</option>
-                        <option value="منطقه2">منطقه2</option>
+                        <option value="1">منطقه1</option>
+                        <option value="2">منطقه2</option>
+                        <option value="3">منطقه3</option>
+                        <option value="4">منطقه4</option>
+                        <option value="5">منطقه5</option>
+                        <option value="6">منطقه6</option>
+                        <option value="7">منطقه7</option>
+                        <option value="8">منطقه8</option>
                     </select>
                 </span>
                 {errors.region && (
@@ -280,11 +318,14 @@ const NewAdBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="بدون اتاق">بدون اتاق</option>
-                        <option value="یک">یک</option>
-                        <option value="دو">دو</option>
-                        <option value="سه">سه</option>
-                        <option value="بیشتر از سه">بیشتر از سه</option>
+                        <option value="0">بدون اتاق</option>
+                        <option value="1">یک</option>
+                        <option value="2">دو</option>
+                        <option value="3">سه</option>
+                        <option value="4">چهار</option>
+                        <option value="5">پبنج</option>
+                        <option value="6">شش</option>
+                        <option value="7">هفت</option>
                     </select>
                 </span>
                 {errors.room && (
@@ -298,23 +339,16 @@ const NewAdBox:React.FC = () => {
                 )}
               </div>
               <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
-                <span className="flex flex-row gap-[1%] items-center  justify-between">
-                    <label htmlFor="year-select" className="inline text-[14px] text-right font-bold" >سال ساخت : </label>
-                    <select data-testid="year-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                <span className="flex flex-row gap-[1%] items-center justify-between">
+                    <label htmlFor="year-select" className="inline text-[14px] text-right font-bold" >سن بنا : </label>
+                    <input type='number' placeholder="سن" data-testid="year-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
                         errors.year ? "border-red outline-red" : `${themeBorder}`
                     }`}
                     id={yearId}
                     {...register("year", {
-                        required: "سال ساخت اجباری است...",
+                        required: "سن بنا ساخت اجباری است...",
                     })}
-                    >
-                        <option value="">انتخاب کنید</option>
-                        <option value="1401">1401</option>
-                        <option value="1400">1400</option>
-                        <option value="1399">1399</option>
-                        <option value="1398">1398</option>
-                        <option value="قبا از 1398">قبل از 1398</option>
-                    </select>
+                    />
                 </span>
                 {errors.year && (
                   <div className="text-red text-right pt-[5px]">
@@ -326,7 +360,7 @@ const NewAdBox:React.FC = () => {
                   </div>
                 )}
               </div>
-              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+              {/* <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center  justify-between">
                     <label htmlFor="floor-select" className="inline text-[14px] text-right font-bold" >طبقه : </label>
                     <select data-testid="floor-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
@@ -353,7 +387,7 @@ const NewAdBox:React.FC = () => {
                     <span className="pr-[5px]">{errors.floor.message}</span>
                   </div>
                 )}
-              </div>
+              </div> */}
               <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center  justify-between">
                     <label htmlFor="elevator-select" className="inline text-[14px] text-right font-bold" >آسانسور : </label>
@@ -366,8 +400,8 @@ const NewAdBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="ندارد">ندارد</option>
-                        <option value="دارد">دارد</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
                     </select>
                 </span>
                 {errors.elevator && (
@@ -392,8 +426,8 @@ const NewAdBox:React.FC = () => {
                     })}
                     >
                         <option value="">انتخاب کنید</option>
-                        <option value="ندارد">ندارد</option>
-                        <option value="دارد">دارد</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
                     </select>
                 </span>
                 {errors.parking && (
@@ -403,6 +437,188 @@ const NewAdBox:React.FC = () => {
                       aria-hidden="true"
                     ></i>
                     <span className="pr-[5px]">{errors.parking.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="lobby-select" className="inline text-[14px] text-right font-bold" >لابی : </label>
+                    <select data-testid="lobby-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.lobby ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={lobbyId}
+                    {...register("lobby", {
+                        required: "لابی اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
+                    </select>
+                </span>
+                {errors.lobby && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.lobby.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="sports_hall-select" className="inline text-[14px] text-right font-bold" >سالن ورزشی : </label>
+                    <select data-testid="sports_hall-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.sports_hall ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={sports_hallId}
+                    {...register("sports_hall", {
+                        required: "سالن ورزشی اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
+                    </select>
+                </span>
+                {errors.sports_hall && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.sports_hall.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="guard-select" className="inline text-[14px] text-right font-bold" >نگهبانی : </label>
+                    <select data-testid="guard-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.guard ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={guardId}
+                    {...register("guard", {
+                        required: "نگهبانی اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
+                    </select>
+                </span>
+                {errors.guard && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.guard.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="swimming_pool-select" className="inline text-[14px] text-right font-bold" >استخر : </label>
+                    <select data-testid="swimming_pool-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.swimming_pool ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={swimming_poolId}
+                    {...register("swimming_pool", {
+                        required: "استخر اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
+                    </select>
+                </span>
+                {errors.swimming_pool && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.swimming_pool.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="balcony-select" className="inline text-[14px] text-right font-bold" >بالکن : </label>
+                    <select data-testid="balcony-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.balcony ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={balconyId}
+                    {...register("balcony", {
+                        required: "بالکن اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
+                    </select>
+                </span>
+                {errors.balcony && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.balcony.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="roof_garden-select" className="inline text-[14px] text-right font-bold" >روف گاردن : </label>
+                    <select data-testid="roof_garden-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.roof_garden ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={roof_gardenId}
+                    {...register("roof_garden", {
+                        required: "روف گاردن اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
+                    </select>
+                </span>
+                {errors.roof_garden && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.roof_garden.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="remote_door-select" className="inline text-[14px] text-right font-bold" >در برقی : </label>
+                    <select data-testid="remote_door-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.remote_door ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={remote_doorId}
+                    {...register("remote_door", {
+                        required: "در برقی اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        <option value="0">ندارد</option>
+                        <option value="1">دارد</option>
+                    </select>
+                </span>
+                {errors.remote_door && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.remote_door.message}</span>
                   </div>
                 )}
               </div>
@@ -421,7 +637,7 @@ const NewAdBox:React.FC = () => {
                     <div className="flex justify-center items-center gap-[5px]">
                     <input type="radio" {...register("creator",{
                         required: "ارائه دهنده اجباری است...",
-                    })} id="shop" name="creator" value="مشاور املاک" />
+                    })} id="shop" name="creator" value="املاک" />
                     <label htmlFor="shop" className="text-[12px]">مشاور املاک</label>
                     </div>
                 </span>
@@ -442,7 +658,7 @@ const NewAdBox:React.FC = () => {
                     <div className="flex justify-center items-center gap-[5px]">
                     <input type="radio" {...register("warehouse",{
                         required: " انباری اجباری است...",
-                    })} id="دارد" name="warehouse" value="دارد"
+                    })} id="دارد" name="warehouse" value="1"
                              />
                     <label htmlFor="دارد" className="text-[12px]">دارد</label>
                     </div>
@@ -450,7 +666,7 @@ const NewAdBox:React.FC = () => {
                     <div className="flex justify-center items-center gap-[5px]">
                     <input type="radio" {...register("warehouse",{
                         required: " انباری اجباری است...",
-                    })} id="دارد" name="warehouse" value="ندارد" />
+                    })} id="دارد" name="warehouse" value="0" />
                     <label htmlFor="ندارد" className="text-[12px]">ندارد</label>
                     </div>
                 </span>
