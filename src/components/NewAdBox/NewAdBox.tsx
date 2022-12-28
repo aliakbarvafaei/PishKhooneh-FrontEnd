@@ -5,8 +5,11 @@ import { useHistory } from "react-router-dom";
 import { useToast } from "../../contexts/ToastState";
 import { eachToast, NewAdInputTypes } from "../../ts/interfaces.js";
 import { convertorPrice } from "../../ts/functions";
+import Map from "../Map/Map";
 
 const NewAdBox:React.FC = () => {
+  const [ location_x, setlocation_x ] = useState(36);
+  const [ location_y, setlocation_y ] = useState(51);
   const { setToastState } = useToast();
   const [ price, setPrice ] = useState<null | number>(null);
   const [ imagesFile, setImagesFile ] = useState<FileList | null>(null);
@@ -53,6 +56,10 @@ const NewAdBox:React.FC = () => {
   function addItemOnce(arr : Array<eachToast>, value: eachToast) {
     arr.push(value);
     return arr;
+  }
+  function handleLocation(x:number,y:number){
+    setlocation_x(x);
+    setlocation_y(y);
   }
   function handlePrice(){
     setPrice(parseInt((document.getElementById(priceId) as HTMLInputElement).value));
@@ -144,7 +151,7 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(titleId) as HTMLInputElement).value = "";
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
-    NewAdAPI(category, type, city, region, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, title, callNumber, bio, creator, warehouse)
+    NewAdAPI(category, type, city, region, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, title, callNumber, bio, creator, warehouse, location_x, location_y)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -833,6 +840,10 @@ const NewAdBox:React.FC = () => {
                   cols={30} rows={10} ></textarea>
               </div>
               
+              <div className="flex lg:flex-col lgmin:flex-row lgmin:justify-between items-center lg:justify-center w-full my-[30px] gap-[30px]">
+                <Map x={location_x} y={location_y} handleLocation={handleLocation}/>
+              </div>
+
               <button
                 type="submit"
                 className="min-w-fill px-[4%] py-[1%] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"

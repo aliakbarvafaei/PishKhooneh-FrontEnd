@@ -1,6 +1,6 @@
 import NeshanMap from "./components/NeshanMap";
 
-function App({x,y}) {
+function App({x,y, handleLocation}) {
   return (
     <div className="h-full w-full">
       {/* <NeshanMap
@@ -27,9 +27,11 @@ function App({x,y}) {
             .addTo(myMap)
             .bindPopup('I am a popup.');
 
-          // myMap.on('click', function (e) {
-          //   marker.setLatLng(e.latlng)
-          // });
+          handleLocation && myMap.on('click', function (e) {
+            marker.setLatLng(e.latlng)
+            console.log(e.latlng)
+            handleLocation(e.latlng.lat,e.latlng.lng)
+          });
         }}
       />
     </div>

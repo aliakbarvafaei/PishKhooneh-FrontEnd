@@ -19,7 +19,7 @@ const NeshanMap = (props) => {
     maptype: "dreamy",
     poi: true,
     traffic: false,
-    center: [props.x, props.y],
+    center: [35.699739, 51.338097],
     zoom: 10,
   };
 

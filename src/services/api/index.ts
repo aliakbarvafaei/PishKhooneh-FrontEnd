@@ -37,7 +37,7 @@ export const activateAccountAPI = (code : string) =>
       email_active_code: code,
     }
   );
-export const NewAdAPI = (category : string, type : string, city : string, region : number, room : number, year : number, elevator : boolean, parking : boolean, lobby : boolean, sports_hall : boolean, guard : boolean,swimming_pool : boolean, balcony : boolean, roof_garden : boolean, remote_door : boolean, meterage : number, price : number, main_image : string, image_1 : string, image_2 : string, title : string, callNumber : string, bio : string, creator: string, warehouse: boolean) =>{
+export const NewAdAPI = (category : string, type : string, city : string, region : number, room : number, year : number, elevator : boolean, parking : boolean, lobby : boolean, sports_hall : boolean, guard : boolean,swimming_pool : boolean, balcony : boolean, roof_garden : boolean, remote_door : boolean, meterage : number, price : number, main_image : string, image_1 : string, image_2 : string, title : string, callNumber : string, bio : string, creator: string, warehouse: boolean, location_x : number, location_y: number) =>{
   console.log(category,type,room,year,main_image,image_1)
   return axiosInstance.post(
     "/homes/",
@@ -67,8 +67,8 @@ export const NewAdAPI = (category : string, type : string, city : string, region
       description: bio,
       seller: creator,
       warehouse: warehouse,
-      location_x: 0,
-      location_y: 0
+      location_x: location_x,
+      location_y: location_y
     },
     configToken
   );
