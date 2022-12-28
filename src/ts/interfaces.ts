@@ -137,9 +137,7 @@ export interface ads{
     description: string | null;
     region: number;
     neighbor: string | null;
-    graph: {
-    "12000": "Price"
-    },
+    graph: any;
     phone_number: string;
     updated_at: string;
     created_at: string;

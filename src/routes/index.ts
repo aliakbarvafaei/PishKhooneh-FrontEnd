@@ -40,7 +40,7 @@ const AppRoutes:Array<any> = [
     icon: "fa fa-list",
     component: NewAd,
     showInNav: false,
-    private: false,
+    private: true,
   },
   {
     path: "/ad-details/:idad",

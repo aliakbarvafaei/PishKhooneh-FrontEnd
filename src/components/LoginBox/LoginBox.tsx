@@ -64,7 +64,6 @@ const LoginBox:React.FC = () => {
               key: Math.random(),
             })
           );
-          // toggleAuth(response.data.data.email,response.data.token);
           dispatch({
             type: "login",
             payload: [email, response.data.token],
@@ -81,7 +80,15 @@ const LoginBox:React.FC = () => {
         }
       })
       .catch((err) => {
-        if (err.response && err.response.status === 403) {
+        if (err.response && err.response.status === 401) {
+          setToastState((old : Array<eachToast>) =>
+            addItemOnce(old.slice(), {
+              title: "2",
+              description: "حساب کاربری فعال نشده است",
+              key: Math.random(),
+            })
+          );
+        } else if (err.response && err.response.status === 403) {
           setToastState((old : Array<eachToast>) =>
             addItemOnce(old.slice(), {
               title: "2",
@@ -205,12 +212,23 @@ const LoginBox:React.FC = () => {
                 </>
               )}
             </div>
-            <button
-              type="submit"
-              className="min-w-fit py-[3%] px-[10%] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
-            >
-              ورود
-            </button>
+            <div className="w-[100%] flex flex-row gap-[10px] smmin:justify-end sm:justify-center">
+              <button
+                type="submit"
+                className="min-w-fit py-[3%] px-[10%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+              >
+                ورود
+              </button>
+              <button
+                type="button"
+                onClick={()=>{
+                  history.push('/activeaccount')
+                }}
+                className="min-w-fit py-[3%] px-[6%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+              >
+                فعال‌سازی
+              </button>
+            </div>
           </form>
         </div>
       </div>

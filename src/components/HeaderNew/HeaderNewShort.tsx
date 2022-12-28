@@ -28,8 +28,8 @@ const titleMenus = [
     {
       title: "قیمت خانه شما",
       submenu: [
-        { title: "آپارتمان", pathTo: "/" },
-        { title: "ویلایی", pathTo: "/" },
+        { title: "آپارتمان", pathTo: "/predict" },
+        { title: "ویلایی", pathTo: "/predict" },
       ],
     }
   ];
@@ -147,13 +147,19 @@ const HeaderNewShort:React.FC = () => {
                                 :
                                 <div className='group relative'><button className='peer'>حساب کاربری</button>
                                     <div
-                                        className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[100px] py-[10px] px-[20px] right-0
+                                        className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[120px] py-[10px] px-[20px] right-0
                                         flex-col drop-shadow-lg z-[22]`}>
                                             <Link
                                                 className="text-right text-[14px] py-[12px] hoverItem"
                                                 to='profile'
                                                 >
                                                 پروفایل
+                                            </Link>
+                                            <Link
+                                                className="text-right text-[12px] py-[12px] hoverItem"
+                                                to='bookmark'
+                                                >
+                                                نشان شده‌ها
                                             </Link>
                                             <Link
                                                 className="text-right text-[14px] py-[12px] hoverItem"

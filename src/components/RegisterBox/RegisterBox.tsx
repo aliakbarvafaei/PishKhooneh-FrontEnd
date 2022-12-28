@@ -281,12 +281,23 @@ const RegisterBox:React.FC = () => {
                 />
               </div>
               
-              <button
-                type="submit"
-                className="h-[50px] min-w-[150px] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
-              >
-                ثبت نام
-              </button>
+              <div className="w-[100%] flex flex-row gap-[10px] smmin:justify-start sm:justify-center">
+                <button
+                  type="submit"
+                  className="min-w-fit py-[1%] px-[5%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                >
+                  ثبت نام
+                </button>
+                <button
+                  type="button"
+                  onClick={()=>{
+                    history.push('/activeaccount')
+                  }}
+                  className="min-w-fit py-[1%] px-[5%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                >
+                  فعال‌سازی
+                </button>
+              </div>
             </form>
           </div>
         </div>

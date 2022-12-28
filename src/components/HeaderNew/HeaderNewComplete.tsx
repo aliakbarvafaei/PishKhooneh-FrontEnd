@@ -28,8 +28,8 @@ const titleMenus = [
     {
       title: "قیمت خانه شما",
       submenu: [
-        { title: "آپارتمان", pathTo: "/" },
-        { title: "ویلایی", pathTo: "/" },
+        { title: "آپارتمان", pathTo: "/predict" },
+        { title: "ویلایی", pathTo: "/predict" },
       ],
     }
   ];
@@ -152,13 +152,19 @@ const HeaderNewComplete:React.FC = () => {
                                 :
                                 <div className='group relative'><button className='peer'>حساب کاربری</button>
                                     <div
-                                        className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[100px] py-[10px] px-[20px] right-0
+                                        className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[120px] py-[10px] px-[20px] right-0
                                         flex-col drop-shadow-lg z-[22]`}>
                                             <Link
                                                 className="text-right text-[14px] py-[12px] hoverItem"
                                                 to='profile'
                                                 >
                                                 پروفایل
+                                            </Link>
+                                            <Link
+                                                className="text-right text-[12px] py-[12px] hoverItem"
+                                                to='bookmark'
+                                                >
+                                                نشان شده‌ها
                                             </Link>
                                             <Link
                                                 className="text-right text-[14px] py-[12px] hoverItem"
@@ -194,11 +200,13 @@ const HeaderNewComplete:React.FC = () => {
                     قیمت خانه خود را پیش‌بینی کنید
                 </div>
                 <div className="relative text-center mt-[40px]">
-                    <input type="text" value={searchInput} onChange={handleChange as any} className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] outline outline-[10px] outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
-                    <i onClick={()=>{
-                        if(searchInput!=="")
-                            history.push(`/search?searchText=${searchInput}`)
-                    }} className="fa fa-search absolute right-[3%] sm:right-[3%] mm:right-[11%] top-[35%]"></i>
+                    <form>
+                        <input type="text" value={searchInput} onChange={handleChange as any} className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] outline outline-[10px] outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
+                        <button type='submit' onClick={()=>{
+                            if(searchInput!=="")
+                                history.push(`/search?searchText=${searchInput}`)
+                        }} className="fa fa-search absolute right-[3%] sm:right-[3%] mm:right-[11%] top-[35%]"></button>
+                    </form>
                 </div>
                 <div className='flex flex-col items-center gap-[10px] text-center text-white text-[18px] font-bold leading-[40px] pt-[30px]'>
                     <Link to='/predict'><img src={predict} className="peer w-[100px] cursor-pointer hover:scale-125 duration-[500ms]" alt="" /></Link>
