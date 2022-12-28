@@ -58,7 +58,7 @@ const RegisterBox:React.FC = () => {
               key: Math.random(),
             })
           );
-          history.push("/login");
+          history.push("/activeaccount");
         }
       })
       .catch((err) => {

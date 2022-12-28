@@ -13,6 +13,7 @@ import Bookmark from "../pages/Bookmark";
 import Predict from "../pages/Predict";
 import NewAd from "../pages/NewAd";
 import AdDetails from "../pages/AdDetails";
+import ActiveAccount from "../pages/ActiveAccount";
 
 const indexRoutes = [{ path: "/", component: DefaultLayout }];
 
@@ -64,6 +65,14 @@ const AppRoutes:Array<any> = [
     component: Bookmark,
     showInNav: false,
     private: true,
+  },
+  {
+    path: "/activeaccount",
+    name: "فعال‌سازی حساب",
+    icon: "fa fa-list",
+    component: ActiveAccount,
+    showInNav: false,
+    private: false,
   },
   // {
   //   path: "/cart",

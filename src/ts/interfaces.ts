@@ -43,6 +43,10 @@ export interface RegisterInputTypes {
     address: string;
     bio: string;
 }
+export interface ActivateInputTypes {
+    email: string;
+    code: number;
+}
 export interface NewAdInputTypes {
     category: string;
     type: string;
