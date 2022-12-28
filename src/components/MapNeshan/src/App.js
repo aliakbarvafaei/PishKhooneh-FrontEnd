@@ -29,7 +29,6 @@ function App({x,y, handleLocation}) {
 
           handleLocation && myMap.on('click', function (e) {
             marker.setLatLng(e.latlng)
-            console.log(e.latlng)
             handleLocation(e.latlng.lat,e.latlng.lng)
           });
         }}

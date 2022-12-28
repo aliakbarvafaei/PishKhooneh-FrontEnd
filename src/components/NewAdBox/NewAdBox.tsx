@@ -23,7 +23,6 @@ const NewAdBox:React.FC = () => {
   const regionId = useId();
   const roomId = useId();
   const yearId = useId();
-  const floorId = useId();
   const elevatorId = useId();
   const parkingId = useId();
   const lobbyId = useId();
