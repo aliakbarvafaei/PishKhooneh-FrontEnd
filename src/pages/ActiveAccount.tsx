@@ -87,9 +87,8 @@ const ActiveAccount:React.FC = ()=> {
             .then((response) => {
                 if (response.status === 200) {
                     (document.getElementById(emailId) as HTMLInputElement).disabled = true;
-                    (document.getElementById(codeId) as HTMLInputElement).disabled = false;
                     setButtonText("تایید");
-                setToastState((old:Array<eachToast>) =>
+                    setToastState((old:Array<eachToast>) =>
                     addItemOnce(old.slice(), {
                     title: "1",
                     description: "ایمیل فعالسازی با موفقیت ارسال شد",
@@ -184,7 +183,6 @@ const ActiveAccount:React.FC = ()=> {
                             </label>
                             <input
                             type="text"
-                            disabled={true}
                             className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
                                 errors.code ? "border-red outline-red" : `${themeBorder}`
                             }`}

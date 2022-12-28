@@ -25,14 +25,14 @@ export const registerAPI = (fname : string, callNumber : string, email : string,
   );
 export const sendEmailAPI = (email : string) =>
   axiosInstance.post(
-    "/send-mail/",
+    "/send_mail/",
     {
       username: email,
     }
   );
 export const activateAccountAPI = (code : string) =>
   axiosInstance.post(
-    "/active-account/",
+    "/active_account/",
     {
       email_active_code: code,
     }
