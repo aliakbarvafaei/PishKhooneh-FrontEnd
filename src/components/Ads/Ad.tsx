@@ -12,8 +12,9 @@ import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { ads, eachToast, statesRedux } from "../../ts/interfaces";
 import { convertorPrice, DateDiff } from "../../ts/functions";
-import Map from "../Map/Map";
+
 import Chart1 from "../Chart/Chart";
+import Map from "../Map/Map";
 
 const Ad:React.FC<{ad:ads}> = ({ ad })=> {
   const history = useHistory();
@@ -401,7 +402,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
           )}
         </div>
         <div className="flex lg:flex-col lgmin:flex-row lgmin:justify-between items-center lg:justify-center w-full my-[30px] gap-[30px]">
-          <Map />
+          <Map x={ad.location_y} y={ad.location_x}/>
           <Chart1 />
         </div>
       </div>

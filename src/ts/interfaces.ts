@@ -107,8 +107,8 @@ export interface ads{
     unit_price: number;
     province: string;
     address: string;
-    location_x: number;
-    location_y: number;
+    location_x: Number;
+    location_y: Number;
     main_image: string;
     image_1: string | null;
     image_2: string | null;
