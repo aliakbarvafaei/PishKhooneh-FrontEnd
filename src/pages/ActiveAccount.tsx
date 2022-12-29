@@ -1,5 +1,6 @@
 import React, { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import HeaderNewShort from '../components/HeaderNew/HeaderNewShort';
 import TitlePages from '../components/TitlePages/TitlePages';
@@ -9,6 +10,7 @@ import { ActivateInputTypes, eachToast } from '../ts/interfaces';
 
 const ActiveAccount:React.FC = ()=> {
     const { setToastState } = useToast();
+    const dispatch = useDispatch();
 
     const [ buttonText, setButtonText ] = useState<string>("ارسال کد");
     const themeClass = "bg-white";
@@ -45,11 +47,23 @@ const ActiveAccount:React.FC = ()=> {
                     setToastState((old:Array<eachToast>) =>
                         addItemOnce(old.slice(), {
                         title: "1",
-                        description: "حساب کاربری با موفقیت فعال شد",
+                        description: `فعال‌سازی انجام شد. خوش آمدید`,
                         key: Math.random(),
                         })
                     );
-                    history.push('/home');
+                    dispatch({
+                        type: "login",
+                        payload: [email, response.data.token],
+                    });
+                    try {
+                        localStorage.setItem(
+                        "token_user",
+                        JSON.stringify(response.data.token)
+                        );
+                    } catch (e) {
+                        console.error({ e });
+                    }
+                    history.push("/home");
                 }
             })
             .catch((err) => {

@@ -201,7 +201,7 @@ const HeaderNewComplete:React.FC = () => {
                 </div>
                 <div className="relative text-center mt-[40px]">
                     <form>
-                        <input type="text" value={searchInput} onChange={handleChange as any} className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] outline outline-[10px] outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
+                        <input type="text" value={searchInput} onChange={handleChange as any} className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] mm:pr-[12%] outline outline-[10px] outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
                         <button type='submit' onClick={()=>{
                             if(searchInput!=="")
                                 history.push(`/search?searchText=${searchInput}`)

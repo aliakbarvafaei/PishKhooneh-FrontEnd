@@ -7,6 +7,7 @@ import { convertorPrice } from "../../ts/functions";
 import { ads, eachToast, statesRedux } from "../../ts/interfaces";
 
 const Card:React.FC<{item:ads, dir:string}> = ({ item, dir}) => {
+  console.log(item.source)
   const history = useHistory();
   const { user } = useSelector((state:statesRedux) => state.userAuth);
   const [backgroundImage, setBackgroundImage] = useState("");

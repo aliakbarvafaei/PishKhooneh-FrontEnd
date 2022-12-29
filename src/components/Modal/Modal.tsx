@@ -54,7 +54,7 @@ const Modal:React.FC<{modalClose:any,priceMin:number,priceMax:number}> = ({modal
                 <div className="my-[30px] sm:my-[50px] text-center">
                   <div className="text-sm text-gray-500 px-[20px] text-center">
                     <div className='flex flex-row w-[100%] smmin:px-[10%] mmmin:px-[5%] md:text-sm'>
-                      <div className='bg-[#FDDA0D] h-[40px] w-[33%] flex justify-center items-center rounded-r-lg text-white relative'>
+                      <div className='bg-[#fd250d] h-[40px] w-[33%] flex justify-center items-center rounded-r-lg text-white relative'>
                          بالا 
                         <span className='text-black absolute left-[-25%] top-[110%] sm:flex sm:flex-col'>
                           <span>{convertorPrice(Math.round(priceMax-((priceMax-priceMin)/3)))[1]}</span><span className='sm:text-[10px]'>{convertorPrice(Math.round(priceMax-((priceMax-priceMin)/3)))[0]}</span>
@@ -63,7 +63,7 @@ const Modal:React.FC<{modalClose:any,priceMin:number,priceMax:number}> = ({modal
                           <span>{convertorPrice(priceMax)[1]}</span><span className='sm:text-[10px]'>{convertorPrice(priceMax)[0]}</span>
                         </span>
                       </div>
-                      <div className='bg-[#00A300] h-[40px] w-[33%] flex justify-center items-center text-white'>منصفانه</div>
+                      <div className='bg-[#FDDA0D] h-[40px] w-[33%] flex justify-center items-center text-white'>منصفانه</div>
                       <div className='bg-[#007500] h-[40px] w-[33%] flex justify-center items-center rounded-l-lg text-white relative'>
                         پایین
                         <span className='text-black absolute left-[-15%] top-[110%] sm:flex sm:flex-col'>

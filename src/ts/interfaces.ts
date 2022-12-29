@@ -142,4 +142,5 @@ export interface ads{
     updated_at: string;
     created_at: string;
     is_active: boolean;
+    source: string;
 }
