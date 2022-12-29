@@ -41,7 +41,7 @@ const MobileMenu:React.FC = ()=> {
             <p className="text-[12px]">نشان شده</p>
           </span>
         </Link>
-        <Link to="/home">
+        <Link to="/predict">
           <span className="flex flex-col justify-center items-center">
             <i
               className="fa fa-home"
