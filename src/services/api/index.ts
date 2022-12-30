@@ -52,7 +52,7 @@ export const resetPassAPI = (code : string, newPass : string) =>
       password: newPass
     }
   );
-export const NewAdAPI = (token : string, category : string, type : string, status : string, city : string, region : number, room : number, year : number, elevator : boolean, parking : boolean, lobby : boolean, sports_hall : boolean, guard : boolean,swimming_pool : boolean, balcony : boolean, roof_garden : boolean, remote_door : boolean, meterage : number, price : number, main_image : string, image_1 : string, image_2 : string, title : string, callNumber : string, bio : string, creator: string, warehouse: boolean, location_x : number, location_y: number) =>
+export const NewAdAPI = (token : string, category : string, type : string, status : string, city : string, region : number, room : number, year : number, elevator : boolean, parking : boolean, lobby : boolean, sports_hall : boolean, guard : boolean,swimming_pool : boolean, balcony : boolean, roof_garden : boolean, remote_door : boolean, meterage : number, price : number, main_image : string, image_1 : string, image_2 : string, image_3 : string, title : string, callNumber : string, bio : string, creator: string, warehouse: boolean, location_x : number, location_y: number) =>
   axiosInstance.post(
     "/homes_create/",
     {
@@ -77,14 +77,14 @@ export const NewAdAPI = (token : string, category : string, type : string, statu
       main_image: main_image,
       image_1: image_1,
       image_2: image_2,
+      image_3: image_3,
       title: title,
       phone_number: callNumber,
       description: bio,
       seller: creator,
       warehouse: warehouse,
       location_x: location_x,
-      location_y: location_y,
-      token: token
+      location_y: location_y
     },
     configToken
   );

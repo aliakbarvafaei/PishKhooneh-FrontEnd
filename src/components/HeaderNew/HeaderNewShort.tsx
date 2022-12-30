@@ -151,13 +151,13 @@ const HeaderNewShort:React.FC = () => {
                                         flex-col drop-shadow-lg z-[22]`}>
                                             <Link
                                                 className="text-right text-[14px] py-[12px] hoverItem"
-                                                to='profile'
+                                                to='/profile'
                                                 >
                                                 پروفایل
                                             </Link>
                                             <Link
                                                 className="text-right text-[12px] py-[12px] hoverItem"
-                                                to='bookmark'
+                                                to='/bookmark'
                                                 >
                                                 نشان شده‌ها
                                             </Link>

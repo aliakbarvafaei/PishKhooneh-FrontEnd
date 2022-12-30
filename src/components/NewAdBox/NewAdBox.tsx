@@ -13,7 +13,7 @@ const NewAdBox:React.FC = () => {
   const { setToastState } = useToast();
   const [ price, setPrice ] = useState<null | number>(null);
   const [ imagesFile, setImagesFile ] = useState<FileList | null>(null);
-  const [preview, setPreview] = useState([])
+  const [preview, setPreview] = useState<Array<any>>([])
 
   const history = useHistory();
   
@@ -65,7 +65,21 @@ const NewAdBox:React.FC = () => {
     setPrice(parseInt((document.getElementById(priceId) as HTMLInputElement).value));
   }
   function handleFile(e : React.MouseEvent) {
-    setImagesFile((document.getElementById(photoId) as HTMLInputElement).files);
+    if(((document.getElementById(photoId) as HTMLInputElement).files)?.length as number > 4){
+      setToastState((old:Array<eachToast>) =>
+            addItemOnce(old.slice(), {
+              title: "2",
+              description: "تعداد عکس‌های مجاز 4 تا است",
+              key: Math.random(),
+            })
+          );
+          (document.getElementById(photoId) as HTMLInputElement).value = "";
+          setImagesFile(null);
+          setPreview([]);      
+    }
+    else{
+      setImagesFile((document.getElementById(photoId) as HTMLInputElement).files);
+    }
   }
 
   function formSubmit() {
@@ -112,15 +126,19 @@ const NewAdBox:React.FC = () => {
     const meterage = parseInt((document.getElementById(meterageId) as HTMLInputElement).value);
     const price = parseInt((document.getElementById(priceId) as HTMLInputElement).value);
     // const photo = {...imagesFile as FileList};
-    var main_image = "";
+    var main_image = "https://foyr.com/learn/wp-content/uploads/2021/08/design-your-dream-home.jpg";
     var image_1 = "";
     var image_2 = "";
+    var image_3 = "";
     if(preview.length>0){
-      main_image = (preview[0] as string).split("blob:")[1];
+      main_image = (preview[0] as string);
       if(preview.length>1){
-        image_1 = (preview[1] as string).split("blob:")[1];
+        image_1 = (preview[1] as string);
         if(preview.length>2){
-          image_2 = (preview[2] as string).split("blob:")[1];
+          image_2 = (preview[2] as string);
+          if(preview.length>3){
+            image_3 = (preview[3] as string);
+          }
         }
       }
     }
@@ -155,7 +173,7 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(bioId) as HTMLInputElement).value = "";
     const value : string | null = localStorage.getItem("token_user");
 
-    NewAdAPI(JSON.parse(value as string), category, type, status, city, region, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, title, callNumber, bio, creator, warehouse, location_x, location_y)
+    NewAdAPI(JSON.parse(value as string), category, type, status, city, region, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, image_3, title, callNumber, bio, creator, warehouse, location_x, location_y)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -207,20 +225,20 @@ const NewAdBox:React.FC = () => {
         return
     }
 
-    var arr = [];
+    // var arr:Array<any> = [];
     for(var i=0;i<imagesFile.length;i++){
       const objectUrl = URL.createObjectURL(imagesFile[i])
       getBase64(imagesFile[i])
       .then(result => {
-        console.log(typeof(result))
+        setPreview(old => [...old,result])
       })
       .catch(err => {
         console.log(err);
       });
-      arr.push(objectUrl);
+      // arr.push(objectUrl);
     }
-    setPreview(arr as any);
-    console.log(arr);
+    // setPreview(arr as any);
+    // console.log(preview);
   }, [imagesFile])
 
   return (
