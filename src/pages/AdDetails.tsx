@@ -8,12 +8,12 @@ import { ads } from "../ts/interfaces";
 
 const AdDetails:React.FC = (props) => {
   const history = useHistory();
-  const { idad } = useParams<any>();
+  const { idad, source } = useParams<any>();
   const [ad, setAd] = useState<ads | null>(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    getAd(idad)
+    getAd(idad, source)
     .then((response) => {
       setAd(response.data);
     })

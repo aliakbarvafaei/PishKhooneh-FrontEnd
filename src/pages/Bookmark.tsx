@@ -87,7 +87,7 @@ const Bookmark:React.FC = () => {
                           <Link
                             to={
                               "/ad-details/" +
-                              String(Ad.identifier) 
+                              String(Ad.identifier) + `${Ad.source==="پیش خونه"? '/pishkhooneh':'/kilid'}`
                               // +
                               // `-` +
                               // String(
@@ -106,7 +106,7 @@ const Bookmark:React.FC = () => {
                           <Link
                             to={
                               "/ad-details/" +
-                              String(Ad.identifier)
+                              String(Ad.identifier) + `${Ad.source==="پیش خونه"? '/pishkhooneh':'/kilid'}`
                             }
                           >
                             {Ad.title}

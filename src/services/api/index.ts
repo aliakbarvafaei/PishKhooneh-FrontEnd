@@ -89,45 +89,45 @@ export const NewAdAPI = (token : string, category : string, type : string, statu
     configToken
   );
 
-  export const PredictAPI = (type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, warehouse: string) =>
-  axiosInstance.post(
-    "/predict",
-    {
-      type: type,
-      city: city,
-      region: region,
-      room: room,
-      year: year,
-      floor: floor,
-      elevator: elevator,
-      parking: parking,
-      meterage: meterage,
-      warehouse: warehouse
-    },
-    configToken
-  );
+// export const PredictAPI = (type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, warehouse: string) =>
+//   axiosInstance.post(
+//     "/predict",
+//     {
+//       type: type,
+//       city: city,
+//       region: region,
+//       room: room,
+//       year: year,
+//       floor: floor,
+//       elevator: elevator,
+//       parking: parking,
+//       meterage: meterage,
+//       warehouse: warehouse
+//     },
+//     configToken
+//   );
 
 export const getUser = () => axiosInstance.get(
     `/getuser/`,
     configToken
   );
 
-  export const getmyhomes = () => axiosInstance.get(
+export const getmyhomes = () => axiosInstance.get(
     `/myhomes/`,
     configToken
   );
 
-export const updatePassword = (email : string, LastPassword : string, NewPassword : string) =>
-  axiosInstance.patch(
-    `/user/${email}`,
-    {
-      LastPassword: LastPassword,
-      NewPassword: NewPassword,
-    },
-    configToken
-  );
+// export const updatePassword = (email : string, LastPassword : string, NewPassword : string) =>
+//   axiosInstance.patch(
+//     `/user/${email}`,
+//     {
+//       LastPassword: LastPassword,
+//       NewPassword: NewPassword,
+//     },
+//     configToken
+//   );
 
-export const getAds = () => axiosInstance.get("/ads", configToken);
+// export const getAds = () => axiosInstance.get("/ads", configToken);
 
 export const getAdsNew = () => axiosInstance.get("/homes/new/");
 
@@ -141,8 +141,14 @@ export const getAdsWithPage = (pageNumber : number, pageSize : number, filters :
     }
   );
 
-export const getAd = (idAd : string) =>
-  axiosInstance.get(`/homes/${idAd}`);
+export const getAd = (idAd : string, source : string) =>
+  axiosInstance.get(`/homes/${idAd}/${source}`);
+
+export const putAd = (idAd : string, source : string) =>
+  axiosInstance.put(`/homes/${idAd}/${source}`, configToken);
+
+export const deleteAd = (idAd : string, source : string) =>
+  axiosInstance.delete(`/homes/${idAd}/${source}`, configToken);
 
 export const getBookmark = (email : string) =>
   axiosInstance.get(`/bookmark/${email}`, configToken);

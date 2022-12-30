@@ -67,7 +67,7 @@ const Card:React.FC<{item:ads, dir:string}> = ({ item, dir}) => {
       <Link
         to={
           "/ad-details/" +
-          String(item.id)
+          String(item.id) + `${item.source==="پیش خونه"? '/pishkhooneh':'/kilid'}`
         }
       >
         <div
@@ -119,7 +119,7 @@ const Card:React.FC<{item:ads, dir:string}> = ({ item, dir}) => {
       <Link
         to={
           "/ad-details/" +
-          String(item.id)
+          String(item.id) + `${item.source==="پیش خونه"? '/pishkhooneh':'/kilid'}`
         }
       >
         <div id="title" className="sm:text-[12px] md:text-[14px] mdmin:text-[16px] font-medium text-black text-right pt-[10px]">

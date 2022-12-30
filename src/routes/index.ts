@@ -45,7 +45,7 @@ const AppRoutes:Array<any> = [
     private: false,
   },
   {
-    path: "/ad-details/:idad",
+    path: "/ad-details/:idad/:source",
     name: "همه محصولات",
     icon: "fa fa-list",
     component: AdDetails,

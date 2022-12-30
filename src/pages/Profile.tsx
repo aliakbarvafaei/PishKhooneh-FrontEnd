@@ -5,7 +5,7 @@ import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
 import { useToast } from "../contexts/ToastState";
-import { getmyhomes, getUser, updatePassword } from "../services/api";
+import { deleteAd, getmyhomes, getUser } from "../services/api";
 import { ads, eachToast, InformationUserTypes, ProfileInputTypes, statesRedux } from "../ts/interfaces";
 
 // const x:Array<ads> = [
@@ -218,46 +218,46 @@ const Profile:React.FC = () => {
     (document.getElementById(passwordId) as HTMLInputElement).value = "";
     (document.getElementById(passwordConfirm) as HTMLInputElement).value = "";
 
-    updatePassword(user as string, LastPassword, NewPassword)
-      .then((response) => {
-        if (response.status === 200) {
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "1",
-              description: `رمز عبور با موفقیت تغییر یافت`,
-              key: Math.random(),
-            })
-          );
-        }
-      })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description: "رمز عبور نادرست است",
-              key: Math.random(),
-            })
-          );
-        } else if (err.response.status === 404) {
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description: "کاربر یافت نشد ابتدا ثبت‌ نام کنید ...",
-              key: Math.random(),
-            })
-          );
-        } else {
-          console.error(err);
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description: "سرور در دسترس نیست",
-              key: Math.random(),
-            })
-          );
-        }
-      });
+    // updatePassword(user as string, LastPassword, NewPassword)
+    //   .then((response) => {
+    //     if (response.status === 200) {
+    //       setToastState((old:Array<eachToast>) =>
+    //         addItemOnce(old.slice(), {
+    //           title: "1",
+    //           description: `رمز عبور با موفقیت تغییر یافت`,
+    //           key: Math.random(),
+    //         })
+    //       );
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     if (err.response.status === 401) {
+    //       setToastState((old:Array<eachToast>) =>
+    //         addItemOnce(old.slice(), {
+    //           title: "2",
+    //           description: "رمز عبور نادرست است",
+    //           key: Math.random(),
+    //         })
+    //       );
+    //     } else if (err.response.status === 404) {
+    //       setToastState((old:Array<eachToast>) =>
+    //         addItemOnce(old.slice(), {
+    //           title: "2",
+    //           description: "کاربر یافت نشد ابتدا ثبت‌ نام کنید ...",
+    //           key: Math.random(),
+    //         })
+    //       );
+    //     } else {
+    //       console.error(err);
+    //       setToastState((old:Array<eachToast>) =>
+    //         addItemOnce(old.slice(), {
+    //           title: "2",
+    //           description: "سرور در دسترس نیست",
+    //           key: Math.random(),
+    //         })
+    //       );
+    //     }
+    //   });
   }
   useEffect(() => {
     // const value : string | null = localStorage.getItem("token_user");
@@ -311,6 +311,50 @@ const Profile:React.FC = () => {
         }
       });
   }, []);
+
+  function handleDelete(id : number, source:string){
+    setLoading(true);
+    deleteAd(String(id), source)
+    .then((response) =>{
+      if (response.status === 204) {
+        setToastState((old : Array<eachToast>) =>
+          addItemOnce(old.slice(), {
+            title: "2",
+            description: "آگهی با موفقیت حذف شد",
+            key: Math.random(),
+          })
+        );
+        getmyhomes()
+          .then((response) => {
+            if (response.status === 200) {
+              setMyAds(response.data.data);
+              setLoading(false);
+            }
+          })
+          .catch((err) => {
+            setToastState((old:Array<eachToast>) =>
+              addItemOnce(old.slice(), {
+                title: "2",
+                description: "سرور دردسترس نیست",
+                key: Math.random(),
+              })
+            );
+            console.error(err);
+          })
+      }
+    })
+    .catch((err) =>{
+      setToastState((old : Array<eachToast>) =>
+        addItemOnce(old.slice(), {
+          title: "2",
+          description: "سرور دردسترس نیست",
+          key: Math.random(),
+        })
+      );
+      setLoading(false);
+      console.log(err)
+    })
+  }
 
   return (
     <div>
@@ -615,6 +659,7 @@ const Profile:React.FC = () => {
                             ویرایش
                           </button>
                           <button
+                            onClick={()=>{handleDelete(item.id, item.source==="پیش خونه"? 'pishkhooneh':'kilid')}}
                             type="button"
                             className="min-w-fit w-[100%] py-[5%] rounded-md font-extrabold text-[14px] md:text-[12px] sm:text-[10px] bg-red text-white hover:bg-white hover:outline-red hover:outline hover:outline-[2px] hover:outline-solid hover:text-red"
                           >
