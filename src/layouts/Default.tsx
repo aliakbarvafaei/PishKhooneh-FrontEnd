@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import { getUser } from "../services/api";
 import { useToast } from "../contexts/ToastState";
 import Toast from "../components/Toast/Toast";
-import Header from "../components/Header/Header";
-import MainMenu from "../components/mainMenu/MainMenu";
+// import Header from "../components/Header/Header";
+// import MainMenu from "../components/mainMenu/MainMenu";
 import MobileMenu from "../components/MobileMenu/MobileMenu";
 import Footer from "../components/Footer/Footer";
 import { eachToast } from "../ts/interfaces";
 import ProtectedRoute from "../components/ProtectedRoute";
-import HeaderNewComplete from "../components/HeaderNew/HeaderNewComplete";
+// import HeaderNewComplete from "../components/HeaderNew/HeaderNewComplete";
 
 
 const DefaultLayout : React.FC = () => {
@@ -23,7 +23,7 @@ const DefaultLayout : React.FC = () => {
     
     const value : string | null = localStorage.getItem("token_user");
     if (JSON.parse(value as string) !== "") {
-      getUser(JSON.parse(value as string))
+      getUser()
         .then((response) => {
           if (response.status === 200) {
             dispatch({

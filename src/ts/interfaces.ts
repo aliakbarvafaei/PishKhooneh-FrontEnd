@@ -45,11 +45,16 @@ export interface RegisterInputTypes {
 }
 export interface ActivateInputTypes {
     email: string;
-    code: number;
+    code: string;
+}
+export interface ForgetPassInputTypes {
+    password: string;
+    code: string;
 }
 export interface NewAdInputTypes {
     category: string;
     type: string;
+    status : string;
     city: string;
     region: string;
     room: string;

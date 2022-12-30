@@ -30,6 +30,13 @@ export const sendEmailAPI = (email : string) =>
       username: email,
     }
   );
+export const sendEmailForgetPassAPI = (email : string) =>
+  axiosInstance.post(
+    "/send_forget_pass_email/",
+    {
+      username: email,
+    }
+  );
 export const activateAccountAPI = (code : string) =>
   axiosInstance.post(
     "/active_account/",
@@ -37,12 +44,21 @@ export const activateAccountAPI = (code : string) =>
       email_active_code: code,
     }
   );
-export const NewAdAPI = (category : string, type : string, city : string, region : number, room : number, year : number, elevator : boolean, parking : boolean, lobby : boolean, sports_hall : boolean, guard : boolean,swimming_pool : boolean, balcony : boolean, roof_garden : boolean, remote_door : boolean, meterage : number, price : number, main_image : string, image_1 : string, image_2 : string, title : string, callNumber : string, bio : string, creator: string, warehouse: boolean, location_x : number, location_y: number) =>
+export const resetPassAPI = (code : string, newPass : string) =>
   axiosInstance.post(
-    "/homes/",
+    "/reset_pass/",
+    {
+      email_active_code: code,
+      password: newPass
+    }
+  );
+export const NewAdAPI = (token : string, category : string, type : string, status : string, city : string, region : number, room : number, year : number, elevator : boolean, parking : boolean, lobby : boolean, sports_hall : boolean, guard : boolean,swimming_pool : boolean, balcony : boolean, roof_garden : boolean, remote_door : boolean, meterage : number, price : number, main_image : string, image_1 : string, image_2 : string, title : string, callNumber : string, bio : string, creator: string, warehouse: boolean, location_x : number, location_y: number) =>
+  axiosInstance.post(
+    "/homes_create/",
     {
       category: category,
       type: type,
+      status: status,
       province: city,
       region: region,
       num_of_beds: room,
@@ -67,7 +83,8 @@ export const NewAdAPI = (category : string, type : string, city : string, region
       seller: creator,
       warehouse: warehouse,
       location_x: location_x,
-      location_y: location_y
+      location_y: location_y,
+      token: token
     },
     configToken
   );
@@ -90,11 +107,8 @@ export const NewAdAPI = (category : string, type : string, city : string, region
     configToken
   );
 
-export const getUser = (token : string ) => axiosInstance.post(
+export const getUser = () => axiosInstance.get(
     `/getuser/`,
-    {
-      token: token
-    },
     configToken
   );
 

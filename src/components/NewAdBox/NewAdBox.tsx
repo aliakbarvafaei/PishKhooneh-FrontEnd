@@ -19,6 +19,7 @@ const NewAdBox:React.FC = () => {
   
   const categoryId = useId();
   const typeId = useId();
+  const statusId = useId();
   const cityId = useId();
   const regionId = useId();
   const roomId = useId();
@@ -95,6 +96,7 @@ const NewAdBox:React.FC = () => {
     const category = (document.getElementById(categoryId) as HTMLInputElement).value;
     const type = (document.getElementById(typeId) as HTMLInputElement).value;
     const city = (document.getElementById(cityId) as HTMLInputElement).value;
+    const status = (document.getElementById(statusId) as HTMLInputElement).value;
     const region = parseInt((document.getElementById(regionId) as HTMLInputElement).value);
     const room = parseInt((document.getElementById(roomId) as HTMLInputElement).value);
     const year = parseInt((document.getElementById(yearId) as HTMLInputElement).value);
@@ -129,6 +131,7 @@ const NewAdBox:React.FC = () => {
     const bio = (document.getElementById(bioId) as HTMLInputElement).value;
 
     (document.getElementById(categoryId) as HTMLInputElement).value = "";
+    (document.getElementById(statusId) as HTMLInputElement).value = "فروشی";
     (document.getElementById(typeId) as HTMLInputElement).value = "";
     (document.getElementById(cityId) as HTMLInputElement).value = "تهران";
     (document.getElementById(regionId) as HTMLInputElement).value = "";
@@ -150,7 +153,9 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(titleId) as HTMLInputElement).value = "";
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
-    NewAdAPI(category, type, city, region, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, title, callNumber, bio, creator, warehouse, location_x, location_y)
+    const value : string | null = localStorage.getItem("token_user");
+
+    NewAdAPI(JSON.parse(value as string), category, type, status, city, region, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, title, callNumber, bio, creator, warehouse, location_x, location_y)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -175,7 +180,27 @@ const NewAdBox:React.FC = () => {
       });
       // history.go(0);
   }
+  function getBase64 (file:any) {
+    return new Promise(resolve => {
+      let fileInfo;
+      let baseURL:any = "";
+      // Make new FileReader
+      let reader = new FileReader();
 
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        // console.log("Called", reader);
+        baseURL = reader.result;
+        // console.log(baseURL);
+        resolve(baseURL);
+      };
+      // console.log(fileInfo);
+    });
+  };
   useEffect(() => {
     if (!imagesFile || imagesFile.length===0) {
         setPreview([])
@@ -185,9 +210,17 @@ const NewAdBox:React.FC = () => {
     var arr = [];
     for(var i=0;i<imagesFile.length;i++){
       const objectUrl = URL.createObjectURL(imagesFile[i])
+      getBase64(imagesFile[i])
+      .then(result => {
+        console.log(typeof(result))
+      })
+      .catch(err => {
+        console.log(err);
+      });
       arr.push(objectUrl);
     }
     setPreview(arr as any);
+    console.log(arr);
   }, [imagesFile])
 
   return (
@@ -253,6 +286,30 @@ const NewAdBox:React.FC = () => {
                       aria-hidden="true"
                     ></i>
                     <span className="pr-[5px]">{errors.type.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center justify-between">
+                    <label htmlFor="status-select" className="inline text-[14px] text-right font-bold" >وضعیت : </label>
+                    <select data-testid="status-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.status ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={statusId}
+                    {...register("status", {
+                        required: "وضعیت اجباری است...",
+                    })}
+                    >
+                        <option value="فروشی">فروشی</option>
+                    </select>
+                </span>
+                {errors.status && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.status.message}</span>
                   </div>
                 )}
               </div>

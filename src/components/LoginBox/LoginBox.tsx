@@ -212,6 +212,7 @@ const LoginBox:React.FC = () => {
                 </>
               )}
             </div>
+            
             <div className="w-[100%] flex flex-row gap-[10px] smmin:justify-end sm:justify-center">
               <button
                 type="submit"
@@ -229,6 +230,9 @@ const LoginBox:React.FC = () => {
                 فعال‌سازی
               </button>
             </div>
+            <div className="text-red text-[12px] cursor-pointer mt-[5px]" onClick={()=>{
+              history.push('/forgetpassword')
+            }}>فراموشی رمز عبور</div>
           </form>
         </div>
       </div>

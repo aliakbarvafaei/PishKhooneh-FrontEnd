@@ -260,11 +260,10 @@ const Profile:React.FC = () => {
       });
   }
   useEffect(() => {
-    const value : string | null = localStorage.getItem("token_user");
-    getUser(JSON.parse(value as string))
+    // const value : string | null = localStorage.getItem("token_user");
+    getUser()
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data)
           setLoading(false);
           setUserInformation(response.data);
           setMyAds(response.data.homes);

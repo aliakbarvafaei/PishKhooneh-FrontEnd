@@ -14,6 +14,8 @@ import Predict from "../pages/Predict";
 import NewAd from "../pages/NewAd";
 import AdDetails from "../pages/AdDetails";
 import ActiveAccount from "../pages/ActiveAccount";
+import ResetPass from "../pages/ResetPass";
+import ResetPass2 from "../pages/ResetPass2";
 
 const indexRoutes = [{ path: "/", component: DefaultLayout }];
 
@@ -40,7 +42,7 @@ const AppRoutes:Array<any> = [
     icon: "fa fa-list",
     component: NewAd,
     showInNav: false,
-    private: true,
+    private: false,
   },
   {
     path: "/ad-details/:idad",
@@ -71,6 +73,22 @@ const AppRoutes:Array<any> = [
     name: "فعال‌سازی حساب",
     icon: "fa fa-list",
     component: ActiveAccount,
+    showInNav: false,
+    private: false,
+  },
+  {
+    path: "/forgetpassword",
+    name: "بازیابی رمز",
+    icon: "fa fa-list",
+    component: ResetPass,
+    showInNav: false,
+    private: false,
+  },
+  {
+    path: "/forgetpassword2",
+    name: "بازیابی رمز",
+    icon: "fa fa-list",
+    component: ResetPass2,
     showInNav: false,
     private: false,
   },
