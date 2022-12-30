@@ -112,6 +112,11 @@ export const getUser = () => axiosInstance.get(
     configToken
   );
 
+  export const getmyhomes = () => axiosInstance.get(
+    `/myhomes/`,
+    configToken
+  );
+
 export const updatePassword = (email : string, LastPassword : string, NewPassword : string) =>
   axiosInstance.patch(
     `/user/${email}`,

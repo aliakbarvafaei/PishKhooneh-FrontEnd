@@ -5,7 +5,7 @@ import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
 import { useToast } from "../contexts/ToastState";
-import { getUser, updatePassword } from "../services/api";
+import { getmyhomes, getUser, updatePassword } from "../services/api";
 import { ads, eachToast, InformationUserTypes, ProfileInputTypes, statesRedux } from "../ts/interfaces";
 
 // const x:Array<ads> = [
@@ -264,9 +264,27 @@ const Profile:React.FC = () => {
     getUser()
       .then((response) => {
         if (response.status === 200) {
-          setLoading(false);
+          // console.log(response.data)
           setUserInformation(response.data);
-          setMyAds(response.data.homes);
+          // setMyAds(response.data.homes);
+          getmyhomes()
+          .then((response) => {
+            if (response.status === 200) {
+              // console.log(response.data.data);
+              setMyAds(response.data.data);
+              setLoading(false);
+            }
+          })
+          .catch((err) => {
+            setToastState((old:Array<eachToast>) =>
+              addItemOnce(old.slice(), {
+                title: "2",
+                description: "سرور دردسترس نیست",
+                key: Math.random(),
+              })
+            );
+            console.error(err);
+          })
         }
       })
       .catch((err) => {
@@ -312,14 +330,14 @@ const Profile:React.FC = () => {
           >
             اطلاعات
           </h4>
-          <h4
+          {/* <h4
             className={`${
               showMenu === "change password" ? styleSelectedMenu : themeBorder2
             } mb-[20px] pb-[10px] md:text-[12px] mdmin:text-[14px] font-semibold mm:w-[100%] mm:text-center mm:pb-[10px] cursor-pointer mm:border-b-[1px] mm:border-b-solid`}
             onClick={() => setShowMenu("change password")}
           >
             تغییر رمز عبور
-          </h4>
+          </h4> */}
           <h4
             className={`${
               showMenu === "my ads" ? styleSelectedMenu : themeBorder2

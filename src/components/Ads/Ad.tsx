@@ -17,6 +17,7 @@ import Chart1 from "../Chart/Chart";
 import Map from "../Map/Map";
 
 const Ad:React.FC<{ad:ads}> = ({ ad })=> {
+  console.log(ad.source)
   const history = useHistory();
   const themeClass = "bg-white";
   const [ images, setImages ] = useState<Array<string | null>>([ad.main_image]);
