@@ -1,11 +1,12 @@
 import React, { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
 import { useToast } from "../contexts/ToastState";
-import { deleteAd, getmyhomes, getUser } from "../services/api";
+import { deleteAd, getmyhomes, getUser, updateCreditAPI } from "../services/api";
 import { ads, eachToast, InformationUserTypes, ProfileInputTypes, statesRedux } from "../ts/interfaces";
 
 // const x:Array<ads> = [
@@ -178,7 +179,7 @@ const Profile:React.FC = () => {
 
   const { setToastState } = useToast();
   const [ myAds, setMyAds ] = useState<Array<ads>>([]);
-
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState("information");
   const styleSelectedMenu = "text-red border-red border-b-solid border-b-[2px]";
   const { user } = useSelector((state : statesRedux) => state.userAuth);
@@ -312,6 +313,22 @@ const Profile:React.FC = () => {
       });
   }, []);
 
+  function updateCredit(level:number){
+    updateCreditAPI(level)
+    .then((response) => {
+      history.go(0);
+    })
+    .catch((err) => {
+      setToastState((old : Array<eachToast>) =>
+        addItemOnce(old.slice(), {
+          title: "2",
+          description: "سرور دردسترس نیست",
+          key: Math.random(),
+        })
+      );
+    });
+  }
+
   function handleDelete(id : number, source:string){
     setLoading(true);
     deleteAd(String(id), source)
@@ -408,6 +425,37 @@ const Profile:React.FC = () => {
               )}
               {!loading && (
                 <>
+                  <div className="mb-[30px]">
+                    <label
+                      htmlFor="level-input"
+                      className="block text-[14px] font-bold mb-[8px]"
+                    >
+                      سطح حساب
+                    </label>
+                    <div className="flex justify-between items-center">
+                      <input
+                        disabled={true}
+                        className={`${themeClass} ${themeBorder} max-w-[50%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[14px] }`}
+                        placeholder={userInformation? userInformation.level===0? "برنزی":userInformation.level===1? "نقره‌ای":"طلایی":""}
+                      />
+                      <div className="flex justify-end gap-[20%] w-[45%]">
+                        {userInformation && userInformation.level===0 ? <button
+                            type="button"
+                            className="max-w-[45%] max-h-[50%] py-[6px] px-[2%] rounded-none bg-red text-white font-bold mmmin:text-[12px] mm:text-[8px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                            onClick={()=>updateCredit(1)}
+                          >
+                            ارتقا به نقره‌ای
+                        </button>:<></>}
+                        {userInformation && userInformation.level<2 ? <button
+                            type="button"
+                            className="max-w-[45%] max-h-[50%] py-[6px] px-[2%] rounded-none bg-red text-white font-bold mmmin:text-[12px] mm:text-[8px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                            onClick={()=>updateCredit(2)}
+                          >
+                            ارتقا به طلایی
+                        </button>:<></>}
+                      </div>
+                    </div>
+                  </div>
                   <div className="mb-[30px]">
                     <label
                       htmlFor="fullName-input"

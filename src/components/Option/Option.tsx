@@ -8,7 +8,7 @@ const Option : React.FC = () => {
   const themeBorder : string = "border-darkModeGray";
 
   return (
-    <div className={`${themeClass} pb-[40px] px-total mt-[40px] pt-[30px]`}>
+    <div className={`${themeClass} pb-[40px] px-total pt-[30px]`}>
       <div
         className={`py-[50px] flex lg:flex-col lg:items-center lg:gap-[20px] lgmin:flex-row lgmin:justify-between border-y-[1px] border-y-solid ${themeBorder}`}
       >

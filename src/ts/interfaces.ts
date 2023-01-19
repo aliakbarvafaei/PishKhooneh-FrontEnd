@@ -96,6 +96,7 @@ export interface InformationUserTypes {
     username: string;
     address: string;
     bio: string;
+    level: number;
 }
 export interface filtersInterface {
     searchInput: string;

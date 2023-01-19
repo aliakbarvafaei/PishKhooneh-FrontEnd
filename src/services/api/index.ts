@@ -88,7 +88,14 @@ export const NewAdAPI = (token : string, category : string, type : string, statu
     },
     configToken
   );
-
+export const updateCreditAPI = (level: number) =>
+  axiosInstance.post(
+    "/credit/",
+    {
+      level: level,
+    },
+    configToken
+  );
 // export const PredictAPI = (type : string, city : string, region : string, room : string, year : string, floor : string, elevator : string, parking : string, meterage : string, warehouse: string) =>
 //   axiosInstance.post(
 //     "/predict",

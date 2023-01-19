@@ -45,8 +45,8 @@ const MainMenu:React.FC = ()=> {
     <>
       <div
         ref={stickyRef}
-        className={`${stickyClass} ${themeClass} flex flex-row items-center justify-between py-[20px] px-total shadow-[0_2px_4px_0_rgba(200,200,200)] box-border`}
-      >
+        className={`${stickyClass} ${themeClass} flex flex-row items-center justify-between py-[20px] px-total -[0_2px_4px_0_rgba(200,200,200)] box-border`}
+      >shadow
         <div className="flex flex-row justify-between items-center gap-[20px]">
           <span>
             <Link to="/home">
