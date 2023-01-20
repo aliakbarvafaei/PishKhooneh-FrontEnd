@@ -1,32 +1,70 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
+import React from 'react';
 import {
-  ArgumentAxis,
-  ValueAxis,
-  Chart,
-  LineSeries,
-} from '@devexpress/dx-react-chart-material-ui';
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
-const data = [
-  { argument: "1", value: 1000000000 },
-  { argument: "2", value: 500000000 },
-  { argument: "3", value: 10000000000 },
-  { argument: "4", value: 8500000000 },
-  { argument: "5", value: 4250000000 },
-];
-
-const Chart1:React.FC = () => (
-  <Paper className='lg:w-[100%] lgmin:w-[60%]'>
-    <Chart
-      data={data}
-      height={300}
-    >
-      <ArgumentAxis />
-      <ValueAxis position='right'/>
-
-      <LineSeries valueField="value" argumentField="argument" />
-    </Chart>
-  </Paper>
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
 );
 
-export default Chart1
+export const options = {
+  responsive: true,
+  stacked: false,
+  maintainAspectRatio:false,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+    title: {
+      display: true,
+      text: 'نمودار قیمت',
+    },
+  },
+  scales:{
+    y: {
+      ticks: {
+          // Include a dollar sign in the ticks
+          callback: function(value:any) {
+              return value + "میلیارد";
+          }
+      }
+  }
+  }
+};
+
+
+
+const Chart1:React.FC<{data:any[]}> = ({data})=> {
+  var labels:any[] = [];
+  data.forEach((item)=>{
+    labels.push(item['periodSymbol'])
+  })
+  const xxx = {
+    labels,
+    datasets: [
+      {
+        label: 'قیمت',
+        data: labels.map((item,index) => data[index]['value']/1000000000),
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      }
+    ],
+  };
+  return <Line options={options} data={xxx} />;
+}
+
+export default Chart1;

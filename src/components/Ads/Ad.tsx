@@ -29,9 +29,8 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
     "description": ad.description,
     "informationCall": ad.phone_number
   })
-
   const { user } = useSelector((state:statesRedux) => state.userAuth);
-
+  console.log(JSON.parse(ad.graph.replace(/'/g, '"')))
   const [showMenu, setShowMenu] = useState("description");
   const styleSelectedMenu = "text-red border-red border-b-solid border-b-[2px]";
 
@@ -402,9 +401,9 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
             </div>
           )}
         </div>
-        <div className="flex lg:flex-col lgmin:flex-row lgmin:justify-between items-center lg:justify-center w-full my-[30px] gap-[30px]">
+        <div className="flex lg:flex-col lgmin:flex-row lgmin:justify-center items-center lg:justify-center w-full my-[30px] gap-[30px]">
           <Map x={ad.location_x} y={ad.location_y}/>
-          <Chart1 />
+          {ad.graph==="" || ad.graph==="Graph"? <></>:<div className="lgmin:w-[60%] lg:w-[90%] h-[400px]"><Chart1 data={JSON.parse(ad.graph.replace(/'/g, '"'))['content'] as any[]} /></div>}
         </div>
       </div>
     </div>
