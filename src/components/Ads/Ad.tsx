@@ -17,7 +17,6 @@ import Chart1 from "../Chart/Chart";
 import Map from "../Map/Map";
 
 const Ad:React.FC<{ad:ads}> = ({ ad })=> {
-  console.log(ad.source)
   const history = useHistory();
   const themeClass = "bg-white";
   const [ images, setImages ] = useState<Array<string | null>>([ad.main_image]);
@@ -30,7 +29,6 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
     "informationCall": ad.phone_number
   })
   const { user } = useSelector((state:statesRedux) => state.userAuth);
-  console.log(JSON.parse(ad.graph.replace(/'/g, '"')))
   const [showMenu, setShowMenu] = useState("description");
   const styleSelectedMenu = "text-red border-red border-b-solid border-b-[2px]";
 
