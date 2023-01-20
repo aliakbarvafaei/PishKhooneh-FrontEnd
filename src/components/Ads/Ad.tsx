@@ -211,7 +211,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
                                     قیمت 
                                 </th>
                                 <td className="py-4 mmmin:px-6 mm:pl-3 text-left">
-                                    <span className="pl-[6px]">{convertorPrice(ad.total_price)[1]}</span>{convertorPrice(ad.total_price)[0]}
+                                    <span className="pl-[6px]">{ad.total_price===0 ? "":convertorPrice(ad.total_price)[1]}</span>{ad.total_price!==0 ? convertorPrice(ad.total_price)[0]:"توافقی"}
                                 </td>
                             </tr>
                             <tr className="bg-white">

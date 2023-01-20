@@ -130,8 +130,8 @@ const Card:React.FC<{item:ads, dir:string}> = ({ item, dir}) => {
       <div id="price" className="text-right text-red pt-[10px] opacity-90">
         <h3 className="sm:text-[8px] md:text-[10px] mdmin:text-[14px] font-bold ">
           <span>قیمت : </span>
-          <span>{convertorPrice(item.total_price)[1]}</span>
-          <span className="pr-[5px]">{convertorPrice(item.total_price)[0]}</span>
+          <span>{item.total_price === 0 ? "":convertorPrice(item.total_price)[1]}</span>
+          <span className="pr-[5px]">{item.total_price !==0 ? convertorPrice(item.total_price)[0]:"توافقی"}</span>
         </h3>
       </div>
       <div id="location" className="py-[10px] text-right sm:text-[8px] smmin:text-[12px] text-darkGray">
