@@ -60,8 +60,8 @@ const NewAdBox:React.FC = () => {
     return arr;
   }
   function handleLocation(x:number,y:number){
-    setlocation_x(x);
-    setlocation_y(y);
+    setlocation_x(y);
+    setlocation_y(x);
   }
   function handlePrice(){
     setPrice(parseInt((document.getElementById(priceId) as HTMLInputElement).value));
