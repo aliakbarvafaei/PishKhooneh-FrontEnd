@@ -187,13 +187,24 @@ const NewAdBox:React.FC = () => {
         }
       })
       .catch((err) => {
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description: "سرور دردسترس نیست",
-              key: Math.random(),
-            })
-          );
+          if (err.response.status === 401) {
+            setToastState((old:Array<eachToast>) =>
+              addItemOnce(old.slice(), {
+                title: "2",
+                description: "تعداد آگهی‌های مجاز شما به اتمام رسیده است",
+                key: Math.random(),
+              })
+            );
+          }
+          else{
+            setToastState((old:Array<eachToast>) =>
+              addItemOnce(old.slice(), {
+                title: "2",
+                description: "سرور دردسترس نیست",
+                key: Math.random(),
+              })
+            );
+          }
           console.error(err);
       });
       // history.go(0);
