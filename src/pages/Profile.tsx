@@ -316,7 +316,9 @@ const Profile:React.FC = () => {
   function updateCredit(level:number){
     updateCreditAPI(level)
     .then((response) => {
-      history.go(0);
+      if(response.status === 200){
+        history.go(0);
+      }
     })
     .catch((err) => {
       setToastState((old : Array<eachToast>) =>

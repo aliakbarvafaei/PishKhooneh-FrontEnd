@@ -89,7 +89,7 @@ export const NewAdAPI = (token : string, category : string, type : string, statu
     configToken
   );
 export const updateCreditAPI = (level: number) =>
-  axiosInstance.post(
+  axiosInstance.put(
     "/credit/",
     {
       level: level,
