@@ -705,6 +705,10 @@ const Profile:React.FC = () => {
                           <button
                             type="button"
                             className="min-w-fit w-[100%] py-[5%] rounded-md font-extrabold text-[14px] md:text-[12px] sm:text-[10px] bg-green text-white hover:bg-white hover:outline-green hover:outline hover:outline-[2px] hover:outline-solid hover:text-green"
+                            onClick={()=>
+                                history.push("/ad-edit/" +
+                                String(item.id) + `${item.source==="پیش خونه"? '/pishkhooneh':'/kilid'}`)
+                            }
                           >
                             ویرایش
                           </button>

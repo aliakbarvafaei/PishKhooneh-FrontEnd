@@ -16,6 +16,7 @@ import AdDetails from "../pages/AdDetails";
 import ActiveAccount from "../pages/ActiveAccount";
 import ResetPass from "../pages/ResetPass";
 import ResetPass2 from "../pages/ResetPass2";
+import EditAd from "../pages/EditAd";
 
 const indexRoutes = [{ path: "/", component: DefaultLayout }];
 
@@ -42,7 +43,7 @@ const AppRoutes:Array<any> = [
     icon: "fa fa-list",
     component: NewAd,
     showInNav: false,
-    private: false,
+    private: true,
   },
   {
     path: "/ad-details/:idad/:source",
@@ -51,6 +52,14 @@ const AppRoutes:Array<any> = [
     component: AdDetails,
     showInNav: false,
     private: false,
+  },
+  {
+    path: "/ad-edit/:idad/:source",
+    name: "همه محصولات",
+    icon: "fa fa-list",
+    component: EditAd,
+    showInNav: false,
+    private: true,
   },
   {
     path: "/search",

@@ -282,7 +282,6 @@ const NewAdBox:React.FC = () => {
                         <option value="آپارتمان">آپارتمان</option>
                         <option value="ویلا">ویلا</option>
                         <option value="باغ">باغ</option>
-                        <option value="آپارتمان/برج">آپارتمان/برج</option>
                     </select>
                 </span>
                 {errors.category && (

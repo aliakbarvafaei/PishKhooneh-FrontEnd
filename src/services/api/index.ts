@@ -89,6 +89,43 @@ export const NewAdAPI = (token : string, category : string, type : string, statu
     },
     configToken
   );
+export const EditAdAPI = (idAd : string ,source : string ,token : string, category : string, type : string, status : string, city : string, region : number, neighbor: string, room : number, year : number, elevator : boolean, parking : boolean, lobby : boolean, sports_hall : boolean, guard : boolean,swimming_pool : boolean, balcony : boolean, roof_garden : boolean, remote_door : boolean, meterage : number, price : number, main_image : string, image_1 : string, image_2 : string, image_3 : string, title : string, callNumber : string, bio : string, creator: string, warehouse: boolean, location_x : number, location_y: number) =>
+  axiosInstance.put(
+    `/homes/${idAd}/${source}`,
+    {
+      category: category,
+      type: type,
+      status: status,
+      province: city,
+      region: region,
+      neighbor: neighbor,
+      num_of_beds: room,
+      age: year,
+      elevator: elevator,
+      parking: parking,
+      lobby: lobby,
+      sports_hall: sports_hall,
+      guard: guard,
+      swimming_pool: swimming_pool,
+      balcony: balcony,
+      roof_garden: roof_garden,
+      remote_door: remote_door,
+      floor_area: meterage,
+      total_price: price,
+      main_image: main_image,
+      image_1: image_1,
+      image_2: image_2,
+      image_3: image_3,
+      title: title,
+      phone_number: callNumber,
+      description: bio,
+      seller: creator,
+      warehouse: warehouse,
+      location_x: location_x,
+      location_y: location_y
+    },
+    configToken
+  );
 export const updateCreditAPI = (level: number) =>
   axiosInstance.put(
     "/credit/",
