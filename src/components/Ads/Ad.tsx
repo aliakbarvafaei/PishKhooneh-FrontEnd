@@ -400,7 +400,7 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
           )}
         </div>
         <div className="flex lg:flex-col lgmin:flex-row lgmin:justify-center items-center lg:justify-center w-full my-[30px] gap-[30px]">
-          <Map x={ad.location_x} y={ad.location_y}/>
+          <Map x={ad.location_y} y={ad.location_x}/>
           {ad.graph==="" || ad.graph==="Graph"? <></>:<div className="lgmin:w-[60%] lg:w-[90%] h-[400px]"><Chart1 data={JSON.parse(ad.graph.replace(/'/g, '"'))['content'] as any[]} /></div>}
         </div>
       </div>
