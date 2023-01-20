@@ -43,51 +43,13 @@ const Home : React.FC = ()=> {
         </p>
       </div>
       {/* <SectionProductMain products={products} /> */}
-      <section className="flex justify-center bg-darkModeGray">
+      <section className="flex justify-center bg-[#EEEEEE]">
         <div className="bg-white smmin:h-[450px] min-w-[50%] flex smmin:flex-row sm:flex-col justify-center smmin:gap-[8%] sm:gap-[10px] rounded-3xl py-[3%] px-[2%] my-[3%] mx-[5%]">
-        <div className="flex flex-col justify-between items-center text-center gap-[5%]">
-            <img src={gold} className="h-[126px] w-[110px]" alt="طلا"/>
-            <h3 className="font-bold">خانه طلایی</h3>
-            <ul className="">
-              <li className="text-[12px]">✔ امکان اضافه کردن نامحدود آگهی</li>
-            </ul>
-            <p className="flex flex-col">
-              <span className="text-[12px]"> قیمت</span>
-              <span className="text-red font-bold text-[20px]">50,000 تومان</span>
-            </p>
-            <button
-                type="button"
-                className="max-w-fit py-[5%] px-[14%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
-                onClick={()=>history.push('/profile')}
-              >
-                ارتقا
-            </button>
-          </div>
-          <div className="border-darkModeGray border-[1px] shadow-[0_2px_4px_0_rgba(200,200,200)]"></div>
           <div className="flex flex-col justify-between items-center text-center gap-[5%]">
-            <img src={silver} className="h-[124px] w-[110px]" alt="نقره"/>
-            <h3 className="font-bold">خانه نقره‌ای</h3>
-            <ul className="">
-              <li className="text-[12px]">✔ امکان اضافه کردن ده آگهی</li>
-            </ul>
-            <p className="flex flex-col">
-              <span className="text-[12px]"> قیمت</span>
-              <span className="text-red font-bold text-[20px]">20,000 تومان</span>
-            </p>
-            <button
-                type="button"
-                className="max-w-fit py-[5%] px-[14%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
-                onClick={()=>history.push('/profile')}
-              >
-                ارتقا
-            </button>
-          </div>
-          <div className="border-darkModeGray border-[1px] shadow-[0_2px_4px_0_rgba(200,200,200)]"></div>
-          <div className="flex flex-col justify-between items-center text-center gap-[5%]">
-            <img src={bronze} className="h-[124px] w-[110px]" alt="برنز"/>
+            <img src={bronze} className="h-[124px] w-[100px]" alt="برنز"/>
             <h3 className="font-bold">خانه برنزی</h3>
             <ul className="">
-              <li className="text-[12px]">✔ امکان اضافه کردن سه آگهی</li>
+              <li className="text-[12px]">✔ امکان اضافه کردن تا سه آگهی</li>
             </ul>
             <p className="flex flex-col">
               <span className="text-[12px]"> قیمت</span>
@@ -95,7 +57,45 @@ const Home : React.FC = ()=> {
             </p>
             <button
                 type="button"
-                className="max-w-fit py-[5%] px-[14%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                disabled={true}
+                className="max-w-fit min-w-[100px] rounded-md py-[5%] px-[14%] bg-gray text-white font-bold mmmin:text-[14px] mm:text-[10px]"
+              >
+                پیش‌فرض
+            </button>
+          </div>
+          <div className="border-darkModeGray border-[1px] shadow-[0_2px_4px_0_rgba(200,200,200)]"></div>
+          <div className="flex flex-col justify-between items-center text-center gap-[5%]">
+            <img src={silver} className="h-[126px] w-[100px]" alt="نقره"/>
+            <h3 className="font-bold">خانه نقره‌ای</h3>
+            <ul className="">
+              <li className="text-[12px]">✔ امکان اضافه کردن تا ده آگهی</li>
+            </ul>
+            <p className="flex flex-col">
+              <span className="text-[12px]"> قیمت</span>
+              <span className="text-red font-bold text-[20px]">۲۰,۰۰۰ تومان</span>
+            </p>
+            <button
+                type="button"
+                className="max-w-fit min-w-[100px] py-[5%] px-[14%] rounded-md bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                onClick={()=>history.push('/profile')}
+              >
+                ارتقا
+            </button>
+          </div>
+          <div className="border-darkModeGray border-[1px] shadow-[0_2px_4px_0_rgba(200,200,200)]"></div>
+          <div className="flex flex-col justify-between items-center text-center gap-[5%]">
+            <img src={gold} className="h-[126px] w-[110px]" alt="طلا"/>
+            <h3 className="font-bold">خانه طلایی</h3>
+            <ul className="">
+              <li className="text-[12px]">✔ امکان اضافه کردن نامحدود آگهی</li>
+            </ul>
+            <p className="flex flex-col">
+              <span className="text-[12px]"> قیمت</span>
+              <span className="text-red font-bold text-[20px]">۵۰,۰۰۰ تومان</span>
+            </p>
+            <button
+                type="button"
+                className="max-w-fit min-w-[100px] py-[5%] px-[14%] rounded-md bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                 onClick={()=>history.push('/profile')}
               >
                 ارتقا
