@@ -57,6 +57,7 @@ export interface NewAdInputTypes {
     status : string;
     city: string;
     region: string;
+    neighbor: string;
     room: string;
     year: string;
     floor: string;

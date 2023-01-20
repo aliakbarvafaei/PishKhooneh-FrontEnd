@@ -6,6 +6,7 @@ import { useToast } from "../../contexts/ToastState";
 import { eachToast, NewAdInputTypes } from "../../ts/interfaces.js";
 import { convertorPrice } from "../../ts/functions";
 import Map from "../Map/Map";
+const regions = ['شهرک مدرس','زمانی','جوادیه','حق گویان','مهدیه','18 متری شکریه','شکریه', 'هنرستان', 'کمال آباد', 'کمال آباد شرقی', 'سعیدیه پایین','رکنی', 'جهان نما', 'بلوار بعثت','سعیدیه بالا',  'ادیب',  'میلاد استادان', 'قهرمان استادان', 'تربیت استادان','بلوار شهرداری',  'استادان', 'پردیس', 'بلوار عمار',  'پرستار','کوچه مشکی', 'خ طالقانی',  'فرهنگ', 'نواب','گلزار',  'شهناز', 'میلادکوچه مشکی','متخصصین', 'مدیریت', 'آزاد غربی', 'اعتمادیه غربی', 'اعتمادیه شرقی', 'بلوار مدنی', 'بلوار دانشگاه', 'بلوار ارم', 'بلوار خرم رودی', 'بلوار رنجبران', 'بلوار صورتی', 'بلوار فاطمیه', 'بلوار کاج', 'بوعلی بالا','پاستور', 'ذوالفقار', 'عارف', 'خواجه رشید','میرزاده عشقی', 'مصیب مجیدی', 'بین النهرین', 'کولانج', 'تختی', 'فرهنگیان','ذوالریاستین', 'حیدره', 'جانبازان', 'شریعتی', 'دره مرادبیگ', 'آرام شرقی',  'بوعلی پایین', 'خیابان پاسداران -کرمانشاه']
 
 const NewAdBox:React.FC = () => {
   const [ location_x, setlocation_x ] = useState(36);
@@ -22,6 +23,7 @@ const NewAdBox:React.FC = () => {
   const statusId = useId();
   const cityId = useId();
   const regionId = useId();
+  const neighborId = useId();
   const roomId = useId();
   const yearId = useId();
   const elevatorId = useId();
@@ -112,6 +114,7 @@ const NewAdBox:React.FC = () => {
     const city = (document.getElementById(cityId) as HTMLInputElement).value;
     const status = (document.getElementById(statusId) as HTMLInputElement).value;
     const region = parseInt((document.getElementById(regionId) as HTMLInputElement).value);
+    const neighbor = (document.getElementById(neighborId) as HTMLInputElement).value;
     const room = parseInt((document.getElementById(roomId) as HTMLInputElement).value);
     const year = parseInt((document.getElementById(yearId) as HTMLInputElement).value);
     const elevator = (document.getElementById(elevatorId) as HTMLInputElement).value==="1" ? true:false;
@@ -153,6 +156,7 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(typeId) as HTMLInputElement).value = "";
     (document.getElementById(cityId) as HTMLInputElement).value = "تهران";
     (document.getElementById(regionId) as HTMLInputElement).value = "";
+    (document.getElementById(neighborId) as HTMLInputElement).value = "";
     (document.getElementById(roomId) as HTMLInputElement).value = "";
     (document.getElementById(yearId) as HTMLInputElement).value = "";
     (document.getElementById(elevatorId) as HTMLInputElement).value = "";
@@ -172,8 +176,7 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
     const value : string | null = localStorage.getItem("token_user");
-
-    NewAdAPI(JSON.parse(value as string), category, type, status, city, region, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, image_3, title, callNumber, bio, creator, warehouse, location_x, location_y)
+    NewAdAPI(JSON.parse(value as string), category, type, status, city, region, neighbor, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, image_3, title, callNumber, bio, creator, warehouse, location_x, location_y)
       .then((response) => {
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
@@ -395,6 +398,35 @@ const NewAdBox:React.FC = () => {
                       aria-hidden="true"
                     ></i>
                     <span className="pr-[5px]">{errors.region.message}</span>
+                  </div>
+                )}
+              </div>
+              <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
+                <span className="flex flex-row gap-[1%] items-center  justify-between">
+                    <label htmlFor="neighbor-select" className="inline text-[14px] text-right font-bold" >محله : </label>
+                    <select data-testid="neighbor-select" className={`${themeClass} w-[70%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                        errors.neighbor ? "border-red outline-red" : `${themeBorder}`
+                    }`}
+                    id={neighborId}
+                    {...register("neighbor", {
+                        required: "محله اجباری است...",
+                    })}
+                    >
+                        <option value="">انتخاب کنید</option>
+                        {
+                          regions.map((item,i)=>{
+                            return <option value={item} key={i}>{item}</option>
+                          })
+                        }
+                    </select>
+                </span>
+                {errors.neighbor && (
+                  <div className="text-red text-right pt-[5px]">
+                    <i
+                      className="fa fa-exclamation-triangle"
+                      aria-hidden="true"
+                    ></i>
+                    <span className="pr-[5px]">{errors.neighbor.message}</span>
                   </div>
                 )}
               </div>
