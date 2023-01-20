@@ -9,8 +9,8 @@ import Map from "../Map/Map";
 const regions = ['شهرک مدرس','زمانی','جوادیه','حق گویان','مهدیه','18 متری شکریه','شکریه', 'هنرستان', 'کمال آباد', 'کمال آباد شرقی', 'سعیدیه پایین','رکنی', 'جهان نما', 'بلوار بعثت','سعیدیه بالا',  'ادیب',  'میلاد استادان', 'قهرمان استادان', 'تربیت استادان','بلوار شهرداری',  'استادان', 'پردیس', 'بلوار عمار',  'پرستار','کوچه مشکی', 'خ طالقانی',  'فرهنگ', 'نواب','گلزار',  'شهناز', 'میلادکوچه مشکی','متخصصین', 'مدیریت', 'آزاد غربی', 'اعتمادیه غربی', 'اعتمادیه شرقی', 'بلوار مدنی', 'بلوار دانشگاه', 'بلوار ارم', 'بلوار خرم رودی', 'بلوار رنجبران', 'بلوار صورتی', 'بلوار فاطمیه', 'بلوار کاج', 'بوعلی بالا','پاستور', 'ذوالفقار', 'عارف', 'خواجه رشید','میرزاده عشقی', 'مصیب مجیدی', 'بین النهرین', 'کولانج', 'تختی', 'فرهنگیان','ذوالریاستین', 'حیدره', 'جانبازان', 'شریعتی', 'دره مرادبیگ', 'آرام شرقی',  'بوعلی پایین', 'خیابان پاسداران -کرمانشاه']
 
 const NewAdBox:React.FC = () => {
-  const [ location_x, setlocation_x ] = useState(36);
-  const [ location_y, setlocation_y ] = useState(51);
+  const [ location_x, setlocation_x ] = useState(35.692997228);
+  const [ location_y, setlocation_y ] = useState(51.335998656);
   const { setToastState } = useToast();
   const [ price, setPrice ] = useState<null | number>(null);
   const [ imagesFile, setImagesFile ] = useState<FileList | null>(null);
@@ -465,7 +465,7 @@ const NewAdBox:React.FC = () => {
               <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center justify-between">
                     <label htmlFor="year-select" className="inline text-[14px] text-right font-bold" >سن بنا : </label>
-                    <input type='number' placeholder="سن" data-testid="year-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                    <input type='number' min={0} placeholder="سن" data-testid="year-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
                         errors.year ? "border-red outline-red" : `${themeBorder}`
                     }`}
                     id={yearId}
@@ -807,7 +807,7 @@ const NewAdBox:React.FC = () => {
               <div className="sm:w-[100%] smmin:w-[45%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center">
                     <label htmlFor="meterage-select" className="inline text-[14px] text-right font-bold" >متراژ : </label>
-                    <input type='number' placeholder="متر مربع" data-testid="meterage-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                    <input type='number' min={0} placeholder="متر مربع" data-testid="meterage-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
                         errors.meterage ? "border-red outline-red" : `${themeBorder}`
                     }`}
                     id={meterageId}
@@ -829,7 +829,7 @@ const NewAdBox:React.FC = () => {
               <div className="sm:w-[100%] smmin:w-[45%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center">
                     <label htmlFor="price-select" className="inline text-[14px] text-right font-bold" >قیمت : </label>
-                    <input type='number' {...priceInput} onChange={(e) => {
+                    <input type='number' min={0} {...priceInput} onChange={(e) => {
                           priceInput.onChange(e);
                           handlePrice();
                       }}  

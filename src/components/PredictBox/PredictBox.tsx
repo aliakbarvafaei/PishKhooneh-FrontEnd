@@ -298,7 +298,7 @@ const PredictBox:React.FC = () => {
               <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center justify-between">
                     <label htmlFor="meterage-select" className="inline text-[14px] text-right font-bold" >متراژ : </label>
-                    <input type='number' placeholder="متر مربع" data-testid="meterage-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                    <input type='number' min={0} placeholder="متر مربع" data-testid="meterage-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
                         errors.meterage ? "border-red outline-red" : `${themeBorder}`
                     }`}
                     id={meterageId}
@@ -320,7 +320,7 @@ const PredictBox:React.FC = () => {
               <div className="sm:w-[100%] md:w-[45%] mdmin:w-[30%] text-right flex flex-col gap-[1%] mb-[30px]">
                 <span className="flex flex-row gap-[1%] items-center justify-between">
                     <label htmlFor="year-select" className="inline text-[14px] text-right font-bold" >سن بنا : </label>
-                    <input type='number' placeholder="سن" data-testid="year-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
+                    <input type='number' min={0} placeholder="سن" data-testid="year-select" className={`${themeClass} w-[70%] px-[4%] rounded-md border-solid border-[1px] outline-darkGray py-[0.5%] pl-[2%] text-[12px] ${
                         errors.year ? "border-red outline-red" : `${themeBorder}`
                     }`}
                     id={yearId}
