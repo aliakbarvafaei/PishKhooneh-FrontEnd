@@ -1,13 +1,12 @@
 import React, { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
 import { useToast } from "../contexts/ToastState";
 import { deleteAd, getmyhomes, getUser, updateCreditAPI } from "../services/api";
-import { ads, eachToast, InformationUserTypes, ProfileInputTypes, statesRedux } from "../ts/interfaces";
+import { ads, eachToast, InformationUserTypes, ProfileInputTypes } from "../ts/interfaces";
 
 // const x:Array<ads> = [
 //   {
@@ -175,14 +174,14 @@ const Profile:React.FC = () => {
   const themeClass = "bg-white"; 
   const themeBorder = "border-darkModeGray"; 
   const themeBorder2 = "border-darkModeGray"; 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const { setToastState } = useToast();
   const [ myAds, setMyAds ] = useState<Array<ads>>([]);
   const history = useHistory();
   const [showMenu, setShowMenu] = useState("information");
   const styleSelectedMenu = "text-red border-red border-b-solid border-b-[2px]";
-  const { user } = useSelector((state : statesRedux) => state.userAuth);
+  // const { user } = useSelector((state : statesRedux) => state.userAuth);
   const [userInformation, setUserInformation] = useState<false | InformationUserTypes>(false);
   const [loading, setLoading] = useState(true);
 

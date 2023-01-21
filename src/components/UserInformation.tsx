@@ -6,7 +6,7 @@ import { eachToast } from '../ts/interfaces';
 
 const UserInformation = ()=> {
 
-    const { toastState, setToastState } = useToast();
+    const { setToastState } = useToast();
   const dispatch = useDispatch();
 
   function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {

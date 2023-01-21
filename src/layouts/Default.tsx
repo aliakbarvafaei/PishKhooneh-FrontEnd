@@ -1,24 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AppRoutes from "../routes";
-import { useDispatch } from "react-redux";
-import { getUser } from "../services/api";
 import { useToast } from "../contexts/ToastState";
 import Toast from "../components/Toast/Toast";
-// import Header from "../components/Header/Header";
-// import MainMenu from "../components/mainMenu/MainMenu";
 import MobileMenu from "../components/MobileMenu/MobileMenu";
 import Footer from "../components/Footer/Footer";
 import { eachToast } from "../ts/interfaces";
 import ProtectedRoute from "../components/ProtectedRoute";
 import UserInformation from "../components/UserInformation";
-// import HeaderNewComplete from "../components/HeaderNew/HeaderNewComplete";
 
 
 const DefaultLayout : React.FC = () => {
   const { toastState, setToastState } = useToast();
   
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
     
@@ -54,10 +49,10 @@ const DefaultLayout : React.FC = () => {
   //   }
   // }, [dispatch,setToastState]);
   
-  function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
-    arr.push(value);
-    return arr;
-  }
+  // function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
+  //   arr.push(value);
+  //   return arr;
+  // }
 
   function destroyToast(indexKey : Number):void {
     setToastState((old : Array<eachToast>) => removeItemOnce(old.slice(), indexKey));
