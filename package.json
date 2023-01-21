@@ -2,6 +2,7 @@
   "name": "pishkhooneh-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://erfan-nourbakhsh.ir",
   "dependencies": {
     "@devexpress/dx-react-chart": "^4.0.1",
     "@devexpress/dx-react-chart-material-ui": "^4.0.1",

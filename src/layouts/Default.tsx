@@ -11,6 +11,7 @@ import MobileMenu from "../components/MobileMenu/MobileMenu";
 import Footer from "../components/Footer/Footer";
 import { eachToast } from "../ts/interfaces";
 import ProtectedRoute from "../components/ProtectedRoute";
+import UserInformation from "../components/UserInformation";
 // import HeaderNewComplete from "../components/HeaderNew/HeaderNewComplete";
 
 
@@ -19,39 +20,39 @@ const DefaultLayout : React.FC = () => {
   
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    const value : string | null = localStorage.getItem("token_user");
-    if (JSON.parse(value as string) !== "") {
-      getUser()
-        .then((response) => {
-          if (response.status === 200) {
-            dispatch({
-              type: "login",
-              payload: [response.data.username, JSON.parse(value as string)],
-            });
-          }
-        })
-        .catch((err) => {
-          dispatch({ type: "logout" });
-          setToastState((old : Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description:
-                "احراز هویت ما مشکل مواجه شد لطفا مجدد وارد شوید",
-              key: Math.random(),
-            })
-          );
-          try {
-            localStorage.setItem("token_user", JSON.stringify(""));
-          } catch (e) {
-            console.error({ e });
-          }
-        });
-    } else {
-      dispatch({ type: "logout" });
-    }
-  }, [dispatch,setToastState]);
+  //   const value : string | null = localStorage.getItem("token_user");
+  //   if (JSON.parse(value as string) !== "") {
+  //     getUser()
+  //       .then((response) => {
+  //         if (response.status === 200) {
+  //           dispatch({
+  //             type: "login",
+  //             payload: [response.data.username, JSON.parse(value as string)],
+  //           });
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         dispatch({ type: "logout" });
+  //         setToastState((old : Array<eachToast>) =>
+  //           addItemOnce(old.slice(), {
+  //             title: "2",
+  //             description:
+  //               "احراز هویت ما مشکل مواجه شد لطفا مجدد وارد شوید",
+  //             key: Math.random(),
+  //           })
+  //         );
+  //         try {
+  //           localStorage.setItem("token_user", JSON.stringify(""));
+  //         } catch (e) {
+  //           console.error({ e });
+  //         }
+  //       });
+  //   } else {
+  //     dispatch({ type: "logout" });
+  //   }
+  // }, [dispatch,setToastState]);
   
   function addItemOnce(arr : Array<eachToast>, value : eachToast):Array<eachToast> {
     arr.push(value);
@@ -95,6 +96,7 @@ const DefaultLayout : React.FC = () => {
         <div className="page-content container-fluid">
           <Switch>
             {AppRoutes.map((prop, key) => {
+                UserInformation();
               if (prop.private){
                 return <ProtectedRoute
                     path={prop.path}

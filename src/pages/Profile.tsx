@@ -262,21 +262,45 @@ const Profile:React.FC = () => {
   }
   useEffect(() => {
     // const value : string | null = localStorage.getItem("token_user");
-    getUser()
-      .then((response) => {
-        if (response.status === 200) {
-          // console.log(response.data)
-          setUserInformation(response.data);
-          // setMyAds(response.data.homes);
-          getmyhomes()
-          .then((response) => {
-            if (response.status === 200) {
-              // console.log(response.data.data);
-              setMyAds(response.data.data);
-              setLoading(false);
-            }
-          })
-          .catch((err) => {
+      getUser()
+        .then((response) => {
+          if (response.status === 200) {
+            // console.log(response.data)
+            setUserInformation(response.data);
+            // setMyAds(response.data.homes);
+            getmyhomes()
+            .then((response) => {
+              if (response.status === 200) {
+                // console.log(response.data.data);
+                setMyAds(response.data.data);
+                setLoading(false);
+              }
+            })
+            .catch((err) => {
+              setToastState((old:Array<eachToast>) =>
+                addItemOnce(old.slice(), {
+                  title: "2",
+                  description: "سرور دردسترس نیست",
+                  key: Math.random(),
+                })
+              );
+              console.error(err);
+            })
+          }
+        })
+        .catch((err) => {
+          if (err.response && err.response.status === 404) {
+            // dispatch({ type: "logout" });
+            // setToastState((old : Array<eachToast>) =>
+            //   addItemOnce(old.slice(), {
+            //     title: "2",
+            //     description:
+            //       "احراز هویت ما مشکل مواجه شد لطفا مجدد وارد شوید",
+            //     key: Math.random(),
+            //   })
+            // );
+            // localStorage.setItem("token_user", JSON.stringify(""));
+          }else{
             setToastState((old:Array<eachToast>) =>
               addItemOnce(old.slice(), {
                 title: "2",
@@ -285,32 +309,8 @@ const Profile:React.FC = () => {
               })
             );
             console.error(err);
-          })
-        }
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 404) {
-          dispatch({ type: "logout" });
-          setToastState((old : Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description:
-                "احراز هویت ما مشکل مواجه شد لطفا مجدد وارد شوید",
-              key: Math.random(),
-            })
-          );
-          localStorage.setItem("token_user", JSON.stringify(""));
-        }else{
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description: "سرور دردسترس نیست",
-              key: Math.random(),
-            })
-          );
-          console.error(err);
-        }
-      });
+          }
+        });
   }, []);
 
   function updateCredit(level:number){

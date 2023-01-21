@@ -160,12 +160,12 @@ const HeaderNewComplete:React.FC = () => {
                                                 >
                                                 پروفایل
                                             </Link>
-                                            <Link
+                                            {/* <Link
                                                 className="text-right text-[12px] py-[12px] hoverItem"
                                                 to='bookmark'
                                                 >
                                                 نشان شده‌ها
-                                            </Link>
+                                            </Link> */}
                                             <Link
                                                 className="text-right text-[14px] py-[12px] hoverItem"
                                                 onClick={() => {

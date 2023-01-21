@@ -46,10 +46,10 @@ const MainFooter:React.FC = ()=> {
             آگهی های من
           </li></Link>
           <div></div>
-          <Link to='/bookmark'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
+          {/* <Link to='/bookmark'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
             نشان شده‌ها
           </li></Link>
-          <div></div>
+          <div></div> */}
           <Link to='/profile'><li className="relative inline-block pt-[13px] text-darkGray hoverItem">
             پروفایل
           </li></Link>

@@ -44,7 +44,7 @@ const Header:React.FC = ()=> {
             </li>
           </ul>
           <ul className="flex flex-row gap-[1rem] items-center p-0 m-0 ">
-            <li>
+            {/* <li>
               <Link
                 className="group text-[14px] text-darkGray no-underline hover:text-darkGray"
                 to="/bookmark"
@@ -55,7 +55,7 @@ const Header:React.FC = ()=> {
                 ></i>
                 نشان‌ شده‌ها
               </Link>
-            </li>
+            </li> */}
             <li className="group relative text-darkGray">
               <i
                 className="fa fa-user text-[14px] pl-0 cursor-pointer group-hover:text-red"

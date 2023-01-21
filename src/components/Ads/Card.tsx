@@ -78,7 +78,7 @@ const Card:React.FC<{item:ads, dir:string}> = ({ item, dir}) => {
             <i
               style={{fontSize: '35px'}}
               className="smmin:group-hover:translate-x-[-50px] duration-[700ms] delay-[150ms] fa fa-bookmark rotate-90 cursor-pointer text-white hover:text-red"
-              onClick={handleClickBookmark}
+              // onClick={handleClickBookmark}
               aria-hidden="true"
             ></i>
           </div>
