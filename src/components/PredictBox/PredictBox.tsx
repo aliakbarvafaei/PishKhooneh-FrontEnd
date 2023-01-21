@@ -58,7 +58,7 @@ const PredictBox:React.FC = () => {
     (document.getElementById(elevatorId) as HTMLInputElement).value = "";
     (document.getElementById(parkingId) as HTMLInputElement).value = "";
     (document.getElementById(meterageId) as HTMLInputElement).value = "";
-    fetch(`http://predict.erfan-nourbakhsh.ir/predict?area=${meterage}&age=${year}&region=${region}&parking=${parking}&elevator=${elevator}`)
+    fetch(`https://predict.erfan-nourbakhsh.ir/predict?area=${meterage}&age=${year}&region=${region}&parking=${parking}&elevator=${elevator}`)
         .then(async response => {
             const data = await response.json();
             if(response.ok){
