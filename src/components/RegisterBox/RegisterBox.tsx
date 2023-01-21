@@ -58,7 +58,7 @@ const RegisterBox:React.FC = () => {
               key: Math.random(),
             })
           );
-          history.push("/activeaccount");
+          history.push(`/activeaccount?emailUser=${email}`);
         }
       })
       .catch((err) => {
@@ -291,7 +291,7 @@ const RegisterBox:React.FC = () => {
                 <button
                   type="button"
                   onClick={()=>{
-                    history.push('/activeaccount')
+                    history.push('/activeaccount?emailUser=')
                   }}
                   className="min-w-fit py-[1%] px-[5%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                 >

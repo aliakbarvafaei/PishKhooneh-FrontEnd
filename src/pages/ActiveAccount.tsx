@@ -1,7 +1,7 @@
 import React, { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import HeaderNewShort from '../components/HeaderNew/HeaderNewShort';
 import TitlePages from '../components/TitlePages/TitlePages';
 import { useToast } from '../contexts/ToastState';
@@ -10,13 +10,21 @@ import { ActivateInputTypes, eachToast } from '../ts/interfaces';
 
 const ActiveAccount:React.FC = ()=> {
     const { setToastState } = useToast();
+    const history = useHistory();
+    const [emailUser, setSearchInput] = useState(()=>{
+        if(history.location.search.split('=')[1]){
+          return history.location.search.split('=')[1]}
+        else return ""
+        });
+    function handleChange(e : React.MouseEvent) {
+        setSearchInput((e.target as HTMLInputElement).value);
+        }
     const dispatch = useDispatch();
 
     const [ buttonText, setButtonText ] = useState<string>("ارسال کد");
     const themeClass = "bg-white";
     const themeBorder = "border-darkModeGray";
 
-    const history = useHistory();
     const emailId = useId();
     const codeId = useId();
     function addItemOnce(arr : Array<eachToast>, value: eachToast) {
@@ -166,15 +174,17 @@ const ActiveAccount:React.FC = ()=> {
                         </label>
                         <input
                         type="email"
+                        value={emailUser}
+                        onChange={handleChange as any}
                         className={`${themeClass} w-[100%] rounded-none border-solid border-[1px] outline-darkGray py-[17px] px-[25px] text-[12px] ${
                             errors.email ? "border-red outline-red" : `${themeBorder}`
                         }`}
                         data-testid="email-input"
                         placeholder="ایمیل"
                         id={emailId}
-                        {...register("email", {
-                            required: "ایمیل اجباری است...",
-                        })}
+                        // {...register("email", {
+                        //     required: "ایمیل اجباری است...",
+                        // })}
                         />
                         {errors.email && (
                         <div className="text-red text-right pt-[5px]">
@@ -221,6 +231,7 @@ const ActiveAccount:React.FC = ()=> {
                         <div className="w-[100%] text-right sm:text-center">
                             <button
                             type="submit"
+                            disabled={emailUser===""? true:false}
                             className="min-w-fill px-[4%] py-[1%] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                             >
                             {buttonText}

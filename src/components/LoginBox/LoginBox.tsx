@@ -223,7 +223,7 @@ const LoginBox:React.FC = () => {
               <button
                 type="button"
                 onClick={()=>{
-                  history.push('/activeaccount')
+                  history.push('/activeaccount?emailUser=')
                 }}
                 className="min-w-fit py-[3%] px-[6%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
               >
