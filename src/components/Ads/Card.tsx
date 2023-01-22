@@ -1,67 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { useToast } from "../../contexts/ToastState";
-import { postBookmark } from "../../services/api";
+import { Link } from "react-router-dom";
 import { convertorPrice } from "../../ts/functions";
-import { ads, eachToast, statesRedux } from "../../ts/interfaces";
+import { ads } from "../../ts/interfaces";
 
 const Card:React.FC<{item:ads, dir:string}> = ({ item, dir}) => {
-  const history = useHistory();
-  const { user } = useSelector((state:statesRedux) => state.userAuth);
   const [backgroundImage, setBackgroundImage] = useState("");
-  const { setToastState } = useToast();
   useEffect(() => {
     setBackgroundImage(item.main_image);
   }, [item.main_image]);
 
-  function addItemOnce(arr:Array<eachToast>, value:eachToast) {
-    arr.push(value);
-    return arr;
-  }
-
-  function handleClickBookmark(e : React.MouseEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!user) {
-      setToastState((old:Array<eachToast>) =>
-        addItemOnce(old.slice(), {
-          title: "2",
-          description: "ابتدا وارد حساب خود شوید",
-          key: Math.random(),
-        })
-      );
-      history.push("/login");
-    } else {
-      // setToastState(old=>addItemOnce(old.slice(),{
-      //     title: "3",
-      //     description: "", key:Math.random()
-      //     }))
-      postBookmark(user, item.id)
-        .then((response) => {
-          console.log(response.data);
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "1",
-              description: "آگهی با موفقیت اضافه شد",
-              key: Math.random(),
-            })
-          );
-        })
-        .catch((err) => {
-          if (err.response.status === 409) {
-            setToastState((old:Array<eachToast>) =>
-              addItemOnce(old.slice(), {
-                title: "2",
-                description: "این آگهی اخیرا اضافه شده است",
-                key: Math.random(),
-              })
-            );
-          } else {
-            console.error(err);
-          }
-        });
-    }
-  }
+  // function handleClickBookmark(e : React.MouseEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   if (!user) {
+  //     setToastState((old:Array<eachToast>) =>
+  //       addItemOnce(old.slice(), {
+  //         title: "2",
+  //         description: "ابتدا وارد حساب خود شوید",
+  //         key: Math.random(),
+  //       })
+  //     );
+  //     history.push("/login");
+  //   } else {
+  //     // setToastState(old=>addItemOnce(old.slice(),{
+  //     //     title: "3",
+  //     //     description: "", key:Math.random()
+  //     //     }))
+  //     postBookmark(user, item.id)
+  //       .then((response) => {
+  //         console.log(response.data);
+  //         setToastState((old:Array<eachToast>) =>
+  //           addItemOnce(old.slice(), {
+  //             title: "1",
+  //             description: "آگهی با موفقیت اضافه شد",
+  //             key: Math.random(),
+  //           })
+  //         );
+  //       })
+  //       .catch((err) => {
+  //         if (err.response.status === 409) {
+  //           setToastState((old:Array<eachToast>) =>
+  //             addItemOnce(old.slice(), {
+  //               title: "2",
+  //               description: "این آگهی اخیرا اضافه شده است",
+  //               key: Math.random(),
+  //             })
+  //           );
+  //         } else {
+  //           console.error(err);
+  //         }
+  //       });
+  //   }
+  // }
   return (
     <div className="group flex flex-col md:ml-[5px] lg:ml-[10px] lgmin:ml-[20px] text-right">
       <Link

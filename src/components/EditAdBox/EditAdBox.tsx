@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
-import { EditAdAPI, getAd, NewAdAPI } from "../../services/api/index";
+import { EditAdAPI, getAd } from "../../services/api/index";
 import { useHistory, useParams } from "react-router-dom";
 import { useToast } from "../../contexts/ToastState";
 import { ads, eachToast, NewAdInputTypes } from "../../ts/interfaces.js";
@@ -206,35 +206,23 @@ const EditAdBox:React.FC = () => {
   }
   function getBase64 (file:any) {
     return new Promise(resolve => {
-      let fileInfo;
       let baseURL:any = "";
-      // Make new FileReader
       let reader = new FileReader();
 
-      // Convert the file to base64 text
       reader.readAsDataURL(file);
 
-      // on reader load somthing...
       reader.onload = () => {
-        // Make a fileInfo Object
-        // console.log("Called", reader);
         baseURL = reader.result;
-        // console.log(baseURL);
         resolve(baseURL);
       };
-      // console.log(fileInfo);
     });
   };
   useEffect(() => {
-    // if (!imagesFile || imagesFile.length===0) {
         setPreview([])
-    //     return
-    // }
 
-    // var arr:Array<any> = [];
     if(imagesFile!==null){
         for(var i=0;i<imagesFile.length;i++){
-        const objectUrl = URL.createObjectURL(imagesFile[i])
+        // const objectUrl = URL.createObjectURL(imagesFile[i])
         getBase64(imagesFile[i])
         .then(result => {
             setPreview(old => [...old,result])
@@ -242,11 +230,8 @@ const EditAdBox:React.FC = () => {
         .catch(err => {
             console.log(err);
         });
-        // arr.push(objectUrl);
         }
     }
-    // setPreview(arr as any);
-    // console.log(preview);
   }, [imagesFile])
 
   useEffect(()=>{

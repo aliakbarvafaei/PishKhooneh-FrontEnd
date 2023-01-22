@@ -212,8 +212,8 @@ const Profile:React.FC = () => {
 
   function formSubmit() {
     
-    const LastPassword = (document.getElementById(passwordIdCurrent) as HTMLInputElement).value;
-    const NewPassword = (document.getElementById(passwordId) as HTMLInputElement).value;
+    // const LastPassword = (document.getElementById(passwordIdCurrent) as HTMLInputElement).value;
+    // const NewPassword = (document.getElementById(passwordId) as HTMLInputElement).value;
 
     (document.getElementById(passwordIdCurrent) as HTMLInputElement).value = "";
     (document.getElementById(passwordId) as HTMLInputElement).value = "";

@@ -1,33 +1,20 @@
 import React, { useEffect, useState } from "react";
-// import { FaGooglePlusG } from "@react-icons/all-files/fa/FaGooglePlusG";
-// import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
-// import { FaTwitter } from "@react-icons/all-files/fa/FaTwitter";
-// import { FaFacebookF } from "@react-icons/all-files/fa/FaFacebookF";
-import { useToast } from "../../contexts/ToastState";
-import { useHistory } from "react-router-dom";
-import {
-  postBookmark,
-} from "../../services/api";
 import Skeleton from "@mui/material/Skeleton";
-import { useSelector } from "react-redux";
-import { ads, eachToast, statesRedux } from "../../ts/interfaces";
+import { ads } from "../../ts/interfaces";
 import { convertorPrice, DateDiff } from "../../ts/functions";
 
 import Chart1 from "../Chart/Chart";
 import Map from "../Map/Map";
 
 const Ad:React.FC<{ad:ads}> = ({ ad })=> {
-  const history = useHistory();
   const themeClass = "bg-white";
   const [ images, setImages ] = useState<Array<string | null>>([ad.main_image]);
   const themeBorder = "border-darkGray";
   const themeBorder2 = "border-darkModeGray";
-  const { setToastState } = useToast();
   const [ menuAd ] = useState({
     "description": ad.description,
     "informationCall": ad.phone_number
   })
-  const { user } = useSelector((state:statesRedux) => state.userAuth);
   const [showMenu, setShowMenu] = useState("description");
   const styleSelectedMenu = "text-red border-red border-b-solid border-b-[2px]";
 
@@ -35,10 +22,6 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
     ad.main_image
   );
 
-  function addItemOnce(arr:Array<eachToast>, value:eachToast) {
-    arr.push(value);
-    return arr;
-  }
   useEffect(() => {
     if(ad.image_1){
       setImages(old=> [...old,ad.image_1]);
@@ -58,48 +41,48 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
     setBackgroundImage((e.target as HTMLImageElement).src);
   }
 
-  function handleClickBookmark(e:React.MouseEvent) {
-    e.preventDefault();
-    if (!user) {
-      setToastState((old:Array<eachToast>) =>
-        addItemOnce(old.slice(), {
-          title: "2",
-          description: "First, log in to your account",
-          key: Math.random(),
-        })
-      );
-      history.push("/login");
-    } else {
-      // setToastState(old=>addItemOnce(old.slice(),{
-      //     title: "3",
-      //     description: "", key:Math.random()
-      //     }))
-      postBookmark(user, ad.id)
-        .then((response) => {
-          console.log(response.data);
-          setToastState((old:Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "1",
-              description: "آگهی با موفقیت اضافه شد",
-              key: Math.random(),
-            })
-          );
-        })
-        .catch((err) => {
-          if (err.response.status === 409) {
-            setToastState((old:Array<eachToast>) =>
-              addItemOnce(old.slice(), {
-                title: "2",
-                description: "این آگهی اخیرا اضافه شده است",
-                key: Math.random(),
-              })
-            );
-          } else {
-            console.error(err);
-          }
-        });
-    }
-  }
+  // function handleClickBookmark(e:React.MouseEvent) {
+  //   e.preventDefault();
+  //   if (!user) {
+  //     setToastState((old:Array<eachToast>) =>
+  //       addItemOnce(old.slice(), {
+  //         title: "2",
+  //         description: "First, log in to your account",
+  //         key: Math.random(),
+  //       })
+  //     );
+  //     history.push("/login");
+  //   } else {
+  //     // setToastState(old=>addItemOnce(old.slice(),{
+  //     //     title: "3",
+  //     //     description: "", key:Math.random()
+  //     //     }))
+  //     postBookmark(user, ad.id)
+  //       .then((response) => {
+  //         console.log(response.data);
+  //         setToastState((old:Array<eachToast>) =>
+  //           addItemOnce(old.slice(), {
+  //             title: "1",
+  //             description: "آگهی با موفقیت اضافه شد",
+  //             key: Math.random(),
+  //           })
+  //         );
+  //       })
+  //       .catch((err) => {
+  //         if (err.response.status === 409) {
+  //           setToastState((old:Array<eachToast>) =>
+  //             addItemOnce(old.slice(), {
+  //               title: "2",
+  //               description: "این آگهی اخیرا اضافه شده است",
+  //               key: Math.random(),
+  //             })
+  //           );
+  //         } else {
+  //           console.error(err);
+  //         }
+  //       });
+  //   }
+  // }
 
   return (
     <div className={`${themeClass} px-[14%] sm:px-[6%] py-[50px]`}>
