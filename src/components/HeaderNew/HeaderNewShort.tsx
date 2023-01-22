@@ -147,10 +147,10 @@ const HeaderNewShort:React.FC = () => {
                                 :
                                 <div className='group relative'><button className='peer'>حساب کاربری</button>
                                     <div
-                                        className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[120px] py-[10px] px-[20px] right-0
+                                        className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[120px] mt-[-2px] right-0
                                         flex-col drop-shadow-lg z-[22]`}>
                                             <Link
-                                                className="text-right text-[14px] py-[12px] hoverItem"
+                                                className="text-right text-[14px] hover:text-red rounded-md py-[15px] px-[20px] hoverItem"
                                                 to='/profile'
                                                 >
                                                 پروفایل
@@ -162,7 +162,7 @@ const HeaderNewShort:React.FC = () => {
                                                 نشان شده‌ها
                                             </Link> */}
                                             <Link
-                                                className="text-right text-[14px] py-[12px] hoverItem"
+                                                className="text-right text-[14px] hover:text-red rounded-md py-[15px] px-[20px] hoverItem"
                                                 onClick={() => {
                                                     dispatch({ type: "logout" });
                                                     localStorage.setItem(
