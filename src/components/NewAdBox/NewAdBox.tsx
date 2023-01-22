@@ -962,7 +962,7 @@ const NewAdBox:React.FC = () => {
 
               <button
                 type="submit"
-                className="min-w-fill px-[4%] py-[1%] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                className="min-w-fill px-[4%] py-[1%] rounded-md bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
               >
                 ایجاد
               </button>

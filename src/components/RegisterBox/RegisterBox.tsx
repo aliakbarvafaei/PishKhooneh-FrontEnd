@@ -247,7 +247,7 @@ const RegisterBox:React.FC = () => {
                   htmlFor="address-input"
                   className="block text-[14px] text-right font-bold mb-[8px]"
                 >
-                  آدرس
+                  آدرس (اختیاری)
                 </label>
                 <input
                   type="text"
@@ -266,7 +266,7 @@ const RegisterBox:React.FC = () => {
                   htmlFor="bio-input"
                   className="block text-[14px] text-right font-bold mb-[8px]"
                 >
-                  توضیحات
+                  توضیحات (اختیاری)
                 </label>
                 <input
                   type="text"
@@ -284,7 +284,7 @@ const RegisterBox:React.FC = () => {
               <div className="w-[100%] flex flex-row gap-[10px] smmin:justify-start sm:justify-center">
                 <button
                   type="submit"
-                  className="min-w-fit py-[1%] px-[5%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                  className="min-w-fit py-[1%] px-[5%] rounded-md bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                 >
                   ثبت نام
                 </button>
@@ -293,7 +293,7 @@ const RegisterBox:React.FC = () => {
                   onClick={()=>{
                     history.push('/activeaccount?emailUser=')
                   }}
-                  className="min-w-fit py-[1%] px-[5%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                  className="min-w-fit py-[1%] px-[5%] rounded-md bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                 >
                   فعال‌سازی
                 </button>

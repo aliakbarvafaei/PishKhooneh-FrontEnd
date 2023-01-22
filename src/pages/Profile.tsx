@@ -442,14 +442,14 @@ const Profile:React.FC = () => {
                       <div className="flex justify-end gap-[20%] w-[45%]">
                         {userInformation && userInformation.level===0 ? <button
                             type="button"
-                            className="max-w-[45%] max-h-[50%] py-[6px] px-[2%] rounded-none bg-red text-white font-bold mmmin:text-[12px] mm:text-[8px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                            className="max-w-[45%] max-h-[50%] py-[6px] px-[2%] rounded-md bg-red text-white font-bold mmmin:text-[12px] mm:text-[8px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                             onClick={()=>updateCredit(1)}
                           >
                             ارتقا به نقره‌ای
                         </button>:<></>}
                         {userInformation && userInformation.level<2 ? <button
                             type="button"
-                            className="max-w-[45%] max-h-[50%] py-[6px] px-[2%] rounded-none bg-red text-white font-bold mmmin:text-[12px] mm:text-[8px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                            className="max-w-[45%] max-h-[50%] py-[6px] px-[2%] rounded-md bg-red text-white font-bold mmmin:text-[12px] mm:text-[8px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                             onClick={()=>updateCredit(2)}
                           >
                             ارتقا به طلایی
@@ -670,7 +670,7 @@ const Profile:React.FC = () => {
                   </div>
                   <button
                     type="submit"
-                    className="h-[50px] min-w-[150px] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                    className="h-[50px] min-w-[150px] rounded-md bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                   >
                     تغییر
                   </button>

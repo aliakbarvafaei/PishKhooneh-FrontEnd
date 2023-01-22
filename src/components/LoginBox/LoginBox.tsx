@@ -216,7 +216,7 @@ const LoginBox:React.FC = () => {
             <div className="w-[100%] flex flex-row gap-[10px] smmin:justify-end sm:justify-center">
               <button
                 type="submit"
-                className="min-w-fit py-[3%] px-[10%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                className="min-w-fit py-[3%] px-[10%] rounded-md bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
               >
                 ورود
               </button>
@@ -225,7 +225,7 @@ const LoginBox:React.FC = () => {
                 onClick={()=>{
                   history.push('/activeaccount?emailUser=')
                 }}
-                className="min-w-fit py-[3%] px-[6%] rounded-none bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+                className="min-w-fit py-[3%] px-[6%] rounded-md bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
               >
                 فعال‌سازی
               </button>
@@ -249,7 +249,7 @@ const LoginBox:React.FC = () => {
           <button
             type="button"
             onClick={handleCreate}
-            className="min-w-fit py-[3%] px-[3%] rounded-none bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
+            className="min-w-fit py-[3%] px-[3%] rounded-md bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
           >
             ایجاد حساب کاربری
           </button>
