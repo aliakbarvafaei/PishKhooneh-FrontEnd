@@ -83,13 +83,13 @@ const SearchPage:React.FC = () => {
     setcounterPage(1);
   }
 
-  function removeItemOnce(arr : any, value : any) {
-    var index = arr.indexOf(value);
-    if (index > -1) {
-      arr.splice(index, 1);
-    }
-    return arr;
-  }
+  // function removeItemOnce(arr : any, value : any) {
+  //   var index = arr.indexOf(value);
+  //   if (index > -1) {
+  //     arr.splice(index, 1);
+  //   }
+  //   return arr;
+  // }
   function handleClick(value : any[], filterName : string) {
     // const target : HTMLInputElement = e.target as HTMLInputElement;
     switch (filterName) {
@@ -130,10 +130,6 @@ const SearchPage:React.FC = () => {
   //   }
   //   return false;
   // }
-  function x(){
-    console.log((document.getElementById("دسته‌بندی") as HTMLInputElement).value)
-
-  }
   return (
     <div>
       <HeaderNewShort />
