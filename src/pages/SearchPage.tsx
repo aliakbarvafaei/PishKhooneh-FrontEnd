@@ -288,7 +288,7 @@ const SearchPage:React.FC = () => {
                     disabled={counterPage !== 1 ? false : true}
                     onClick={() => setcounterPage((old) => old - 1)}
                     type="button"
-                    className="bg-darkGray text-lightGray rounded-r-md border-l border-lightGray py-2 hover:bg-red disabled:opacity-60 px-3"
+                    className={`bg-darkGray text-lightGray rounded-r-md border-l border-lightGray py-2 ${counterPage !== 1 ? "hover:bg-red" : ""} disabled:opacity-60 px-3`}
                   >
                     <div className="flex flex-row align-middle">
                       <svg
@@ -313,7 +313,7 @@ const SearchPage:React.FC = () => {
                     disabled={n <= filterAds.length ? false : true}
                     onClick={() => setcounterPage((old) => old + 1)}
                     type="button"
-                    className="bg-darkGray text-lightGray rounded-l-md py-2  hover:bg-red disabled:opacity-60 px-3"
+                    className={`bg-darkGray text-lightGray ${n <= filterAds.length ? "hover:bg-red" : ""} rounded-l-md py-2 disabled:opacity-60 px-3`}
                   >
                     <div className="flex flex-row align-middle">
                       <span className="ml-2">بعدی</span>
