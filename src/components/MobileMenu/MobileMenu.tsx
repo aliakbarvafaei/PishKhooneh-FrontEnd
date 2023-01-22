@@ -53,7 +53,7 @@ const MobileMenu:React.FC = ()=> {
         <span className="flex flex-col justify-center items-center">
           <i className="fa fa-user group relative" aria-hidden="true">
             <div
-              className={`${themeClass} absolute hidden rounded-md group-hover:block hover:flex w-[100px] mb-[-2px] py-[10px] px-[20px] bottom-6 right-[-45px]
+              className={`${themeClass} absolute hidden rounded-md group-hover:block hover:flex w-[100px] py-[10px] px-[20px] bottom-6 right-[-45px]
                   flex-col drop-shadow-lg z-[26]`}
             >
               {myAccountDrop.map((item, index) => {
@@ -103,7 +103,7 @@ const MobileMenu:React.FC = ()=> {
               })}
             </div>
           </i>
-          <p className="text-[12px]">حساب</p>
+          <p className="text-[12px]">حساب کاربری</p>
         </span>
       </div>
     </>
