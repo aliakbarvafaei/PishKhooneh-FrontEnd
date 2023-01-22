@@ -19,6 +19,7 @@ const AdDetails:React.FC = (props) => {
     })
     .catch((err) => {
       history.push("/not-found");
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       console.error(err);
     });
   }, [idad, history]);

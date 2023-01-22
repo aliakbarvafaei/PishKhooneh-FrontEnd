@@ -13,7 +13,7 @@ const PredictBox:React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [ priceMin, setPriceMin ] = useState<null | number>(null);
   const [ priceMax, setPriceMax ] = useState<null | number>(null);
-
+  const [ loadingReq, setloadingReq ] = useState<boolean>(false);
   const typeId = useId();
   const cityId = useId();
   const regionId = useId();
@@ -58,8 +58,10 @@ const PredictBox:React.FC = () => {
     (document.getElementById(elevatorId) as HTMLInputElement).value = "";
     (document.getElementById(parkingId) as HTMLInputElement).value = "";
     (document.getElementById(meterageId) as HTMLInputElement).value = "";
+    setloadingReq(true);
     fetch(`https://predict.erfan-nourbakhsh.ir/predict?area=${meterage}&age=${year}&region=${region}&parking=${parking}&elevator=${elevator}`)
         .then(async response => {
+            setloadingReq(false);
             const data = await response.json();
             if(response.ok){
               if(typeSelect==="خرید یا فروش"){
@@ -90,7 +92,7 @@ const PredictBox:React.FC = () => {
 
         })
         .catch(error => {
-            
+          setloadingReq(false)
         });
 
   }
@@ -413,7 +415,10 @@ const PredictBox:React.FC = () => {
                   type="submit"
                   className="min-w-fill px-[4%] py-[1%] rounded-md bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                 >
-                  تخمین
+                  {loadingReq? <i
+                    className="fa fa-spinner fa-spin text-[50px]"
+                    aria-hidden="true"
+                  ></i>:"تخمین"}
                 </button>
               </div>
               {modalOpen && <Modal modalClose={modalClose} priceMin={priceMin as number} priceMax={priceMax as number} />}

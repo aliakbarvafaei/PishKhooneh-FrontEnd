@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { eachToast, LoginInputTypes } from "../../ts/interfaces";
 
 const LoginBox:React.FC = () => {
+  const [ loadingReq, setloadingReq ] = useState<boolean>(false);
   const { setToastState } = useToast();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -53,9 +54,10 @@ const LoginBox:React.FC = () => {
 
     (document.getElementById(emailId) as HTMLInputElement).value = "";
     (document.getElementById(passwordId) as HTMLInputElement).value = "";
-
+    setloadingReq(true);
     loginAPI(email, password)
       .then((response) => {
+        setloadingReq(false)
         if (response.status === 200) {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
@@ -77,9 +79,11 @@ const LoginBox:React.FC = () => {
             console.error({ e });
           }
           history.push("/home");
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         }
       })
       .catch((err) => {
+        setloadingReq(false)
         if (err.response && err.response.status === 401) {
           setToastState((old : Array<eachToast>) =>
             addItemOnce(old.slice(), {
@@ -218,7 +222,10 @@ const LoginBox:React.FC = () => {
                 type="submit"
                 className="min-w-fit py-[3%] px-[10%] rounded-md bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
               >
-                ورود
+                {loadingReq? <i
+                        className="fa fa-spinner fa-spin text-[50px]"
+                        aria-hidden="true"
+                    ></i>:"ورود"}
               </button>
               <button
                 type="button"

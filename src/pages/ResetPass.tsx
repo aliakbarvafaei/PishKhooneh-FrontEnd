@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import HeaderNewShort from '../components/HeaderNew/HeaderNewShort';
@@ -8,6 +8,8 @@ import { sendEmailForgetPassAPI } from '../services/api';
 import { ActivateInputTypes, eachToast } from '../ts/interfaces';
 
 const ResetPass:React.FC = ()=> {
+    const [ loadingReq, setloadingReq ] = useState<boolean>(false);
+
     const { setToastState } = useToast();
 
     const themeClass = "bg-white";
@@ -33,9 +35,10 @@ const ResetPass:React.FC = ()=> {
         //     }))
     
         const email = (document.getElementById(emailId) as HTMLInputElement).value;
-
+        setloadingReq(true)
         sendEmailForgetPassAPI(email)
         .then((response) => {
+            setloadingReq(false)
             if (response.status === 200) {
                 (document.getElementById(emailId) as HTMLInputElement).disabled = true;
                 setToastState((old:Array<eachToast>) =>
@@ -49,6 +52,7 @@ const ResetPass:React.FC = ()=> {
             }
         })
         .catch((err) => {
+            setloadingReq(false)
             if (err.response && err.response.status === 404) {
                 setToastState((old:Array<eachToast>) =>
                 addItemOnce(old.slice(), {
@@ -118,7 +122,10 @@ const ResetPass:React.FC = ()=> {
                             type="submit"
                             className="min-w-fill px-[4%] py-[1%] rounded-md bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                             >
-                            ارسال ایمیل
+                            {loadingReq? <i
+                                className="fa fa-spinner fa-spin text-[50px]"
+                                aria-hidden="true"
+                            ></i>:"ارسال ایمیل"}
                             </button>
                         </div>
                     </form>

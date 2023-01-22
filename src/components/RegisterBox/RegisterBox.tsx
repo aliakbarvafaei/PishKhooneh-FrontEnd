@@ -8,6 +8,7 @@ import { eachToast, RegisterInputTypes } from "../../ts/interfaces.js";
 const RegisterBox:React.FC = () => {
   const { setToastState } = useToast();
   const history = useHistory();
+  const [ loadingReq, setloadingReq ] = useState<boolean>(false);
 
   const fnameId = useId();
   const callNumberId = useId();
@@ -47,9 +48,10 @@ const RegisterBox:React.FC = () => {
     (document.getElementById(passwordId) as HTMLInputElement).value = "";
     (document.getElementById(addressId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
-
+    setloadingReq(true)
     registerAPI(fname, callNumber, email, password, address, bio)
       .then((response) => {
+        setloadingReq(false)
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
@@ -62,6 +64,7 @@ const RegisterBox:React.FC = () => {
         }
       })
       .catch((err) => {
+        setloadingReq(false)
         if (err.response && err.response.status === 403) {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
@@ -286,7 +289,10 @@ const RegisterBox:React.FC = () => {
                   type="submit"
                   className="min-w-fit py-[1%] px-[5%] rounded-md bg-red text-white font-bold mmmin:text-[14px] mm:text-[10px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                 >
-                  ثبت نام
+                  {loadingReq? <i
+                    className="fa fa-spinner fa-spin text-[50px]"
+                    aria-hidden="true"
+                  ></i>:"ثبت نام"}
                 </button>
                 <button
                   type="button"

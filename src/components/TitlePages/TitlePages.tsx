@@ -8,6 +8,7 @@ const TitlePages:React.FC<{title: string}> = ({ title }) => {
 
   function handleCreate() {
     history.push("/home");
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }
   return (
     <div

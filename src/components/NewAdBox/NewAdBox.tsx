@@ -9,6 +9,7 @@ import Map from "../Map/Map";
 const regions = ['شهرک مدرس','زمانی','جوادیه','حق گویان','مهدیه','18 متری شکریه','شکریه', 'هنرستان', 'کمال آباد', 'کمال آباد شرقی', 'سعیدیه پایین','رکنی', 'جهان نما', 'بلوار بعثت','سعیدیه بالا',  'ادیب',  'میلاد استادان', 'قهرمان استادان', 'تربیت استادان','بلوار شهرداری',  'استادان', 'پردیس', 'بلوار عمار',  'پرستار','کوچه مشکی', 'خ طالقانی',  'فرهنگ', 'نواب','گلزار',  'شهناز', 'میلادکوچه مشکی','متخصصین', 'مدیریت', 'آزاد غربی', 'اعتمادیه غربی', 'اعتمادیه شرقی', 'بلوار مدنی', 'بلوار دانشگاه', 'بلوار ارم', 'بلوار خرم رودی', 'بلوار رنجبران', 'بلوار صورتی', 'بلوار فاطمیه', 'بلوار کاج', 'بوعلی بالا','پاستور', 'ذوالفقار', 'عارف', 'خواجه رشید','میرزاده عشقی', 'مصیب مجیدی', 'بین النهرین', 'کولانج', 'تختی', 'فرهنگیان','ذوالریاستین', 'حیدره', 'جانبازان', 'شریعتی', 'دره مرادبیگ', 'آرام شرقی',  'بوعلی پایین', 'خیابان پاسداران -کرمانشاه']
 
 const NewAdBox:React.FC = () => {
+  const [ loadingReq, setloadingReq ] = useState<boolean>(false);
   const [ location_x, setlocation_x ] = useState(35.692997228);
   const [ location_y, setlocation_y ] = useState(51.335998656);
   const { setToastState } = useToast();
@@ -176,8 +177,10 @@ const NewAdBox:React.FC = () => {
     (document.getElementById(callNumberId) as HTMLInputElement).value = "";
     (document.getElementById(bioId) as HTMLInputElement).value = "";
     const value : string | null = localStorage.getItem("token_user");
+    setloadingReq(true)
     NewAdAPI(JSON.parse(value as string), category, type, status, city, region, neighbor, room, year, elevator, parking, lobby, sports_hall, guard, swimming_pool, balcony, roof_garden, remote_door, meterage, price, main_image, image_1, image_2, image_3, title, callNumber, bio, creator, warehouse, location_x, location_y)
       .then((response) => {
+        setloadingReq(false)
         if (response.status === 201) {
           setToastState((old:Array<eachToast>) =>
             addItemOnce(old.slice(), {
@@ -187,9 +190,11 @@ const NewAdBox:React.FC = () => {
             })
           );
           history.push("/home");
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         }
       })
       .catch((err) => {
+        setloadingReq(false)
           if (err.response.status === 401) {
             setToastState((old:Array<eachToast>) =>
               addItemOnce(old.slice(), {
@@ -953,7 +958,10 @@ const NewAdBox:React.FC = () => {
                 type="submit"
                 className="min-w-fill px-[4%] py-[1%] rounded-md bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
               >
-                ایجاد
+                {loadingReq? <i
+                        className="fa fa-spinner fa-spin text-[50px]"
+                        aria-hidden="true"
+                    ></i>:"ایجاد"}
               </button>
             </form>
           </div>

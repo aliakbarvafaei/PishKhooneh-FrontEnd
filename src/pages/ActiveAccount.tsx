@@ -9,6 +9,7 @@ import { activateAccountAPI, sendEmailAPI } from '../services/api';
 import { ActivateInputTypes, eachToast } from '../ts/interfaces';
 
 const ActiveAccount:React.FC = ()=> {
+    const [ loadingReq, setloadingReq ] = useState<boolean>(false);
     const { setToastState } = useToast();
     const history = useHistory();
     const [emailUser, setSearchInput] = useState(()=>{
@@ -45,11 +46,12 @@ const ActiveAccount:React.FC = ()=> {
         //     }))
     
         const email = (document.getElementById(emailId) as HTMLInputElement).value;
-
+        setloadingReq(true)
         if(buttonText==="تایید"){
             const code = (document.getElementById(codeId) as HTMLInputElement).value;
             activateAccountAPI(code)
             .then((response) => {
+                setloadingReq(false)
                 if (response.status === 200) {
                     setButtonText("ارسال کد");
                     setToastState((old:Array<eachToast>) =>
@@ -72,9 +74,11 @@ const ActiveAccount:React.FC = ()=> {
                         console.error({ e });
                     }
                     history.push("/home");
+                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
                 }
             })
             .catch((err) => {
+                setloadingReq(false)
                 if (err.response && err.response.status === 404) {
                 setToastState((old:Array<eachToast>) =>
                     addItemOnce(old.slice(), {
@@ -107,6 +111,7 @@ const ActiveAccount:React.FC = ()=> {
         }else{
             sendEmailAPI(email)
             .then((response) => {
+                setloadingReq(false)
                 if (response.status === 200) {
                     (document.getElementById(emailId) as HTMLInputElement).disabled = true;
                     setButtonText("تایید");
@@ -120,6 +125,7 @@ const ActiveAccount:React.FC = ()=> {
                 }
             })
             .catch((err) => {
+                setloadingReq(false)
                 if (err.response && err.response.status === 403) {
                 setToastState((old:Array<eachToast>) =>
                     addItemOnce(old.slice(), {
@@ -234,7 +240,10 @@ const ActiveAccount:React.FC = ()=> {
                             disabled={emailUser===""? true:false}
                             className="min-w-fill px-[4%] py-[1%] rounded-md bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                             >
-                            {buttonText}
+                            {loadingReq? <i
+                                className="fa fa-spinner fa-spin text-[50px]"
+                                aria-hidden="true"
+                            ></i>:buttonText}
                             </button>
                         </div>
                     </form>

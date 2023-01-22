@@ -8,6 +8,8 @@ import { resetPassAPI } from '../services/api';
 import { eachToast, ForgetPassInputTypes } from '../ts/interfaces';
 
 const ResetPass2:React.FC = ()=> {
+    const [ loadingReq, setloadingReq ] = useState<boolean>(false);
+
     const { setToastState } = useToast();
 
     const themeClass = "bg-white";
@@ -44,9 +46,10 @@ const ResetPass2:React.FC = ()=> {
     
         const code = (document.getElementById(codeId) as HTMLInputElement).value;
         const newPass = (document.getElementById(passwordId) as HTMLInputElement).value;
-
+        setloadingReq(true)
         resetPassAPI(code, newPass)
         .then((response) => {
+            setloadingReq(false)
             if (response.status === 200) {
                 setToastState((old:Array<eachToast>) =>
                     addItemOnce(old.slice(), {
@@ -56,9 +59,11 @@ const ResetPass2:React.FC = ()=> {
                     })
                 );
                 history.push("/login");
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
             }
         })
         .catch((err) => {
+            setloadingReq(false)
             if (err.response && err.response.status === 404) {
             setToastState((old:Array<eachToast>) =>
                 addItemOnce(old.slice(), {
@@ -185,7 +190,10 @@ const ResetPass2:React.FC = ()=> {
                             type="submit"
                             className="min-w-fill px-[4%] py-[1%] rounded-md bg-red text-white font-bold text-[14px] hover:bg-white hover:border-red hover:border-[2px] hover:border-solid hover:text-black"
                             >
-                            تغییر رمز
+                            {loadingReq? <i
+                                className="fa fa-spinner fa-spin text-[50px]"
+                                aria-hidden="true"
+                            ></i>:"تغییر رمز"}
                             </button>
                         </div>
                     </form>
