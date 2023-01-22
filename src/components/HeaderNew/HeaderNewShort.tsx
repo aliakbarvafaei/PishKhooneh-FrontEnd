@@ -147,7 +147,7 @@ const HeaderNewShort:React.FC = () => {
                                 :
                                 <div className='group relative'><button className='peer'>حساب کاربری</button>
                                     <div
-                                        className={`${themeAccount} absolute hidden peer-hover:block hover:flex w-[120px] mt-[-2px] right-0
+                                        className={`${themeAccount} absolute hidden rounded-md peer-hover:block hover:flex w-[120px] mt-[-2px] right-0
                                         flex-col drop-shadow-lg z-[22]`}>
                                             <Link
                                                 className="text-right text-[14px] hover:text-red rounded-md py-[15px] px-[20px] hoverItem"
