@@ -205,7 +205,7 @@ const HeaderNewComplete:React.FC = () => {
                         <button type='submit' onClick={()=>{
                             if(searchInput!=="")
                                 history.push(`/search?searchText=${searchInput}`)
-                        }} className="fa fa-search absolute smmin:right-[3%] sm:right-[12px] mm:right-[25px] top-[35%]"></button>
+                        }} className="fa fa-search absolute smmin:right-[3%] sm:right-[5%] mm:right-[15%] top-[35%]"></button>
                     </form>
                 </div>
                 <div className='flex flex-col items-center gap-[10px] text-center text-white text-[18px] font-bold leading-[40px] pt-[30px]'>
