@@ -201,11 +201,11 @@ const HeaderNewComplete:React.FC = () => {
                 </div>
                 <div className="relative text-center mt-[40px]">
                     <form>
-                        <input type="text" value={searchInput} onChange={handleChange as any} className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] mm:pr-[12%] mdmin:outline outline-[10px] outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
+                        <input type="text" value={searchInput} onChange={handleChange as any} className="rounded-3xl w-[500px] lg:w-[400px] sm:w-[300px] mm:w-[200px] h-[50px] text-[10px] pr-[10%] mm:pr-[12%] mdmin:outline mdmin:outline-[10px] mdmin:outline-lightestBlack" placeholder="جستجو آگهی یا منطقه"/>
                         <button type='submit' onClick={()=>{
                             if(searchInput!=="")
                                 history.push(`/search?searchText=${searchInput}`)
-                        }} className="fa fa-search absolute right-[3%] sm:right-[5%] mm:right-[11%] top-[35%]"></button>
+                        }} className="fa fa-search absolute smmin:right-[3%] sm:right-[12px] mm:right-[25px] top-[35%]"></button>
                     </form>
                 </div>
                 <div className='flex flex-col items-center gap-[10px] text-center text-white text-[18px] font-bold leading-[40px] pt-[30px]'>
