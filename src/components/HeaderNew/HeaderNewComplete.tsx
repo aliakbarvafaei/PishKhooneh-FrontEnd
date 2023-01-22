@@ -99,13 +99,13 @@ const HeaderNewComplete:React.FC = () => {
                             ></i> */}
                             {index!==titleMenus.length-1 ? <span className="pr-[12px] text-white">|</span>:<></>}
                             <div
-                                className={`${themeClass} absolute hidden peer-hover:block hover:flex w-[150px] py-[10px] px-[20px] left-0
+                                className={`${themeClass} absolute hidden peer-hover:block rounded-md hover:flex w-[150px] mt-[-2px] left-0
                             flex-col drop-shadow-lg z-[22]`}
                             >
                                 {titleMenu.submenu.map((item, index) => {
                                 return (
                                     <Link
-                                    className={`text-right text-[14px] py-[12px] hoverItem`}
+                                    className={`text-right hover:text-red rounded-md text-[14px] py-[15px] px-[20px] hoverItem`}
                                     to={item.pathTo}
                                     key={index}
                                     >

@@ -160,12 +160,12 @@ const Ad:React.FC<{ad:ads}> = ({ ad })=> {
                     ، <span>{ad.neighbor}</span>
                     
                   </div>
-                  <i
+                  {/* <i
                     className="fa fa-bookmark text-red pb-[5px] rotate-90 cursor-pointer"
                     // onClick={handleClickBookmark}
                     style={{fontSize: '26px'}}
                     aria-hidden="true"
-                  ></i>
+                  ></i> */}
                 </div>
               </>
             ) : (

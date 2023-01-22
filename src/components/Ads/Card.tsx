@@ -75,12 +75,12 @@ const Card:React.FC<{item:ads, dir:string}> = ({ item, dir}) => {
           style={{ backgroundImage: `url("` + backgroundImage + `")` }}
         >
           <div className="absolute sm:right-0 smmin:right-[-50px] bottom-[5%] flex flex-col items-center justify-center gap-[20px] text-darkGray text-[20px]">
-            <i
+            {/* <i
               style={{fontSize: '35px'}}
               className="smmin:group-hover:translate-x-[-50px] duration-[700ms] delay-[150ms] fa fa-bookmark rotate-90 cursor-pointer text-white hover:text-red"
               // onClick={handleClickBookmark}
               aria-hidden="true"
-            ></i>
+            ></i> */}
           </div>
         </div>
       </Link>
