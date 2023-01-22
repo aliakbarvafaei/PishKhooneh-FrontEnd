@@ -6,6 +6,10 @@ import Box from "../assets/images/box.png"
 import TitlePages from "../components/TitlePages/TitlePages";
 import { getAdsWithPage } from "../services/api";
 import { ads, filtersInterface } from "../ts/interfaces";
+import Chip from '@mui/material/Chip';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 
 const filtersOption = [
   { title: "دسته‌بندی", content: ["ویلا", "آپارتمان", "باغ","آپارتمان/برج"] },
@@ -13,7 +17,14 @@ const filtersOption = [
   { title: "منطقه", content: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"] },
   { title: "اتاق", content: ["0", "1", "2", "3","4","5","6","7"]}
 ];
-
+// const top100Films = [
+//   { title: 'The Shawshank Redemption'},
+//   { title: 'The Godfather'},
+//   { title: 'The Godfather: Part II'},
+//   { title: 'The Dark Knight'},
+//   { title: '12 Angry Men'},
+//   { title: "Schindler's List"},
+//   { title: 'Pulp Fiction'}];
 const n=6 ;
 
 const SearchPage:React.FC = () => {
@@ -79,31 +90,34 @@ const SearchPage:React.FC = () => {
     }
     return arr;
   }
-  function handleClick(e : React.MouseEvent, filterName : string) {
-    const target : HTMLInputElement = e.target as HTMLInputElement;
+  function handleClick(value : any[], filterName : string) {
+    // const target : HTMLInputElement = e.target as HTMLInputElement;
     switch (filterName) {
       case "دسته‌بندی":
-        (target.checked && setCategory((old) => [...old, target.value] as any)) ||
-          (!target.checked &&
-            setCategory((old) => removeItemOnce(old.slice(), target.value)));
+        setCategory(value as any);
         setcounterPage(1);
         break;
       case "نوع":
-        (target.checked && setType((old) => [...old, target.value] as any)) ||
-          (!target.checked &&
-            setType((old) => removeItemOnce(old.slice(), target.value)));
+        // (target.checked && setType((old) => [...old, target.value] as any)) ||
+        //   (!target.checked &&
+        //     setType((old) => removeItemOnce(old.slice(), target.value)));
+        setType(value as any);
         setcounterPage(1);
         break;
       case "منطقه":
-        (target.checked && setRegionNumber((old) => [...old, target.value] as any)) ||
-          (!target.checked &&
-            setRegionNumber((old) => removeItemOnce(old.slice(), target.value)));
+        // (target.checked && setRegionNumber((old) => [...old, target.value] as any)) ||
+        //   (!target.checked &&
+        //     setRegionNumber((old) => removeItemOnce(old.slice(), target.value)));
+        // setcounterPage(1);
+        setRegionNumber(value as any);
         setcounterPage(1);
         break;
       case "اتاق":
-        (target.checked && setRoomsNumber((old) => [...old, target.value] as any)) ||
-          (!target.checked &&
-            setRoomsNumber((old) => removeItemOnce(old.slice(), target.value)));
+        // (target.checked && setRoomsNumber((old) => [...old, target.value] as any)) ||
+        //   (!target.checked &&
+        //     setRoomsNumber((old) => removeItemOnce(old.slice(), target.value)));
+        // setcounterPage(1);
+        setRoomsNumber(value as any);
         setcounterPage(1);
         break;
       default:
@@ -116,7 +130,10 @@ const SearchPage:React.FC = () => {
   //   }
   //   return false;
   // }
+  function x(){
+    console.log((document.getElementById("دسته‌بندی") as HTMLInputElement).value)
 
+  }
   return (
     <div>
       <HeaderNewShort />
@@ -130,51 +147,70 @@ const SearchPage:React.FC = () => {
           <h2 className="text-center mb-[20px]">فیلترها</h2>
           {filtersOption.map((item, index) => {
             return (
-              <details key={index} className="mb-[20px]">
-                <summary
-                  className={`text-[16px] list-none flex flex-row justify-between items-center pb-[8px] cursor-pointer border-b-solid border-b-[1px] ${themeBorder}`}
-                >
-                  {item.title}
-                  <i
-                    className="fa fa-caret-down text-[16px]"
-                    aria-hidden="true"
-                  ></i>
-                </summary>
-                <ul className="pl-[10px] text-[14px]">
-                  {item.content.map((subItem, index) => {
-                    return (
-                      <li
-                        key={index}
-                        className="flex flex-row items-center gap-[10px] pt-[10px]"
-                      >
-                        <input
-                          type="checkbox"
-                          value={subItem}
-                          id={item.title + index}
-                          onClick={(e) => handleClick(e, item.title)}
-                        />
-                        <label
-                          className={`w-[100%] py-[8px] cursor-pointer border-b-solid border-b-[1px] ${themeBorder}`}
-                          htmlFor={item.title + index}
-                        >
-                          {item.title==="منطقه"? "منطقه ":""}{subItem}
-                        </label>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </details>
+              // <details key={index} className="mb-[20px]">
+              //   <summary
+              //     className={`text-[16px] list-none flex flex-row justify-between items-center pb-[8px] cursor-pointer border-b-solid border-b-[1px] ${themeBorder}`}
+              //   >
+              //     {item.title}
+              //     <i
+              //       className="fa fa-caret-down text-[16px]"
+              //       aria-hidden="true"
+              //     ></i>
+              //   </summary>
+              //   <ul className="pl-[10px] text-[14px]">
+              //     {item.content.map((subItem, index) => {
+              //       return (
+              //         <li
+              //           key={index}
+              //           className="flex flex-row items-center gap-[10px] pt-[10px]"
+              //         >
+              //           <input
+              //             type="checkbox"
+              //             value={subItem}
+              //             id={item.title + index}
+              //             onClick={(e) => handleClick(e, item.title)}
+              //           />
+              //           <label
+              //             className={`w-[100%] py-[8px] cursor-pointer border-b-solid border-b-[1px] ${themeBorder}`}
+              //             htmlFor={item.title + index}
+              //           >
+              //             {item.title==="منطقه"? "منطقه ":""}{subItem}
+              //           </label>
+              //         </li>
+              //       );
+              //     })}
+              //   </ul>
+              // </details>
+              <Stack spacing={3}>
+                <Autocomplete
+                  multiple
+                  id={item.title}
+                  onChange={(event,value)=>{handleClick(value,item.title)}}
+                  options={item.content}
+                  getOptionLabel={(option) => option}
+                  // defaultValue={[top100Films[13]]}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="standard"
+                      label={item.title}
+                      placeholder=""
+                    />
+                  )}
+                />
+              </Stack>
             );
           })}
-          <details className="mb-[20px]">
+          <details className="mb-[20px] mt-[10px]">
             <summary
-              className={`text-[16px] list-none flex flex-row justify-between items-center pb-[8px] cursor-pointer border-b-solid border-b-[1px] ${themeBorder}`}
-            >
-              قیمت
+              className={`text-[12px] pt-[10px] cursor-text text-[#747474] list-none flex flex-row justify-between items-center pb-[8px] border-b-solid border-b-[1px] border-b-[#949494] hover:border-b-[#000000] hover:border-b-[2px]`}
+            > 
               <i
-                className="fa fa-caret-down text-[16px]"
+                style={{fontSize:"15px"}}
+                className="fa fa-caret-down pr-[8px] text-[#000000]"
                 aria-hidden="true"
               ></i>
+              قیمت
             </summary>
             <ul className="pl-[10px] text-[14px]">
               <li className="flex flex-col gap-[5px] pt-[10px]">
@@ -215,24 +251,6 @@ const SearchPage:React.FC = () => {
               </li>
             </ul>
           </details>
-          {/* <div className="w-full mb-[20px]">
-            <label
-              htmlFor="toggleB"
-              className="flex items-center justify-between cursor-pointer"
-            >
-              <div className="relative">
-                <input
-                  type="checkbox"
-                  id="toggleB"
-                  className="peer sr-only"
-                  onClick={(e:React.MouseEvent) => setInStock((e.target as HTMLInputElement).checked)}
-                />
-                <div className="block bg-darkGray peer-checked:bg-[#0d6efd] w-8 h-4 rounded-full"></div>
-                <div className="dot absolute left-1 top-0.5 bg-white peer-checked:translate-x-[100%] w-3 h-3 rounded-full transition"></div>
-              </div>
-              <div className="ml-3 font-medium text-[15px]">InStock</div>
-            </label>
-          </div> */}
         </div>
         <div
           className={`sm:w-[100%] smmin:w-[78%] smmin:my-[50px] sm:my-[20px]`}
@@ -248,7 +266,7 @@ const SearchPage:React.FC = () => {
               onChange={handleChange as any}
               type="text"
               placeholder="جستجوی عنوان آگهی"
-              className={`w-[100%] mb-[20px] py-[10px] px-[10%] rounded-md border-solid border-[1px] ${themeBorder} ${themeClass}`}
+              className={`w-[100%] mb-[20px] sm:text-[12px] py-[10px] px-[10%] rounded-md border-solid border-[1px] ${themeBorder} ${themeClass}`}
             />
           </div>
           {loading && (

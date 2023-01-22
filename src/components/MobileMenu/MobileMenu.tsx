@@ -103,7 +103,7 @@ const MobileMenu:React.FC = ()=> {
               })}
             </div>
           </i>
-          <p className="text-[12px]">حساب کاربری</p>
+          <p className="text-[12px]">حساب</p>
         </span>
       </div>
     </>
