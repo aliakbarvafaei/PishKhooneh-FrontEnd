@@ -171,7 +171,7 @@ const HeaderNewShort:React.FC = () => {
                                                     );
                                                     setToastState((old : Array<eachToast>) =>
                                                     addItemOnce(old.slice(), {
-                                                        title: "2",
+                                                        title: "1",
                                                         description: "خروج با موفقیت انجام شد",
                                                         key: Math.random(),
                                                     })
