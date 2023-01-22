@@ -32,7 +32,7 @@ const MobileMenu:React.FC = ()=> {
               className="fa fa-plus"
               aria-hidden="true"
             ></i>
-            <p className="text-[12px]">آگهی جدید</p>
+            <p className="text-[12px]">آگهی</p>
           </span>
         </Link>
         {/* <Link to="/bookmark">

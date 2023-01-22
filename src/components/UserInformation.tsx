@@ -29,14 +29,14 @@ const UserInformation = ()=> {
         })
         .catch((err) => {
           dispatch({ type: "logout" });
-          setToastState((old : Array<eachToast>) =>
-            addItemOnce(old.slice(), {
-              title: "2",
-              description:
-                "احراز هویت ما مشکل مواجه شد لطفا مجدد وارد شوید",
-              key: Math.random(),
-            })
-          );
+          // setToastState((old : Array<eachToast>) =>
+          //   addItemOnce(old.slice(), {
+          //     title: "2",
+          //     description:
+          //       "احراز هویت ما مشکل مواجه شد لطفا مجدد وارد شوید",
+          //     key: Math.random(),
+          //   })
+          // );
           try {
             localStorage.setItem("token_user", JSON.stringify(""));
           } catch (e) {

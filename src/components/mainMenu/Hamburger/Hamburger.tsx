@@ -14,7 +14,7 @@ const Hamburger:React.FC<HamburgerProps> = ({ isOpen, items, handleHamburger }) 
           <div>
             <nav
             id="navMenu"
-              className={`${themeClass} w-[250px] h-[200vh] flex justify-center fixed z-[30] top-0 shadow-[0_0_5px_0_rgba(200,200,200)] right-0 ease-in-out ${isOpen ? "translate-x-0 " : "translate-x-full"} cursor-text duration-[850ms]`}
+              className={`${themeClass} w-[250px] h-[200vh] flex justify-center fixed z-[30] top-0 shadow-[0_0_5px_0_rgba(200,200,200)] ease-in-out ${isOpen ? "translate-x-0  right-0" : "translate-x-full  right-[-100px]"} cursor-text duration-[850ms]`}
             >
               <ul className="w-[100%] p-0">
                 <li
