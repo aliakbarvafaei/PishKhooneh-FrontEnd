@@ -2,6 +2,7 @@ import React, { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import Card from "../components/Ads/Card";
+import Box from "../assets/images/box.png"
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
 import TitlePages from "../components/TitlePages/TitlePages";
 import { useToast } from "../contexts/ToastState";
@@ -722,7 +723,11 @@ const Profile:React.FC = () => {
                       </div>
                     );
                   })}
-                  {myAds.length===0? <div className="text-gray">آگهی وجود ندارد</div>:<></>}
+                  {myAds.length===0? 
+                    <div className="flex flex-col gap-3">
+                      <img src={Box} alt="" />
+                      <div className="flex text-darkGray">آگهی وجود ندارد</div>
+                    </div>:<></>}
                 </div>
               )}
             </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Card from "../components/Ads/Card";
 import HeaderNewShort from "../components/HeaderNew/HeaderNewShort";
+import Box from "../assets/images/box.png"
 import TitlePages from "../components/TitlePages/TitlePages";
 import { getAdsWithPage } from "../services/api";
 import { ads, filtersInterface } from "../ts/interfaces";
@@ -260,16 +261,17 @@ const SearchPage:React.FC = () => {
           )}
           {!loading && (
             <div
-              className={`flex flex-row flex-wrap w-[100%] py-[40px] px-[2%] gap-[1%] rounded-md border-solid border-[1px] ${themeBorder}`}
+              className={`flex flex-row ${filterAds.length === 0? "justify-center text-center":""} flex-wrap w-[100%] py-[40px] px-[2%] gap-[1%] rounded-md border-solid border-[1px] ${themeBorder}`}
             >
               {filterAds.length === 0 ? (
-                <>
-                  <i
+                <div className="flex flex-col gap-3">
+                  {/* <i
                     className="fa fa-exclamation-triangle text-red mt-[2px]"
                     aria-hidden="true"
-                  ></i>
-                  <div className="text-red">آگهی یافت نشد</div>
-                </>
+                  ></i> */}
+                  <img src={Box} alt="" />
+                  <div className="flex text-darkGray">آگهی یافت نشد</div>
+                </div>
               ) : (
                 filterAds.map((item:ads, index:number) => {
                   return (
@@ -282,7 +284,7 @@ const SearchPage:React.FC = () => {
                   );
                 })
               )}
-              <div className="max-w-[100%] pt-[40px] container flex justify-center mx-auto">
+              {filterAds.length ===0 ? <></>:<div className="max-w-[100%] pt-[40px] container flex justify-center mx-auto">
                 <div className="flex flex-row mx-auto">
                   <button
                     disabled={counterPage !== 1 ? false : true}
@@ -332,7 +334,7 @@ const SearchPage:React.FC = () => {
                     </div>
                   </button>
                 </div>
-              </div>
+              </div>}
             </div>
           )}
         </div>
