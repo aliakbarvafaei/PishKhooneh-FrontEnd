@@ -14,19 +14,19 @@ const Hamburger:React.FC<HamburgerProps> = ({ isOpen, items, handleHamburger }) 
           <div>
             <nav
             id="navMenu"
-              className={`${themeClass} w-[250px] h-[200vh] flex justify-center fixed z-[30] top-0 shadow-[0_0_5px_0_rgba(200,200,200)] ease-in-out ${isOpen ? "translate-x-0  right-0" : "translate-x-full  right-[-100px]"} cursor-text duration-[850ms]`}
+              className={`${themeClass} w-[250px] h-[200vh] flex justify-center fixed z-[30] top-0 shadow-[0_0_5px_0_rgba(200,200,200)] ease-in-out ${isOpen ? "translate-x-0  left-0" : " left-[-100px] translate-x-[-100%]"} cursor-text duration-[850ms]`}
             >
               <ul className="w-[100%] p-0">
                 <li
-                  className="w-[100%] pr-[8%] h-[80px] flex justify-end items-center border-b-solid border-b-[1px] border-b-darkModeGray"
+                  className="w-[100%] pr-[8%] h-[80px] flex justify-start items-center border-b-solid border-b-[1px] border-b-darkModeGray"
                   onClick={() => {
                     handleHamburger();
                   }}
                 >
-                  <Link to="#" className=" ml-[2rem] text-[2rem] no-underline">
+                  <Link to="#" className=" mr-[1rem] text-[2rem] no-underline">
                     <i
                       style={{ fontSize: "20px" }}
-                      className="fa fa-angle-right"
+                      className="fa fa-angle-left"
                       aria-hidden="true"
                     ></i>
                   </Link>
